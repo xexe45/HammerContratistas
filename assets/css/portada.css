@@ -1,0 +1,270 @@
+.top {
+    margin-top: -61px;
+}
+
+.bienvenido {
+    padding: 50px;
+}
+
+.bienvenido .texto {
+    text-align: center;
+    color: #1B2B56;
+}
+
+.bienvenido .vision {
+    margin-top: 50px;
+}
+
+.bienvenido .vision .mivision {
+    color: #727477;
+    line-height: 30px;
+}
+
+.bienvenido .vision .mivision .parrafo {
+    text-align: justify;
+}
+
+.servicios{
+    background: #EFF1F6;
+    padding: 50px;
+}
+
+.servicios .presentacion .titulo{
+    color: #1B2B56;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+.servicios .tarjeta{
+    margin-bottom: 10px;
+}
+
+/* equal card height */
+.row-equal > div[class*='col-'] {
+    display: flex;
+    flex: 1 0 auto;
+}
+
+.row-equal .card {
+   width: 100%;
+}
+
+/* ensure equal card height inside carousel */
+.carousel-inner>.row-equal.active, 
+.carousel-inner>.row-equal.next, 
+.carousel-inner>.row-equal.prev {
+    display: flex;
+}
+
+/* prevent flicker during transition */
+.carousel-inner>.row-equal.active.left, 
+.carousel-inner>.row-equal.active.right {
+    opacity: 0.5;
+    display: flex;
+}
+
+
+/* control image height */
+.card-img-top-250 {
+    max-height: 250px;
+    overflow:hidden;
+}
+
+.detalle {
+    background: url(../imgs/bg_detalle.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 50px;
+}
+
+.detalle .texto {
+    text-align: center;
+    color: #fff;
+}
+
+.detalle .texto .titulo{
+    font-size: 50px;
+}
+
+.customers {
+    padding: 50px;
+}
+
+.customers .texto {
+    text-align: center;
+    color: #1B2B56;
+}
+
+.customer-logos{
+    margin-top: 30px;
+}
+
+.slick-slide {
+    margin: 0px 20px;
+}
+
+.slick-slide img {
+    width: 100%;
+}
+
+.slick-slider
+{
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+            user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -ms-touch-action: pan-y;
+        touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.slick-list
+{
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+.slick-list:focus
+{
+    outline: none;
+}
+.slick-list.dragging
+{
+    cursor: pointer;
+    cursor: hand;
+}
+
+.slick-slider .slick-track,
+.slick-slider .slick-list
+{
+    -webkit-transform: translate3d(0, 0, 0);
+       -moz-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+         -o-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+}
+
+.slick-track
+{
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+}
+.slick-track:before,
+.slick-track:after
+{
+    display: table;
+    content: '';
+}
+.slick-track:after
+{
+    clear: both;
+}
+.slick-loading .slick-track
+{
+    visibility: hidden;
+}
+
+.slick-slide
+{
+    display: none;
+    float: left;
+    height: 100%;
+    min-height: 1px;
+}
+[dir='rtl'] .slick-slide
+{
+    float: right;
+}
+.slick-slide img
+{
+    display: block;
+}
+.slick-slide.slick-loading img
+{
+    display: none;
+}
+.slick-slide.dragging img
+{
+    pointer-events: none;
+}
+.slick-initialized .slick-slide
+{
+    display: block;
+}
+.slick-loading .slick-slide
+{
+    visibility: hidden;
+}
+.slick-vertical .slick-slide
+{
+    display: block;
+    height: auto;
+    border: 1px solid transparent;
+}
+.slick-arrow.slick-hidden {
+    display: none;
+}
+
+.contacto {
+    background: #EFF1F6;
+    padding: 50px;
+}
+
+.contacto .texto {
+    text-align: center;
+    color: #1B2B56;
+}
+
+.contacto .contactanos{
+    margin-top: 30px;
+}
+
+
+footer{
+    background: #1B2B56;
+    padding: 20px;
+}
+
+.pie .derechos{
+    color: #fff;
+    margin-top: 20px;
+}
+
+
+.pie .info{
+    color: #fff;
+    margin-top: 20px;
+}
+
+@media only screen and (max-width: 576px) {
+    .bienvenido {
+        padding: 20px;
+    }
+    .bienvenido .vision {
+        margin-top: 20px;
+    }
+    .bienvenido .vision .mivision .parrafo {
+        text-align: center;
+    }
+
+    .servicios{
+        background: #EFF1F6;
+        padding: 10px;
+    }
+
+    .detalle .texto .titulo{
+        font-size: 40px;
+    }
+}
