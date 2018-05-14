@@ -8,12 +8,9 @@ class Administracion extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->helper('form');
+		$this->load->model('Info');
 	}
 
-	public function index()
-	{
-		$this->load->view('login');
-	}
 
 	public function inicio(){
 		$this->load->view('administracion/header');
@@ -31,8 +28,11 @@ class Administracion extends CI_Controller {
 	}
 
 	public function empresa(){
+
+		$info = $this->Info->info();
 		$this->load->view('administracion/header');
-		$this->load->view('administracion/empresa');
+		$this->load->view('administracion/empresa', compact('info'));
+	
 	}
 
 	public function filosofia(){

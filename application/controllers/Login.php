@@ -11,6 +11,11 @@ class Login extends CI_Controller {
 		$this->load->library('form_validation');
 	}
 
+	public function index()
+	{
+		$this->load->view('login');
+	}
+
 	public function login(){
 
 		$respuesta = array();
