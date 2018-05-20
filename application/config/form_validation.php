@@ -21,10 +21,9 @@ $config = array(
 	/**
 	 * elefante
 	 * */
-	'elefante'
+	'store_customer'
 	=> array(
-		array('field' => 'nombre', 'label' => 'Nombre', 'rules' => 'required|is_string|trim|max_length[5]'),
-		array('field' => 'correo', 'label' => 'E-Mail', 'rules' => 'required|is_string|trim|valid_email'),
+		array('field' => 'cliente', 'label' => 'Cliente', 'rules' => 'required|is_string|trim|max_length[200]|min_length[5]'),
 	),
 	/**
 	 * manzana

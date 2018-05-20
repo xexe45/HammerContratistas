@@ -90,7 +90,8 @@
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
-	      <form id="form-logo" method="POST" action="<?=base_url()?>Empresa/update_logo">
+	      
+		      <?=form_open_multipart('Empresa/update_logo', array("id" => "form-logo"));?>
 		      <div class="modal-body">
 		      		<input type="hidden" name="id" value="<?=$info->v1?>">
 		        	<img src="<?=base_url()?>assets/imgs/<?=$info->v3?>" alt="" class="img-fluid" id="imagen">
@@ -104,7 +105,8 @@
 		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 		        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
 		      </div>
-	      </form>
+		      <?=form_close()?>
+	      
 	    </div>
 	  </div>
 	</div>
