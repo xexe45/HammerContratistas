@@ -25,6 +25,16 @@ $config = array(
 	=> array(
 		array('field' => 'cliente', 'label' => 'Cliente', 'rules' => 'required|is_string|trim|max_length[200]|min_length[5]'),
 	),
+
+	'edit_filosofia'
+	=> array(//dentro de este arreglo crear una linea de arreglos por cada campo que quiera trabajar
+
+		array('field' => 'historia', 'label' => 'Historia', 'rules' => 'required|is_string|trim|min_length[10]'),
+		array('field' => 'mision', 'label' => 'Misión', 'rules' => 'required|is_string|trim|min_length[10]'),
+		array('field' => 'vision', 'label' => 'Visión', 'rules' => 'required|is_string|trim|min_length[10]'),
+		array('field' => 'valores', 'label' => 'Valores', 'rules' => 'required|is_string|trim|min_length[10]'),
+	//array('field' => 'rut','label' => 'RUT','rules' => 'required|is_string|xss_clean|trim|esRut'),
+	),
 	/**
 	 * manzana
 	 * */

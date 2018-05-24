@@ -109,6 +109,47 @@ class Empresa extends CI_Controller {
 
 	}
 
+	public function filosofia(){
+		
+		if(!$this->input->is_ajax_request()){ return; }
+		if(!$this->input->post()){ return; }
+
+		$respuesta = array();
+	
+
+		if($this->form_validation->run('edit_filosofia')){
+
+			$id = $this->security->xss_clean(strip_tags($this->input->post('id')));
+			$historia = $this->security->xss_clean(strip_tags($this->input->post('historia')));
+			$mision = $this->security->xss_clean(strip_tags($this->input->post('mision')));
+			$vision = $this->security->xss_clean(strip_tags($this->input->post('vision')));
+			$valores = $this->security->xss_clean(strip_tags($this->input->post('valores')));
+
+			$data = array($id, $historia, $mision, $vision, $valores);
+			
+			if($this->Info->update_filosofia($data)){
+
+				$respuesta["valido"] = true;
+				$respuesta["mensaje"]  = 'Filoso´fía empresarial editada correctamente';
+
+			}else{
+
+				$respuesta["valido"] = false;
+				$respuesta["error"]  = "No se pudo editar la filosofía empresarial, vuelva a intentarlo porfavor";
+
+			}
+		}else{
+
+			$respuesta["valido"] = false;
+			$respuesta["mensaje"]  = validation_errors();
+
+		}
+
+		header('Content-Type: application/x-json; charset:utf-8');
+		echo json_encode($respuesta);
+
+	}
+
 }
 
 /* End of file Empresa.php */

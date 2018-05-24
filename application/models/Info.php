@@ -10,6 +10,7 @@ class Info extends CI_Model {
 	}
 
 	public function update(array $data){
+
 		$query = "CALL sp_editar_empresa(?,?,?,?,?,?,?,@s)";
 		$this->load->database();
 		$this->db->trans_start();
@@ -46,6 +47,27 @@ class Info extends CI_Model {
 		$query = $this->db->select('logo')->from('empresa')->get();
 		$this->db->close();
 		return $query->row();
+	}
+
+	public function getFilosofia(){
+		$query = "CALL sp_get_filosofia";
+		$this->load->database();
+		$filosofia = $this->db->query($query);
+		$this->db->close();
+		return $filosofia->row();
+	}
+
+	public function update_filosofia(array $data){
+
+		$query = "CALL sp_editar_filosofia(?,?,?,?,?,@s)";
+		$this->load->database();
+		$this->db->trans_start();
+		$this->db->query($query,$data);
+		$res = $this->db->query('select @s as res');
+		$this->db->trans_complete();
+		$this->db->close();
+		return $res->row()->res;
+
 	}
 
 }

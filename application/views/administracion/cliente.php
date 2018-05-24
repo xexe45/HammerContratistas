@@ -32,6 +32,7 @@
 					  			</div>
 					  			
 							  <button type="submit" class="btn btn-success">Registrar</button>
+							  <button type="reset" class="btn btn-warning">Limpiar campos</button>
 							
 							<?=form_close()?>
 					  	</div>

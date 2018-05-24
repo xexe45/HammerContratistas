@@ -8,7 +8,6 @@ $(function(){
 			const ruta = $(this).attr('action');
 			const formData = new FormData($('#form')[0]);
 
-
 			$.ajax({
 				url : ruta,
 				type: metodo,

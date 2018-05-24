@@ -22,7 +22,6 @@ class Clientes extends CI_Controller {
 		if( !$this->input->is_ajax_request() ){ return; }
 		if( !$this->input->post() ){ return; }
 
-
 		$respuesta = array();
 
 		if($this->form_validation->run('store_customer')){

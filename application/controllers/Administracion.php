@@ -36,8 +36,9 @@ class Administracion extends CI_Controller {
 	}
 
 	public function filosofia(){
+		$filosofia = $this->Info->getFilosofia();
 		$this->load->view('administracion/header');
-		$this->load->view('administracion/filosofia');
+		$this->load->view('administracion/filosofia', compact('filosofia'));
 	}
 
 	public function servicios(){
