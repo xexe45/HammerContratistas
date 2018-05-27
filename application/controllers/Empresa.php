@@ -150,6 +150,69 @@ class Empresa extends CI_Controller {
 
 	}
 
+	public function slides(){
+
+		if(!$this->input->is_ajax_request()){ return; }
+		if(!$this->input->post()){ return; }
+
+		// Cargamos la libreria Upload
+        $this->load->library('upload');
+
+        $filosofia = $this->Info->getFilosofia();
+		$respuesta = array();
+
+		//imagen 1
+		if (!empty($_FILES['file1']['name'])){
+			        
+			// Configuración para el Archivo 1
+			$config['upload_path'] = './assets/imgs/filosofia';
+			$config['allowed_types'] = 'gif|jpg|png';
+			//$config['max_size'] = '100';
+			//$config['max_width']  = '1024';
+			//$config['max_height']  = '768';       
+			$config['encrypt_name'] = true;
+
+			// Cargamos la configuración del Archivo 1
+			$this->upload->initialize($config);
+
+			// Subimos archivo 1
+			if ($this->upload->do_upload('file1')){
+			    //obtenemos el nombre del archivo
+				$ima = $this->upload->data();
+				$file_name = $ima['file_name'];
+
+			}else{
+			    $error = array('error' => $this->upload->display_errors());
+			}
+		}
+
+		// Revisamos si existe un segundo archivo
+		if (!empty($_FILES['file2']['name'])){
+			        
+			// La configuración del Archivo 2, debe ser diferente del archivo 1
+			// si configuras como el Archivo 1 no hará nada
+			$config2['upload_path'] = './assets/imgs/filosofia';
+			$config2['allowed_types'] = 'gif|jpg|png';
+			//$config['max_size'] = '100';
+			//$config['max_width']  = '1024';
+			//$config['max_height']  = '768';
+			$config2['encrypt_name'] = true;
+
+			// Cargamos la nueva configuración
+			$this->upload->initialize($config2);
+
+			// Subimos el segundo Archivo
+			if ($this->upload->do_upload('file2')){
+			            
+			    $data = $this->upload->data();
+			    $file_name2 = $data['file_name'];
+
+			}else{	            
+			    $error = array('error2' => $this->upload->display_errors());
+			}
+		}
+	}
+
 }
 
 /* End of file Empresa.php */

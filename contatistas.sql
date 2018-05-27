@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-05-2018 a las 04:09:36
+-- Tiempo de generación: 27-05-2018 a las 17:51:56
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.1
 
@@ -42,6 +42,22 @@ commit;
 set v_res = true;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_editar_filosofia` (IN `v_id` INT, IN `v_historia` TEXT, IN `v_mision` TEXT, IN `v_vision` TEXT, IN `v_valores` TEXT, OUT `v_res` BOOLEAN)  BEGIN
+declare exit handler for sqlexception
+begin
+rollback;
+set v_res = false;
+end;
+start transaction;
+UPDATE filosofia set historia = v_historia,
+mision = v_mision,
+vision = v_vision,
+valores = v_valores
+WHERE id = v_id;
+commit;
+set v_res = true;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_editar_logo` (IN `v_id` INT, IN `v_logo` VARCHAR(200), OUT `v_res` BOOLEAN)  BEGIN
 declare exit handler for sqlexception
 begin
@@ -53,6 +69,12 @@ UPDATE empresa set logo = v_logo
 WHERE id = v_id;
 commit;
 set v_res = true;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_filosofia` ()  BEGIN
+SELECT id as v1, historia as v2, mision as v3, vision as v4, 
+slide1 as v5, slide2 as v6, valores as v7
+FROM filosofia;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_info` ()  BEGIN
@@ -180,6 +202,16 @@ CREATE TABLE `cliente` (
   `web` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`id`, `cliente`, `logo`, `web`) VALUES
+(5, 'Navarro Solutions', '1c9a9d850b37b64bce9e57317cfb3459.png', 'https://www.navarro.com'),
+(6, 'Empresa Mazas', '9877b645d2bd3224e79326b20ac6a17e.png', 'https://www.mazas.com/'),
+(7, 'Empresas Claudias', NULL, ''),
+(8, 'Empresa Siccha', '87c31018f9a7b1356ee804fcf9f3aaf7.png', 'https://www.siccha.com');
+
 -- --------------------------------------------------------
 
 --
@@ -202,7 +234,7 @@ CREATE TABLE `empresa` (
 --
 
 INSERT INTO `empresa` (`id`, `nombre`, `logo`, `ruc`, `direccion`, `telefono`, `correo`, `presentacion`) VALUES
-(1, 'Hammer Contratistas', '0212c908def7214c03ed4d8dcd5f7344.jpg', '12345678911', 'Av. Los Tallanes G-5. Urb. La Providencia-Piura', '073596193', 'proyectos@hammer.com.pe', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti consequuntur voluptatem porro fugiat nostrum corrupti? Sint asperiores hic dolor quam. Laboriosam commodi aspernatur repellendus blanditiis vel aperiam molestiae dolorem a?\r\n\r\nLorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti consequuntur voluptatem porro fugiat nostrum corrupti? Sint asperiores hic dolor quam. Laboriosam commodi aspernatur repellendus blanditiis vel aperiam molestiae dolorem a?');
+(1, 'Hammer Contratistas', '150b02c21b793bd89f407c62e6bbe869.jpg', '12345678912', 'Av. Los Tallanes G-5. Urb. La Providencia-Piura', '073596193', 'proyectos@hammer.com.pe', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti consequuntur voluptatem porro fugiat nostrum corrupti? Sint asperiores hic dolor quam. Laboriosam commodi aspernatur repellendus blanditiis vel aperiam molestiae dolorem a?\r\n\r\nLorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti consequuntur voluptatem porro fugiat nostrum corrupti? Sint asperiores hic dolor quam. Laboriosam commodi aspernatur repellendus blanditiis vel aperiam molestiae dolorem a?');
 
 -- --------------------------------------------------------
 
@@ -219,6 +251,13 @@ CREATE TABLE `filosofia` (
   `slide2` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `valores` text COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `filosofia`
+--
+
+INSERT INTO `filosofia` (`id`, `historia`, `mision`, `vision`, `slide1`, `slide2`, `valores`) VALUES
+(1, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Nuestra misión es', 'Nuestra visión es', 'slide1.jpg', 'slide2.jpg', 'Nuestros valores son');
 
 -- --------------------------------------------------------
 
@@ -385,7 +424,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `empresa`
@@ -397,7 +436,7 @@ ALTER TABLE `empresa`
 -- AUTO_INCREMENT de la tabla `filosofia`
 --
 ALTER TABLE `filosofia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `galeria`

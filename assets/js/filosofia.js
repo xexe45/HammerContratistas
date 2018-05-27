@@ -27,4 +27,16 @@ $(function(){
 		});
 
 	})
+
+	$('.frm-slider').on('submit', function(e){
+
+		e.preventDefault();
+
+		const method = $(this).attr('method');
+		const ruta = $(this).attr('action');
+		const formData = new FormData($(this)[0]);
+
+		console.log(formData);
+
+	})
 })
