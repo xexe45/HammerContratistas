@@ -26,6 +26,12 @@ $config = array(
 		array('field' => 'cliente', 'label' => 'Cliente', 'rules' => 'required|is_string|trim|max_length[200]|min_length[5]'),
 	),
 
+	'slides'
+	=> array(
+		array('field' => 'titulo', 'label' => 'Título', 'rules' => 'required|is_string|trim|max_length[100]|min_length[3]'),
+		array('field' => 'subtitulo', 'label' => 'Subtítulo', 'rules' => 'required|is_string|trim|max_length[200]|min_length[3]'),
+	),
+
 	'edit_filosofia'
 	=> array(//dentro de este arreglo crear una linea de arreglos por cada campo que quiera trabajar
 
