@@ -41,6 +41,12 @@ $config = array(
 		array('field' => 'valores', 'label' => 'Valores', 'rules' => 'required|is_string|trim|min_length[10]'),
 	//array('field' => 'rut','label' => 'RUT','rules' => 'required|is_string|xss_clean|trim|esRut'),
 	),
+
+	'servicios'
+	=> array(
+		array('field' => 'servicio', 'label' => 'Servicio', 'rules' => 'required|is_string|trim|max_length[150]|min_length[3]'),
+		array('field' => 'descripcion', 'label' => 'Descripción', 'rules' => 'required|is_string|trim|min_length[3]'),
+	),
 	/**
 	 * manzana
 	 * */

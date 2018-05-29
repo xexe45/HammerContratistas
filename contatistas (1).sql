@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-05-2018 a las 17:51:56
+-- Tiempo de generación: 29-05-2018 a las 07:37:59
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.1
 
@@ -71,6 +71,11 @@ commit;
 set v_res = true;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_clientes` ()  BEGIN
+select id as v1, cliente as v2, logo as v3, web as v4
+from cliente;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_filosofia` ()  BEGIN
 SELECT id as v1, historia as v2, mision as v3, vision as v4, 
 slide1 as v5, slide2 as v6, valores as v7
@@ -81,6 +86,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_info` ()  BEGIN
 select id as v1, nombre as v2, logo as v3, ruc as v4,
 direccion as v5, telefono as v6, correo as v7, presentacion as v8
 from empresa;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_servicios` ()  BEGIN
+select id as v1, servicio as v2, img as v3, descripcion as v4
+from servicios;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_cliente` (IN `v_cliente` VARCHAR(200), IN `v_logo` VARCHAR(200), IN `v_web` VARCHAR(200), OUT `v_res` BOOLEAN)  BEGIN
@@ -142,7 +152,7 @@ rollback;
 set v_res = false;
 end;
 start transaction;
-INSERT INTO servicio (servicio, img, descricion) 
+INSERT INTO servicios (servicio, img, descripcion) 
 VALUES(v_servicio, v_img, v_descripcion);
 commit;
 set v_res = true;
@@ -210,7 +220,10 @@ INSERT INTO `cliente` (`id`, `cliente`, `logo`, `web`) VALUES
 (5, 'Navarro Solutions', '1c9a9d850b37b64bce9e57317cfb3459.png', 'https://www.navarro.com'),
 (6, 'Empresa Mazas', '9877b645d2bd3224e79326b20ac6a17e.png', 'https://www.mazas.com/'),
 (7, 'Empresas Claudias', NULL, ''),
-(8, 'Empresa Siccha', '87c31018f9a7b1356ee804fcf9f3aaf7.png', 'https://www.siccha.com');
+(8, 'Empresa Siccha', '87c31018f9a7b1356ee804fcf9f3aaf7.png', 'https://www.siccha.com'),
+(9, 'Clínica Miraflores', NULL, 'https://www.clinica.com'),
+(10, 'Clínica Sana', '21a141f0dba1eb97cb0c2dc7012dc17d.png', 'https://www.sana.com'),
+(11, 'Clínica Belén', NULL, 'https://www.belen.com');
 
 -- --------------------------------------------------------
 
@@ -301,6 +314,14 @@ CREATE TABLE `servicios` (
   `descripcion` text COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `servicios`
+--
+
+INSERT INTO `servicios` (`id`, `servicio`, `img`, `descripcion`) VALUES
+(1, 'Arquitectura', '6dc53312028016fd8ff5d97bf50af0ef.png', 'Ofrecemos el servicio de arquitectura'),
+(2, 'Ingeniería', '88a255a590e6a5afe9ec67bddfa28de1.jpg', 'Expertos en Ingeniería');
+
 -- --------------------------------------------------------
 
 --
@@ -310,9 +331,17 @@ CREATE TABLE `servicios` (
 CREATE TABLE `slides_portada` (
   `id` int(11) NOT NULL,
   `img` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  `titulo` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
-  `subtitulo` varchar(100) COLLATE utf8_spanish_ci NOT NULL
+  `titulo` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `subtitulo` varchar(200) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `slides_portada`
+--
+
+INSERT INTO `slides_portada` (`id`, `img`, `titulo`, `subtitulo`) VALUES
+(1, 'fb1f1e324ccc60d85326676c8c38ae49.png', 'Arquitectura', 'Expertos en diseño de construcciones'),
+(2, 'ecfed1ec1eebec0e2985ad7c4a80271a.png', 'Angular', 'Excelente framework JS');
 
 -- --------------------------------------------------------
 
@@ -424,7 +453,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `empresa`
@@ -454,13 +483,13 @@ ALTER TABLE `proyecto`
 -- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `slides_portada`
 --
 ALTER TABLE `slides_portada`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tarea_servicio`

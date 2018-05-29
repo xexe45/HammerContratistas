@@ -14,7 +14,9 @@ class Clientes extends CI_Controller {
 
 	public function index()
 	{
-		
+		$clientes['data'] = $this->Cliente->listar();
+		header('Content-Type: application/x-json; charset:utf-8');
+		echo json_encode($clientes);
 	}
 
 	public function store(){
@@ -28,9 +30,6 @@ class Clientes extends CI_Controller {
 
 			$cliente = $this->security->xss_clean(strip_tags($this->input->post('cliente')));
 			$web = $this->security->xss_clean(strip_tags($this->input->post('web')));
-
-			$data = array($cliente, null ,$web);
-
 
 			if (!empty($_FILES['logo']['name'])){
 
@@ -57,25 +56,37 @@ class Clientes extends CI_Controller {
 
 					$file_name = $ima['file_name'];
 
-					$data[1] = $file_name;		
+					$data = array($cliente, $file_name ,$web);	
+
+					if($this->Cliente->insert($data)){
+		
+						$respuesta["valido"] = true;
+						$respuesta["mensaje"] = "Cliente agregado correctamente";
+
+							
+					}else{
+						
+						$respuesta['valido'] = false;
+						$respuesta['mensaje'] = 'No se pudo registrar el Cliente, vuelva a intentarlos porfavor.';
+					}
 					
 				}
-			}
-
-			if($this->Cliente->insert($data)){
-
-		
-				$respuesta["valido"] = true;
-				$respuesta["mensaje"] = "Cliente agregado correctamente";
-
-					
 			}else{
-				
-				$respuesta['valido'] = false;
-				$respuesta['mensaje'] = 'No se pudo registrar el Cliente, vuelva a intentarlos porfavor.';
-			}
-			
 
+				$data = array($cliente, null ,$web);	
+
+				if($this->Cliente->insert($data)){
+	
+					$respuesta["valido"] = true;
+					$respuesta["mensaje"] = "Cliente agregado correctamente";
+
+							
+				}else{
+						
+					$respuesta['valido'] = false;
+					$respuesta['mensaje'] = 'No se pudo registrar el Cliente, vuelva a intentarlos porfavor.';
+				}
+			}
 
 		}else{
 			

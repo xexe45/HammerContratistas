@@ -1,26 +1,26 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Cliente extends CI_Model {
+class Servicios extends CI_Model {
 
 	public function __construct()
 	{
 		parent::__construct();
+		
 	}
 
 	public function listar(){
 		
-		$query = "CALL sp_get_clientes()";
+		$query = "CALL sp_get_servicios()";
 		$this->load->database();
-		$clientes = $this->db->query($query);
+		$servicios = $this->db->query($query);
 		$this->db->close();
-		return $clientes->result();
-		
+		return $servicios->result();
 	}
 
-	public function insert(array $data){
+	public function registrar($data){
 
-		$query = "CALL sp_registrar_cliente(?,?,?,@s)";
+		$query = "CALL sp_registrar_servicio(?,?,?,@s)";
 		$this->load->database();
 		$this->db->trans_start();
 		$this->db->query($query,$data);
@@ -28,10 +28,11 @@ class Cliente extends CI_Model {
 		$this->db->trans_complete();
 		$this->db->close();
 		return $res->row()->res;
-
+		
 	}
+	
 
 }
 
-/* End of file Cliente.php */
-/* Location: ./application/models/Cliente.php */
+/* End of file Servicios.php */
+/* Location: ./application/models/Servicios.php */
