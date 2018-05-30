@@ -16,7 +16,7 @@
 					  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
 					  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 					  	<div class="top">
-					  		<form>
+					  		<?=form_open_multipart('Proyectos/store' , array("id" => "form"))?>
 					  			<div class="form-group">
 								  	<label for="servicio_id">Servicio al que corresponde*</label>
 								  	<select name="servicio_id" id="servicio_id" class="form-control">
@@ -28,8 +28,8 @@
 					  				<input type="text" name="nombre" id="nombre" required="" class="form-control" maxlength="80" minlength="2" placeholder="Nombre de Proyecto">
 					  			</div>
 					  			<div class="form-group">
-								  	<label for="estado">Estado de Proyecto*</label>
-								  	<select name="estado" id="estado" class="form-control">
+								  	<label for="tipo">Estado de Proyecto*</label>
+								  	<select name="tipo" id="tipo" class="form-control">
 								  		<option value="">Seleccionar Estado de proyecto...</option>
 								  		<option value="proceso">En proceso</option>
 								  		<option value="concluido">Concluido</option>
@@ -42,10 +42,14 @@
 								  		
 								  	</select>
 							  	</div>
+							  	<div class="form-group">
+							  		<label for="fecha">Fecha de inicio *</label>
+							  		<input type="date" class="form-control" name="fecha" id="fecha">
+							  	</div>
 					  			
 					  			<div class="form-group">
 					  				<label for="img_principal">Imagen del proyecto *</label>
-					  				<input type="file" class="form-control" name="img_principal" id="img_principal" class="form-control">
+					  				<input type="file" class="form-control" name="file" id="file" class="form-control">
 					  			</div>
 					  			<div class="form-group">
 									<label for="descripcion">Descripción del proyecto *</label>
@@ -53,7 +57,7 @@
 								</div>
 							  
 							  <button type="submit" class="btn btn-success">Registrar</button>
-							</form>
+							<?=form_close()?>
 					  	</div>
 					  </div>
 					  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>

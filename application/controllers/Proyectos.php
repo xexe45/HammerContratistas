@@ -33,8 +33,6 @@ class Proyectos extends CI_Controller {
 			$fecha = $this->security->xss_clean(strip_tags($this->input->post('fecha')));
 			$descripcion = $this->security->xss_clean(strip_tags($this->input->post('descripcion')));
 
-			$data = array($servicio_id,$nombre,$tipo,$cliente_id, null ,$descripcion);
-
 			if (!empty($_FILES['file']['name'])){
 
 				//subimos el archivo
@@ -60,25 +58,38 @@ class Proyectos extends CI_Controller {
 
 					$file_name = $ima['file_name'];
 
-					$data[4] = $file_name;		
+					$data = array($servicio_id,$nombre,$tipo,$cliente_id, $fecha ,$file_name ,$descripcion);	
+
+					if($this->Proyecto->insert($data)){
+		
+						$respuesta["valido"] = true;
+						$respuesta["mensaje"] = "Proyecto agregado correctamente";
+
+							
+					}else{
+						
+						$respuesta['valido'] = false;
+						$respuesta['mensaje'] = 'No se pudo registrar el Proyecto, vuelva a intentarlos porfavor.';
+					}
 					
 				}
-			}
-
-			if($this->Proyecto->insert($data)){
-
-		
-				$respuesta["valido"] = true;
-				$respuesta["mensaje"] = "Proyecto agregado correctamente";
-
-					
 			}else{
-				
-				$respuesta['valido'] = false;
-				$respuesta['mensaje'] = 'No se pudo registrar el Proyecto, vuelva a intentarlos porfavor.';
-			}
-			
 
+				$data = array($servicio_id,$nombre,$tipo,$cliente_id, $fecha,null ,$descripcion);	
+
+				if($this->Proyecto->insert($data)){
+	
+					$respuesta["valido"] = true;
+					$respuesta["mensaje"] = "Proyecto agregado correctamente";
+
+							
+				}else{
+						
+					$respuesta['valido'] = false;
+					$respuesta['mensaje'] = 'No se pudo registrar el Proyecto, vuelva a intentarlos porfavor.';
+				}
+			}
+		
 
 		}else{
 			
