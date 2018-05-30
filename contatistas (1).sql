@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-05-2018 a las 07:37:59
+-- Tiempo de generación: 30-05-2018 a las 21:32:54
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.1
 
@@ -132,15 +132,15 @@ commit;
 set v_res = true;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_proyecto` (IN `v_servico_id` INT, IN `v_nombre` TEXT, IN `v_tipo` ENUM('proceso','concluido'), IN `v_cliente_id` INT, IN `v_img_principal` VARCHAR(150), IN `v_descripcion` TEXT, OUT `v_res` BOOLEAN)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_proyecto` (IN `v_servicio_id` INT, IN `v_nombre` TEXT, IN `v_tipo` ENUM('proceso','concluido'), IN `v_cliente_id` INT, IN `v_fecha` DATE, IN `v_img_principal` VARCHAR(150), IN `v_descripcion` TEXT, OUT `v_res` BOOLEAN)  BEGIN
 declare exit handler for sqlexception
 begin
 rollback;
 set v_res = false;
 end;
 start transaction;
-INSERT INTO proyecto (servicio_id, nombre, tipo, cliente_id, img_principal, descripcion) 
-VALUES(v_servicio_id, v_nombre, v_tipo, v_cliente_id, v_img_principal, v_descripcion);
+INSERT INTO proyecto (servicio_id, nombre, tipo, cliente_id, fecha, img_principal, descripcion) 
+VALUES(v_servicio_id, v_nombre, v_tipo, v_cliente_id, v_fecha ,v_img_principal, v_descripcion);
 commit;
 set v_res = true;
 END$$
@@ -300,6 +300,14 @@ CREATE TABLE `proyecto` (
   `img_principal` varchar(150) COLLATE utf8_spanish_ci DEFAULT NULL,
   `descripcion` text COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `proyecto`
+--
+
+INSERT INTO `proyecto` (`id`, `servicio_id`, `nombre`, `tipo`, `cliente_id`, `fecha`, `img_principal`, `descripcion`) VALUES
+(2, 1, 'Diseño de Clínica Belén', 'concluido', 11, '2017-01-01', 'e8227430aef67a32169e529a256612da.jpg', 'Proyecto realizado por...'),
+(3, 2, 'Construcción Clínica Sana', 'proceso', 10, '2018-01-01', '7c341998028c55ea41507b3a65b56067.jpg', 'El proyecto se viene realizando...');
 
 -- --------------------------------------------------------
 
@@ -477,7 +485,7 @@ ALTER TABLE `galeria`
 -- AUTO_INCREMENT de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
