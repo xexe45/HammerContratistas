@@ -30,7 +30,7 @@ class Clientes extends CI_Controller {
 
 			$cliente = $this->security->xss_clean(strip_tags($this->input->post('cliente')));
 			$web = $this->security->xss_clean(strip_tags($this->input->post('web')));
-
+			
 			if (!empty($_FILES['logo']['name'])){
 
 				//subimos el archivo

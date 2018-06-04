@@ -1,0 +1,23 @@
+1. Correr este procedimiento almacenado
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_editar_slides`(
+IN v_slide1 varchar(255),
+IN v_slide2 varchar(255),
+OUT v_res boolean
+)
+BEGIN
+declare exit handler for sqlexception
+begin
+rollback;
+set v_res = false;
+end;
+start transaction;
+UPDATE filosofia set slide1 = v_slide1, slide2 = v_slide2;
+commit;
+set v_res = true;
+END
+
+2. Archivos a reemplazar
+* filosofia.js
+* vista: filosofia.php
+* modelo: slides.php : function editar($data)
+* controlador: empresa.php : function slides()

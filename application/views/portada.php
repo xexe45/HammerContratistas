@@ -10,21 +10,21 @@
 			<img class="d-block w-100" src="<?=base_url()?>assets/imgs/slide1.png" alt="First slide">
 				<div class="carousel-caption d-none d-md-block">
 					<h3>Arquitectura</h3>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, quod!</p>
+					<p>Grandes diseños en arquitectura</p>
 				</div>
 			</div>
 			<div class="carousel-item">
 			<img class="d-block w-100" src="<?=base_url()?>assets/imgs/slide2.png" alt="Second slide">
 				<div class="carousel-caption d-none d-md-block">
 					<h3>Ingeniería</h3>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, officia.</p>
+					<p>Ingeníeria de calidad</p>
 				</div>
 			</div>
 			<div class="carousel-item">
 			<img class="d-block w-100" src="<?=base_url()?>assets/imgs/slide3.png" alt="Third slide">
 				<div class="carousel-caption d-none d-md-block">
 					<h3>Construcción</h3>
-					<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis, laudantium!</p>
+					<p>Construcciones de calidad</p>
 				</div>
 			</div>
 		</div>
@@ -50,10 +50,15 @@
 			</div>
 			<div class="col-sm-12 col-md-7 mivision">
 				<p class="parrafo">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti consequuntur voluptatem porro fugiat nostrum corrupti? Sint asperiores hic dolor quam. Laboriosam commodi aspernatur repellendus blanditiis vel aperiam molestiae dolorem a?
+					¿Quiénes Somos?
 				</p>
 				<p class="parrafo">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti consequuntur voluptatem porro fugiat nostrum corrupti? Sint asperiores hic dolor quam. Laboriosam commodi aspernatur repellendus blanditiis vel aperiam molestiae dolorem a?
+					Somos una empresa dedicada al rubro de la arquitectura, ingeniería y construcción, liderada por un equipo de profesionales
+					calificados. 
+				</p>
+				<p class="parrafo">
+					Nuestro trabajo se basa en la exigencia y preocupación de cada detalle, además de caracterizarnos por brindar ideas
+					innovadoras garantizando un trabajo de calidad.
 				</p>
 				
 			</div>
@@ -76,39 +81,51 @@
 		                        <img class="img-fluid" src="<?=base_url()?>assets/imgs/carousel1.png" alt="Carousel 1">
 		                    </div>
 		                    <div class="card-body p-t-2">
-		                        <h6 class="small text-wide p-b-2">Insight</h6>
+		                        <h6 class="small text-wide p-b-2"></h6>
 		                        <h3>
-		                            <a href>Why Stuff Happens Every Year.</a>
+		                            <a href>ARQUITECTURA</a>
 		                        </h3>
-		                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At ut mollitia eius, nisi, cumque provident blanditiis sapiente deleniti adipisci quasi eligendi non a itaque, alias ipsam ullam perferendis unde reprehenderit!</p>
+		                        <p>-Arquitectura comercial</p>
+									<p>-Arquitectura residencial(casas de campo, playa, ciudad y multifamiliares)</p>
+									<p>-Elaboración de imágenes fotorrealistas (renders)</p>
+									<p>-Recorridos virtuales 3D</p>
+									<p>-Trámite de licencia de edificación</p>
+
+
 		                    </div>
 		                </div>
 		            </div>
 		            <div class="col-md-4 tarjeta">
 		                <div class="card">
 		                    <div class="card-img-top card-img-top-250">
-		                        <img class="img-fluid" src="http://i.imgur.com/Hw7sWGU.png" alt="Carousel 2">
+		                        <img class="img-fluid" src="<?=base_url()?>assets/imgs/carrusel2.png" alt="Carousel 2">
 		                    </div>
 		                    <div class="card-body p-t-2">
-		                        <h6 class="small text-wide p-b-2">Development</h6>
+		                        <h6 class="small text-wide p-b-2"></h6>
 		                        <h3>
-		                            <a href>How to Make Every Line Count.</a>
+		                            <a href>INGENIERÍA BÁSICA Y DETALLADA</a>
 		                        </h3>
-		                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At ut mollitia eius, nisi, cumque provident blanditiis sapiente deleniti adipisci quasi eligendi non a itaque, alias ipsam ullam perferendis unde reprehenderit!</p>
+		                        <p>- Diseño estructural</p>
+		                        <p>- Diseño eléctrico</p>
+		                        <p>- Diseño de obras hidráulicas</p>
+		                        <p>- Topografía</p>
+		                        <p>- Estudio de drenaje pluvial</p>
 		                    </div>
 		                </div>
 		            </div>
 		            <div class="col-md-4 tarjeta">
 		                <div class="card">
 		                    <div class="card-img-top card-img-top-250">
-		                        <img class="img-fluid" src="http://i.imgur.com/g27lAMl.png" alt="Carousel 3">
+		                        <img class="img-fluid" src="<?=base_url()?>assets/imgs/carrusel3.png" alt="Carousel 3">
 		                    </div>
 		                    <div class="card-body p-t-2">
-		                        <h6 class="small text-wide p-b-2">Design</h6>
+		                        <h6 class="small text-wide p-b-2"></h6>
 		                        <h3>
-		                            <a href>Responsive is Essential.</a>
+		                            <a href>SEGURIDAD INDUSTRIAL</a>
 		                        </h3>
-		                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At ut mollitia eius, nisi, cumque provident blanditiis sapiente deleniti adipisci quasi eligendi non a itaque, alias ipsam ullam perferendis unde reprehenderit!</p>
+		                        <p>- Capacitaciones en seguridad y salud ocupacional</p>
+		                        <p>- Monitoreo Ocupacional</p>
+		                        <p>- Implementación de sistema integral de gestión de seguridad y salud en el trabajo.</p>
 		                    </div>
 		                </div>
 		            </div>
@@ -117,42 +134,53 @@
 		            <div class="col-md-4 tarjeta">
 		                <div class="card">
 		                    <div class="card-img-top card-img-top-250">
-		                        <img class="img-fluid" src="//visualhunt.com/photos/l/1/office-student-work-study.jpg" alt="Carousel 4">
+		                        <img class="img-fluid" src="<?=base_url()?>assets/imgs/carrusel4.jpg" alt="Carousel 4">
 		                    </div>
 		                    <div class="card-body p-t-2">
-		                        <h6 class="small text-wide p-b-2">Another</h6>
+		                        <h6 class="small text-wide p-b-2"></h6>
 		                        <h3>
-		                            <a href>Tagline or Call-to-action.</a>
+		                            <a href>GERENCIA DE PROYECTOS:</a>
 		                        </h3>
-		                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At ut mollitia eius, nisi, cumque provident blanditiis sapiente deleniti adipisci quasi eligendi non a itaque, alias ipsam ullam perferendis unde reprehenderit!</p>
+		                        <p>-Gerencia del ciclo completo de desarrollo del proyecto con estándares PMI</p>
+		                        
+		                        <p>- Gerencia de seguridad, salud ocupacional, medio ambiente y relaciones
+comunitarias (HSEC)</p>
+		                       
 		                    </div>
 		                </div>
 		            </div>
 		            <div class="col-md-4 tarjeta">
 		                <div class="card">
 		                    <div class="card-img-top card-img-top-250">
-		                        <img class="img-fluid" src="//visualhunt.com/photos/l/1/working-woman-technology-computer.jpg" alt="Carousel 5">
+		                        <img class="img-fluid" src="<?=base_url()?>assets/imgs/carrusel5.jpg" alt="Carousel 5">
 		                    </div>
 		                    <div class="card-body p-t-2">
-		                        <h6 class="small text-wide p-b-2"><span class="pull-xs-right">12.04</span> Category 1</h6>
+		                        <h6 class="small text-wide p-b-2"><span class="pull-xs-right"></span></h6>
 		                        <h3>
-		                            <a href>This is a Blog Title.</a>
+		                            <a href>CONSTRUCCIÓN</a>
 		                        </h3>
-		                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At ut mollitia eius, nisi, cumque provident blanditiis sapiente deleniti adipisci quasi eligendi non a itaque, alias ipsam ullam perferendis unde reprehenderit!</p>
+		                        <p>- Obras viales</p>
+		                        <p>- Obras hidráulicas</p>
+		                        <p>- Obras electromecánicas</p>
+		                        <p>- Habilitaciones urbanas</p>
+		                        <p>- Estructuras metálicas</p>
+		                        
 		                    </div>
 		                </div>
 		            </div>
 		            <div class="col-md-4 tarjeta fadeIn wow">
 		                <div class="card">
 		                    <div class="card-img-top card-img-top-250">
-		                        <img class="img-fluid" src="//visualhunt.com/photos/l/1/people-office-team-collaboration.jpg" alt="Carousel 6">
+		                        <img class="img-fluid" src="<?=base_url()?>assets/imgs/carrusel6.jpg" alt="Carousel 6">
 		                    </div>
 		                    <div class="card-body p-t-2">
-		                        <h6 class="small text-wide p-b-2">Category 3</h6>
+		                        <h6 class="small text-wide p-b-2"></h6>
 		                        <h3>
-		                            <a href>Catchy Title of a Blog Post.</a>
+		                            <a href>INGENIERÍA ELECTROMECÁNICA</a>
 		                        </h3>
-		                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At ut mollitia eius, nisi, cumque provident blanditiis sapiente deleniti adipisci quasi eligendi non a itaque, alias ipsam ullam perferendis unde reprehenderit!</p>
+		                        <p>- Diseño de equipos hidráulicos hasta 300PSI según necesidades</p>
+		                        <p>- Implementación subestaciones y transformadores</p>
+		                        <p>- Telemetría</p>
 		                    </div>
 		                </div>
 		            </div>
@@ -233,57 +261,4 @@
 			</div>
 		</div>
 	</section>
-	<footer>
-		<section class="container pie">
-			<div class="row">
-				<div class="col-md-4">
-					 <img src="<?=base_url()?>assets/imgs/logo.jpg" width="70" height="70" alt="">
-				</div>
-				<div class="col-md-4 text-center derechos">
-					®2018, DERECHOS RESERVADOS 
-				</div>
-				<div class="col-md-4 info">
-					<p>Tel. 963956610 /proyectos@hammer.com.pe</p>
-				</div>
-			</div>
-		</section>
-	</footer>
 	
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="<?=base_url()?>assets/js/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
-    <script>
-    	$(document).ready(function(){
-    		 // manual carousel controls
-	    $('.next').click(function(){ $('.carousel').carousel('next');return false; });
-	    $('.prev').click(function(){ $('.carousel').carousel('prev');return false; });
-
-	    $('.customer-logos').slick({
-        slidesToShow: 6,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 1500,
-        arrows: false,
-        dots: false,
-        pauseOnHover: false,
-        responsive: [{
-            breakpoint: 768,
-            settings: {
-                slidesToShow: 4
-            }
-        }, {
-            breakpoint: 520,
-            settings: {
-                slidesToShow: 3
-            }
-        }]
-    });
-
-    	});
-    	
-    </script>
-  </body>
-</html>

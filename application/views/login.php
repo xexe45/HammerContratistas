@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="<?=base_url()?>assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?=base_url()?>assets/fontawesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="<?=base_url()?>assets/css/login.css">
+	<link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>assets/imgs/logo.ico">
 </head>
 <body>
 	<div class="container">

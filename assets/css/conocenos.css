@@ -1,0 +1,63 @@
+.filosofia{
+	margin-top: -33px;
+	background: url(../imgs/filosofia/fondo.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 50px;
+    height: 350px;
+    color: #fff;
+}
+
+.filosofia .titulo-f{
+	margin-top: 6%;
+	font-size: 2.8em;
+}
+
+.conocenos{
+	padding: 50px;
+}
+
+.conocenos .conocer{
+    padding: 50px;
+}
+
+.conocenos .texto2 {
+    text-align: center;
+    color: #1B2B56;
+}
+
+.conocenos .parrafo{
+	color: #768493;
+}
+
+.conocenos .vision {
+    margin-top: 50px;
+}
+
+.conocenos .vision .mivision {
+    color: #727477;
+    line-height: 30px;
+}
+
+.conocenos .vision .mivision .parrafo {
+    text-align: justify;
+}
+
+.info{
+    background: #EFF1F6;
+    padding: 50px;
+}
+
+.info .presentacion .titulo{
+    color: #1B2B56;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 800px) {
+    .filosofia .titulo-f{
+		font-size: 2.2em;
+	}
+}

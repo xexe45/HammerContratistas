@@ -21,6 +21,19 @@ class Slides extends CI_Model {
 		
 	}
 
+	public function editar($data){
+
+		$query = "CALL sp_editar_slides(?,?,@s)";
+		$this->load->database();
+		$this->db->trans_start();
+		$this->db->query($query,$data);
+		$res = $this->db->query('select @s as res');
+		$this->db->trans_complete();
+		$this->db->close();
+		return $res->row()->res;
+
+	}
+
 }
 
 /* End of file Slides.php */

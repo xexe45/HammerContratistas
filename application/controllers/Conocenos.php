@@ -1,9 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Conocenos extends CI_Controller {
 
-	public function __construct(){
+	public function __construct()
+	{
 		parent::__construct();
 		$this->load->helper('url');
 	}
@@ -11,8 +12,11 @@ class Home extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('templates/header');
-		$this->load->view('portada');
+		$this->load->view('conocenos');
 		$this->load->view('templates/footer');
 	}
 
 }
+
+/* End of file Conocenos.php */
+/* Location: ./application/controllers/Conocenos.php */

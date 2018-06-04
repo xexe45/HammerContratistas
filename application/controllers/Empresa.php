@@ -10,6 +10,7 @@ class Empresa extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->load->model('Info');
+		$this->load->model('Slides');
 	}
 
 	public function update()
@@ -153,13 +154,18 @@ class Empresa extends CI_Controller {
 	public function slides(){
 
 		if(!$this->input->is_ajax_request()){ return; }
-		if(!$this->input->post()){ return; }
+		//if(!$this->input->post()){ return; }
+		//return array('hola' => 'mundo');
 
 		// Cargamos la libreria Upload
         $this->load->library('upload');
 
         $filosofia = $this->Info->getFilosofia();
 		$respuesta = array();
+
+		$data = array($filosofia->v5,$filosofia->v6);
+		$error = array();
+		$error['error'] = '';
 
 		//imagen 1
 		if (!empty($_FILES['file1']['name'])){
@@ -180,9 +186,10 @@ class Empresa extends CI_Controller {
 			    //obtenemos el nombre del archivo
 				$ima = $this->upload->data();
 				$file_name = $ima['file_name'];
+				$data[0] = $file_name;
 
 			}else{
-			    $error = array('error' => $this->upload->display_errors());
+				$error['error'] = $error['error'].$this->upload->display_errors();
 			}
 		}
 
@@ -204,13 +211,35 @@ class Empresa extends CI_Controller {
 			// Subimos el segundo Archivo
 			if ($this->upload->do_upload('file2')){
 			            
-			    $data = $this->upload->data();
-			    $file_name2 = $data['file_name'];
+			    $ima2 = $this->upload->data();
+			    $file_name2 = $ima2['file_name'];
+			    $data[1] = $file_name2;
 
 			}else{	            
-			    $error = array('error2' => $this->upload->display_errors());
+			   $error['error'] = $error['error'].$this->upload->display_errors();
 			}
 		}
+
+		if(empty($error['error'])){
+
+			if($this->Slides->editar($data)){
+	
+					$respuesta["valido"] = true;
+					$respuesta["mensaje"] = "Slides editados correctamente";
+							
+				}else{
+						
+					$respuesta['valido'] = false;
+					$respuesta['mensaje'] = 'No se pudo editar slides.';
+				}
+		}else{
+			$respuesta['valido'] = false;
+			$respuesta['mensaje'] = $error['error'];
+			
+		}
+
+		header('Content-Type: application/x-json; charset:utf-8');
+		echo json_encode($respuesta);
 	}
 
 }

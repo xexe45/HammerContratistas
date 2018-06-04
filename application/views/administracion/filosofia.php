@@ -70,7 +70,7 @@
 							    		<button type="submit" class="btn btn-primary">Cambiar Imagen</button>
 							    	<?=form_close()?>
 							    	<br>
-					  		<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+					  		<!--<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 							  <div class="carousel-inner">
 							    <div class="carousel-item active">
 							      <img class="d-block w-100" height="500" src="<?=base_url()?>assets/imgs/filosofia/<?=$filosofia->v5?>" alt="First slide">
@@ -88,7 +88,7 @@
 							    <span class="carousel-control-next-icon" aria-hidden="true"></span>
 							    <span class="sr-only">Next</span>
 							  </a>
-							</div>
+							</div>-->
 					  	</div>
 					  	
 					  </div>

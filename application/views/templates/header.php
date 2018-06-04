@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="<?=base_url()?>assets/css/custom.min.css">
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">-->
     <link rel="stylesheet" href="<?=base_url()?>assets/css/portada.css">
+    <link rel="stylesheet" href="<?=base_url()?>assets/css/conocenos.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/fontawesome/css/font-awesome.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>assets/imgs/logo.ico">
     <title>HammerContratistas</title>
   </head>
   <body>
@@ -24,7 +26,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Themes <span class="caret"></span></a>
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes">HOME <span class="caret"></span></a>
               <div class="dropdown-menu" aria-labelledby="themes">
                 <a class="dropdown-item" href="../default/">Default</a>
                 <div class="dropdown-divider"></div>
@@ -52,13 +54,13 @@
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../help/">Help</a>
+              <a class="nav-link" href="../help/">CONÓCENOS</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="http://blog.bootswatch.com">Blog</a>
+              <a class="nav-link" href="http://blog.bootswatch.com">SERVICIOS</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">Litera <span class="caret"></span></a>
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">PROYECTOS<span class="caret"></span></a>
               <div class="dropdown-menu" aria-labelledby="download">
                 <a class="dropdown-item" href="https://jsfiddle.net/bootswatch/rnjfzjjo/">Open in JSFiddle</a>
                 <div class="dropdown-divider"></div>
@@ -73,10 +75,10 @@
 
           <ul class="nav navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="http://builtwithbootstrap.com/" target="_blank">Built With Bootstrap</a>
+              <a class="nav-link" href="http://builtwithbootstrap.com/" target="_blank">CLIENTES</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a>
+              <a class="nav-link" href="https://wrapbootstrap.com/?ref=bsw" target="_blank">CONTACTO</a>
             </li>
           </ul>
 
