@@ -5,6 +5,11 @@ $(function(){
 	comboServicios(BASE_URL + "Servicio");
 	comboClientes(BASE_URL + "Clientes");
 
+	$("#cliente_id").tokenInput(BASE_URL + "Clientes/buscar", {
+        theme: "facebook",
+        tokenLimit: 1
+    });
+
 	$('#form').on('submit', function(e){
 
 		e.preventDefault();
@@ -30,6 +35,7 @@ $(function(){
 				if(response['valido']){
 					
 					Swal('El sistema informa', response['mensaje'], 'success');
+						$("#cliente_id").tokenInput("clear");
 						$('#form')[0].reset();
 					}else{
 						Swal('Oops...', response['mensaje'] , 'error');

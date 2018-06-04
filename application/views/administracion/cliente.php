@@ -22,6 +22,7 @@
 					  				<label for="nombre">Nombre de empresa cliente *</label>
 					  				<input type="text" name="cliente" id="cliente" required="" class="form-control" maxlength="200" minlength="2" placeholder="Nombre de empresa cliente">
 					  			</div>
+					  			
 					  			<div class="form-group">
 					  				<label for="logo">Logo</label>
 					  				<input type="file" class="form-control" name="logo" id="logo">
@@ -51,6 +52,7 @@
 <script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
 <script src="<?=base_url()?>assets/js/sweetalert2.all.js"></script>
 <script src="<?=base_url()?>assets/js/cliente.js"></script>
+
 </body>	
 </html>
 

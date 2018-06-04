@@ -19,6 +19,21 @@ class Clientes extends CI_Controller {
 		echo json_encode($clientes);
 	}
 
+	public function buscar(){
+
+		if($this->input->is_ajax_request()){
+			if($this->input->get('q')){
+				$letra = $this->input->get('q');
+				$cliente = $this->Cliente->buscar($letra);
+				header('Content-Type: application/x-json; charset:utf-8');
+				echo json_encode($cliente);
+			}
+		}else{
+			show_404();
+		}
+
+	}
+
 	public function store(){
 		
 		if( !$this->input->is_ajax_request() ){ return; }

@@ -11,6 +11,7 @@
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">-->
     <link rel="stylesheet" href="<?=base_url()?>assets/css/portada.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/css/conocenos.css">
+    
     <link rel="stylesheet" href="<?=base_url()?>assets/fontawesome/css/font-awesome.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>assets/imgs/logo.ico">
     <title>HammerContratistas</title>

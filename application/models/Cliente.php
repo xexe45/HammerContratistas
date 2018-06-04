@@ -31,6 +31,14 @@ class Cliente extends CI_Model {
 
 	}
 
+	public function buscar($parametro){
+		$query = "CALL sp_buscar_cliente(?)";
+		$this->load->database();
+		$data = $this->db->query($query,$parametro);
+		$this->db->close();
+		return $data->result();
+	}
+
 }
 
 /* End of file Cliente.php */

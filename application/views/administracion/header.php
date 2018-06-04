@@ -6,6 +6,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<?=base_url()?>assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?=base_url()?>assets/css/token-input-facebook.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/fontawesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/css/home.css">
     <title>HammerContratistas</title>

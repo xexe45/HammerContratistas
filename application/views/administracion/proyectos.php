@@ -35,12 +35,16 @@
 								  		<option value="concluido">Concluido</option>
 								  	</select>
 							  	</div>
-							  	<div class="form-group">
+							  	<!--<div class="form-group">
 								  	<label for="cliente_id">Cliente*</label>
 								  	<select name="cliente_id" id="cliente_id" class="form-control">
 								  		<option value="">Seleccionar Cliente...</option>
 								  		
 								  	</select>
+							  	</div>-->
+							  	<div class="form-group">
+							  		<label for="cliente_id">Cliente *</label>
+							  		<input type="text" class="form-control" name="cliente_id" id="cliente_id">
 							  	</div>
 							  	<div class="form-group">
 							  		<label for="fecha">Fecha de inicio *</label>
@@ -73,6 +77,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 <script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
 <script src="<?=base_url()?>assets/js/sweetalert2.all.js"></script>
+<script src="<?=base_url()?>assets/js/jquery.tokeninput.js"></script>
 <script src="<?=base_url()?>assets/js/proyectos.js"></script>
 </body>	
 </html>
