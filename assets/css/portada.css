@@ -1,3 +1,6 @@
+.margen-arriba{
+    border-top: 1px solid #FFF320;
+}
 .top {
     margin-top: -61px;
 }
@@ -37,6 +40,10 @@
 
 
 .servicios .tarjeta{
+    margin-bottom: 10px;
+}
+
+.bot{
     margin-bottom: 10px;
 }
 
@@ -246,6 +253,8 @@ footer{
     color: #fff;
     margin-top: 20px;
 }
+
+
 
 @media only screen and (max-width: 576px) {
     .bienvenido {

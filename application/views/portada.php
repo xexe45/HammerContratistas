@@ -1,32 +1,39 @@
 	<section class="top">
 		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 		<ol class="carousel-indicators">
-			<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+			<?php
+				for($i = 0; $i < $contador; $i++){
+					?>
+						<li data-target="#carouselExampleIndicators" data-slide-to="<?=$i?>" <?php if ($i == 0): ?>
+							class="active"
+						<?php endif ?> ></li>
+					<?php
+				}
+			?>
+			
 		</ol>
 		<div class="carousel-inner">
-			<div class="carousel-item active">
-			<img class="d-block w-100" src="<?=base_url()?>assets/imgs/slide1.png" alt="First slide">
-				<div class="carousel-caption d-none d-md-block">
-					<h3>Arquitectura</h3>
-					<p>Grandes diseños en arquitectura</p>
+			<?php foreach ($slides as $key => $value): ?>
+
+				<div <?php
+					if($key == 0){
+						?>
+						class="carousel-item active"
+						<?php
+					}else{
+						?>
+						class="carousel-item"
+						<?php
+					}
+				?> >
+					<img class="d-block w-100" src="<?=base_url()?>assets/imgs/portada/<?=$value->v2?>" alt="First slide">
+					<div class="carousel-caption d-none d-md-block">
+						<h3><?=$value->v4?></h3>
+						<p><?=$value->v5?></p>
+					</div>
 				</div>
-			</div>
-			<div class="carousel-item">
-			<img class="d-block w-100" src="<?=base_url()?>assets/imgs/slide2.png" alt="Second slide">
-				<div class="carousel-caption d-none d-md-block">
-					<h3>Ingeniería</h3>
-					<p>Ingeníeria de calidad</p>
-				</div>
-			</div>
-			<div class="carousel-item">
-			<img class="d-block w-100" src="<?=base_url()?>assets/imgs/slide3.png" alt="Third slide">
-				<div class="carousel-caption d-none d-md-block">
-					<h3>Construcción</h3>
-					<p>Construcciones de calidad</p>
-				</div>
-			</div>
+			<?php endforeach ?>
+			
 		</div>
 		<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -46,157 +53,41 @@
 		</div>
 		<div class="row vision">
 			<div class="col-sm-12 col-md-5">
-				<img src="<?=base_url()?>assets/imgs/logo.jpg" alt="">
+				<img src="<?=base_url()?>assets/imgs/<?=$info->v3?>" alt="">
 			</div>
 			<div class="col-sm-12 col-md-7 mivision">
 				<p class="parrafo">
 					¿Quiénes Somos?
 				</p>
 				<p class="parrafo">
-					Somos una empresa dedicada al rubro de la arquitectura, ingeniería y construcción, liderada por un equipo de profesionales
-					calificados. 
+					<?=$info->v8?>
 				</p>
-				<p class="parrafo">
-					Nuestro trabajo se basa en la exigencia y preocupación de cada detalle, además de caracterizarnos por brindar ideas
-					innovadoras garantizando un trabajo de calidad.
-				</p>
+				
 				
 			</div>
 		</div>
 	</section>
-	<div class="servicios">
-		<section class="container p-t-3 presentacion">
+	<section class="servicios">
+		<div class="container-fluid presentacion">
 		    <div class="row">
 		        <div class="col-lg-12 titulo">
 		            <h2>SERVICIOS</h2>
 		        </div>
 		    </div>
-		</section>
-		<section class="carousel slide" data-ride="carousel" id="postsCarousel">
-		    <div class="container p-t-0 m-t-2 carousel-inner">
-		        <div class="row row-equal carousel-item active m-t-0">
-		            <div class="col-md-4 tarjeta">
-		                <div class="card">
-		                    <div class="card-img-top card-img-top-250">
-		                        <img class="img-fluid" src="<?=base_url()?>assets/imgs/carousel1.png" alt="Carousel 1">
-		                    </div>
-		                    <div class="card-body p-t-2">
-		                        <h6 class="small text-wide p-b-2"></h6>
-		                        <h3>
-		                            <a href>ARQUITECTURA</a>
-		                        </h3>
-		                        <p>-Arquitectura comercial</p>
-									<p>-Arquitectura residencial(casas de campo, playa, ciudad y multifamiliares)</p>
-									<p>-Elaboración de imágenes fotorrealistas (renders)</p>
-									<p>-Recorridos virtuales 3D</p>
-									<p>-Trámite de licencia de edificación</p>
-
-
-		                    </div>
-		                </div>
-		            </div>
-		            <div class="col-md-4 tarjeta">
-		                <div class="card">
-		                    <div class="card-img-top card-img-top-250">
-		                        <img class="img-fluid" src="<?=base_url()?>assets/imgs/carrusel2.png" alt="Carousel 2">
-		                    </div>
-		                    <div class="card-body p-t-2">
-		                        <h6 class="small text-wide p-b-2"></h6>
-		                        <h3>
-		                            <a href>INGENIERÍA BÁSICA Y DETALLADA</a>
-		                        </h3>
-		                        <p>- Diseño estructural</p>
-		                        <p>- Diseño eléctrico</p>
-		                        <p>- Diseño de obras hidráulicas</p>
-		                        <p>- Topografía</p>
-		                        <p>- Estudio de drenaje pluvial</p>
-		                    </div>
-		                </div>
-		            </div>
-		            <div class="col-md-4 tarjeta">
-		                <div class="card">
-		                    <div class="card-img-top card-img-top-250">
-		                        <img class="img-fluid" src="<?=base_url()?>assets/imgs/carrusel3.png" alt="Carousel 3">
-		                    </div>
-		                    <div class="card-body p-t-2">
-		                        <h6 class="small text-wide p-b-2"></h6>
-		                        <h3>
-		                            <a href>SEGURIDAD INDUSTRIAL</a>
-		                        </h3>
-		                        <p>- Capacitaciones en seguridad y salud ocupacional</p>
-		                        <p>- Monitoreo Ocupacional</p>
-		                        <p>- Implementación de sistema integral de gestión de seguridad y salud en el trabajo.</p>
-		                    </div>
-		                </div>
-		            </div>
-		        </div>
-		        <div class="row row-equal carousel-item m-t-0">
-		            <div class="col-md-4 tarjeta">
-		                <div class="card">
-		                    <div class="card-img-top card-img-top-250">
-		                        <img class="img-fluid" src="<?=base_url()?>assets/imgs/carrusel4.jpg" alt="Carousel 4">
-		                    </div>
-		                    <div class="card-body p-t-2">
-		                        <h6 class="small text-wide p-b-2"></h6>
-		                        <h3>
-		                            <a href>GERENCIA DE PROYECTOS:</a>
-		                        </h3>
-		                        <p>-Gerencia del ciclo completo de desarrollo del proyecto con estándares PMI</p>
-		                        
-		                        <p>- Gerencia de seguridad, salud ocupacional, medio ambiente y relaciones
-comunitarias (HSEC)</p>
-		                       
-		                    </div>
-		                </div>
-		            </div>
-		            <div class="col-md-4 tarjeta">
-		                <div class="card">
-		                    <div class="card-img-top card-img-top-250">
-		                        <img class="img-fluid" src="<?=base_url()?>assets/imgs/carrusel5.jpg" alt="Carousel 5">
-		                    </div>
-		                    <div class="card-body p-t-2">
-		                        <h6 class="small text-wide p-b-2"><span class="pull-xs-right"></span></h6>
-		                        <h3>
-		                            <a href>CONSTRUCCIÓN</a>
-		                        </h3>
-		                        <p>- Obras viales</p>
-		                        <p>- Obras hidráulicas</p>
-		                        <p>- Obras electromecánicas</p>
-		                        <p>- Habilitaciones urbanas</p>
-		                        <p>- Estructuras metálicas</p>
-		                        
-		                    </div>
-		                </div>
-		            </div>
-		            <div class="col-md-4 tarjeta fadeIn wow">
-		                <div class="card">
-		                    <div class="card-img-top card-img-top-250">
-		                        <img class="img-fluid" src="<?=base_url()?>assets/imgs/carrusel6.jpg" alt="Carousel 6">
-		                    </div>
-		                    <div class="card-body p-t-2">
-		                        <h6 class="small text-wide p-b-2"></h6>
-		                        <h3>
-		                            <a href>INGENIERÍA ELECTROMECÁNICA</a>
-		                        </h3>
-		                        <p>- Diseño de equipos hidráulicos hasta 300PSI según necesidades</p>
-		                        <p>- Implementación subestaciones y transformadores</p>
-		                        <p>- Telemetría</p>
-		                    </div>
-		                </div>
-		            </div>
-		        </div>
+		    <div class="row">
+		    	<div class="col-md-12">
+		    		<div class="card-deck" id="tarjetas">
+					</div>
+		    	</div>
+				
 		    </div>
-		    <div class="container">
-		        <div class="row">
-		            <div class="col-xs-12 text-md-right lead">
-		                <a class="btn btn-outline-secondary prev" href="" title="go back"><i class="fa fa-lg fa-chevron-left"></i></a>
-		                <a class="btn btn-outline-secondary next" href="" title="more"><i class="fa fa-lg fa-chevron-right"></i></a>
-		            </div>
-		        </div>
-		        <br>
-		    </div>
-		</section>
-	</div>
+		    
+		    
+		</div>
+		
+
+		
+	</section>
 	<section class="detalle">
 		<div class="row">
 			<div class="col-md-12 texto">
@@ -211,14 +102,10 @@ comunitarias (HSEC)</p>
 			</div>
 		</div>
 	   <div class="customer-logos slider">
-	      <div class="slide"><img src="<?=base_url()?>assets/imgs/lcliente1.jpg"></div>
-	      <div class="slide"><img src="<?=base_url()?>assets/imgs/lcliente2.jpg"></div>
-	      <div class="slide"><img src="<?=base_url()?>assets/imgs/lcliente3.jpg"></div>
-	      <div class="slide"><img src="<?=base_url()?>assets/imgs/lcliente4.jpg"></div>
-	      <div class="slide"><img src="<?=base_url()?>assets/imgs/lcliente5.jpg"></div>
-	      <div class="slide"><img src="<?=base_url()?>assets/imgs/lcliente6.jpg"></div>
-	      <div class="slide"><img src="<?=base_url()?>assets/imgs/lcliente7.jpg"></div>
-	      <div class="slide"><img src="<?=base_url()?>assets/imgs/lcliente8.jpg"></div>
+	   		<?php foreach ($clientes as $cliente): ?>
+	   			<div class="slide"><img src="<?=base_url()?>assets/imgs/customers/<?=$cliente->v3?>"></div>
+	   		<?php endforeach ?>
+	      
 	   </div>
 	</section>
 	<section class="contacto">
@@ -237,18 +124,18 @@ comunitarias (HSEC)</p>
 			</div>
 			<div class="col-md-6 textos">
 				
-				<form>
+				<?=form_open('Home/contacto', array("id" => "form"))?>
 					<div class="form-group">
 						<label for="name">Nombre Completo *</label>
-						<input type="text" name="name" class="form-control" placeholder="Nombre Completo">
+						<input type="text" name="name" class="form-control" placeholder="Nombre Completo" maxlength="255" minlength="2">
 					</div>
 					<div class="form-group">
 						<label for="name">Teléfono *</label>
-						<input type="text" name="phone" class="form-control" placeholder="Teléfono">
+						<input type="text" name="phone" class="form-control" placeholder="Teléfono" maxlength="15" minlength="6">
 					</div>
 				  	<div class="form-group">
 					    <label for="exampleInputEmail1">Corre Electrónico *</label>
-					    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+					    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="correo">
 					    <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu correo electrónico con terceros.</small>
 				  	</div>
 				  	<div class="form-group">
@@ -257,7 +144,7 @@ comunitarias (HSEC)</p>
 				  	</div>
 				  
 				  <button type="submit" class="btn btn-primary btn-block">Enviar</button>
-				</form>
+				<?=form_close()?>
 			</div>
 		</div>
 	</section>

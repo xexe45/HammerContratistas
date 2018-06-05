@@ -9,6 +9,15 @@ class Info extends CI_Model {
 		
 	}
 
+	public function listarInfo(){
+
+		$query = "CALL sp_get_empresa";
+		$this->load->database();
+		$info = $this->db->query($query);
+		$this->db->close();
+		return $info->row();
+	}
+
 	public function update(array $data){
 
 		$query = "CALL sp_editar_empresa(?,?,?,?,?,?,?,@s)";

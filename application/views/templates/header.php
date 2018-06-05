@@ -18,7 +18,7 @@
   </head>
   <body>
   <header>
-   <div class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+   <div class="navbar navbar-expand-lg fixed-top navbar-light bg-light margen-arriba">
       <div class="container">
          <img src="<?=base_url()?>assets/imgs/logo.jpg" width="70" height="70" alt="">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,42 +26,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes">HOME <span class="caret"></span></a>
-              <div class="dropdown-menu" aria-labelledby="themes">
-                <a class="dropdown-item" href="../default/">Default</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="../cerulean/">Cerulean</a>
-                <a class="dropdown-item" href="../cosmo/">Cosmo</a>
-                <a class="dropdown-item" href="../cyborg/">Cyborg</a>
-                <a class="dropdown-item" href="../darkly/">Darkly</a>
-                <a class="dropdown-item" href="../flatly/">Flatly</a>
-                <a class="dropdown-item" href="../journal/">Journal</a>
-                <a class="dropdown-item" href="../litera/">Litera</a>
-                <a class="dropdown-item" href="../lumen/">Lumen</a>
-                <a class="dropdown-item" href="../lux/">Lux</a>
-                <a class="dropdown-item" href="../materia/">Materia</a>
-                <a class="dropdown-item" href="../minty/">Minty</a>
-                <a class="dropdown-item" href="../pulse/">Pulse</a>
-                <a class="dropdown-item" href="../sandstone/">Sandstone</a>
-                <a class="dropdown-item" href="../simplex/">Simplex</a>
-                <a class="dropdown-item" href="../sketchy/">Sketchy</a>
-                <a class="dropdown-item" href="../slate/">Slate</a>
-                <a class="dropdown-item" href="../solar/">Solar</a>
-                <a class="dropdown-item" href="../spacelab/">Spacelab</a>
-                <a class="dropdown-item" href="../superhero/">Superhero</a>
-                <a class="dropdown-item" href="../united/">United</a>
-                <a class="dropdown-item" href="../yeti/">Yeti</a>
-              </div>
+            <li class="nav-item">
+              <a class="nav-link <?php if($this->uri->segment(1) == ''){ ?> active <?php }   ?>" href="<?=base_url()?>">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../help/">CONÓCENOS</a>
+              <a class="nav-link <?php if($this->uri->segment(1) == 'Conocenos'){ ?> active <?php }   ?>" href="<?=base_url()?>Conocenos">Conócenos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="http://blog.bootswatch.com">SERVICIOS</a>
+              <a class="nav-link" href="http://blog.bootswatch.com">Servicios</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">PROYECTOS<span class="caret"></span></a>
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">Proyectos<span class="caret"></span></a>
               <div class="dropdown-menu" aria-labelledby="download">
                 <a class="dropdown-item" href="https://jsfiddle.net/bootswatch/rnjfzjjo/">Open in JSFiddle</a>
                 <div class="dropdown-divider"></div>
@@ -76,10 +51,10 @@
 
           <ul class="nav navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="http://builtwithbootstrap.com/" target="_blank">CLIENTES</a>
+              <a class="nav-link" href="http://builtwithbootstrap.com/" target="_blank">Clientes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="https://wrapbootstrap.com/?ref=bsw" target="_blank">CONTACTO</a>
+              <a class="nav-link" href="https://wrapbootstrap.com/?ref=bsw" target="_blank">Contacto</a>
             </li>
           </ul>
 

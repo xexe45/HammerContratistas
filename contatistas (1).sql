@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-05-2018 a las 21:32:54
+-- Tiempo de generación: 05-06-2018 a las 08:52:04
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.1
 
@@ -28,6 +28,25 @@ DELIMITER $$
 --
 -- Procedimientos
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_buscar_cliente` (IN `v_parametro` VARCHAR(25))  BEGIN
+select id as id, cliente as name
+from cliente
+where cliente like concat('%', v_parametro, '%');
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_contacto` (IN `v_nombre` VARCHAR(255), IN `v_telefono` VARCHAR(15), IN `v_correo` VARCHAR(255), IN `v_mensaje` TEXT, OUT `v_res` BOOLEAN)  BEGIN
+declare exit handler for sqlexception
+begin
+rollback;
+set v_res = false;
+end;
+start transaction;
+INSERT INTO contacto (nombre, telefono, correo, mensaje) 
+VALUES(v_nombre, v_telefono, v_correo, v_mensaje);
+commit;
+set v_res = true;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_editar_empresa` (IN `v_id` INT, IN `v_nombre` VARCHAR(150), IN `v_ruc` CHAR(11), IN `v_direccion` VARCHAR(200), IN `v_telefono` VARCHAR(15), IN `v_correo` VARCHAR(200), IN `v_presentacion` TEXT, OUT `v_res` BOOLEAN)  BEGIN
 declare exit handler for sqlexception
 begin
@@ -71,9 +90,27 @@ commit;
 set v_res = true;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_editar_slides` (IN `v_slide1` VARCHAR(255), IN `v_slide2` VARCHAR(255), OUT `v_res` BOOLEAN)  BEGIN
+declare exit handler for sqlexception
+begin
+rollback;
+set v_res = false;
+end;
+start transaction;
+UPDATE filosofia set slide1 = v_slide1, slide2 = v_slide2;
+commit;
+set v_res = true;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_clientes` ()  BEGIN
 select id as v1, cliente as v2, logo as v3, web as v4
 from cliente;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_empresa` ()  BEGIN
+select id as v1, nombre as v2, logo as v3, ruc as v4, direccion as v5,
+telefono as v6, correo as v7, presentacion as v8
+from empresa;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_filosofia` ()  BEGIN
@@ -91,6 +128,11 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_servicios` ()  BEGIN
 select id as v1, servicio as v2, img as v3, descripcion as v4
 from servicios;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listar_slides` ()  BEGIN
+select id as v1, img as v2, titulo as v4, subtitulo as v5
+from slides_portada;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_cliente` (IN `v_cliente` VARCHAR(200), IN `v_logo` VARCHAR(200), IN `v_web` VARCHAR(200), OUT `v_res` BOOLEAN)  BEGIN
@@ -217,13 +259,32 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `cliente`, `logo`, `web`) VALUES
-(5, 'Navarro Solutions', '1c9a9d850b37b64bce9e57317cfb3459.png', 'https://www.navarro.com'),
-(6, 'Empresa Mazas', '9877b645d2bd3224e79326b20ac6a17e.png', 'https://www.mazas.com/'),
-(7, 'Empresas Claudias', NULL, ''),
-(8, 'Empresa Siccha', '87c31018f9a7b1356ee804fcf9f3aaf7.png', 'https://www.siccha.com'),
-(9, 'Clínica Miraflores', NULL, 'https://www.clinica.com'),
-(10, 'Clínica Sana', '21a141f0dba1eb97cb0c2dc7012dc17d.png', 'https://www.sana.com'),
-(11, 'Clínica Belén', NULL, 'https://www.belen.com');
+(13, 'Navarro Solutions', '31c60edc1157df6b2f249468fa690368.jpg', 'https://www.navarro.com'),
+(14, 'Chunatec', '7b5a466946cbc52ab4224acb7752a4ba.jpg', 'https://www.chunated.com'),
+(15, 'Clínica Miraflores', 'f9ad0e0e6e49faf0a21195622ac703c0.jpg', 'https://www.clinicamiraflores.com'),
+(16, 'Clínica Sana', '8e8d0b53a112664fa49f00053738db6a.jpg', 'https://www.sana.com');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `contacto`
+--
+
+CREATE TABLE `contacto` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `telefono` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
+  `correo` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `mensaje` text COLLATE utf8_spanish_ci NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `contacto`
+--
+
+INSERT INTO `contacto` (`id`, `nombre`, `telefono`, `correo`, `mensaje`, `fecha`) VALUES
+(1, 'Juan Cosio Coma', '964088583', 'juanco@gmail.com', 'Hola comunicarse conmigo por favor, necesito un proyecto de una capilla', '2018-06-05 06:51:09');
 
 -- --------------------------------------------------------
 
@@ -247,7 +308,7 @@ CREATE TABLE `empresa` (
 --
 
 INSERT INTO `empresa` (`id`, `nombre`, `logo`, `ruc`, `direccion`, `telefono`, `correo`, `presentacion`) VALUES
-(1, 'Hammer Contratistas', '150b02c21b793bd89f407c62e6bbe869.jpg', '12345678912', 'Av. Los Tallanes G-5. Urb. La Providencia-Piura', '073596193', 'proyectos@hammer.com.pe', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti consequuntur voluptatem porro fugiat nostrum corrupti? Sint asperiores hic dolor quam. Laboriosam commodi aspernatur repellendus blanditiis vel aperiam molestiae dolorem a?\r\n\r\nLorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti consequuntur voluptatem porro fugiat nostrum corrupti? Sint asperiores hic dolor quam. Laboriosam commodi aspernatur repellendus blanditiis vel aperiam molestiae dolorem a?');
+(1, 'Hammer Contratistas', '150b02c21b793bd89f407c62e6bbe869.jpg', '12345678912', 'Av. Los Tallanes G-5. Urb. La Providencia-Piura', '073596193', 'proyectos@hammer.com.pe', 'Somos una empresa dedicada al rubro de la arquitectura, ingeniería y construcción, liderada por un equipo de profesionales calificados. \r\n\r\nNuestro trabajo se basa en la exigencia y preocupación de cada detalle, además de caracterizarnos por brindar ideas innovadoras garantizando un trabajo de calidad.');
 
 -- --------------------------------------------------------
 
@@ -270,7 +331,7 @@ CREATE TABLE `filosofia` (
 --
 
 INSERT INTO `filosofia` (`id`, `historia`, `mision`, `vision`, `slide1`, `slide2`, `valores`) VALUES
-(1, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Nuestra misión es', 'Nuestra visión es', 'slide1.jpg', 'slide2.jpg', 'Nuestros valores son');
+(1, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Nuestra misión es', 'Nuestra visión es', 'adc30155573fbf48831b6d9a3ed1aeee.jpg', '0016c7ac129a509316347e88d4da0202.jpg', 'Nuestros valores son');
 
 -- --------------------------------------------------------
 
@@ -301,14 +362,6 @@ CREATE TABLE `proyecto` (
   `descripcion` text COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Volcado de datos para la tabla `proyecto`
---
-
-INSERT INTO `proyecto` (`id`, `servicio_id`, `nombre`, `tipo`, `cliente_id`, `fecha`, `img_principal`, `descripcion`) VALUES
-(2, 1, 'Diseño de Clínica Belén', 'concluido', 11, '2017-01-01', 'e8227430aef67a32169e529a256612da.jpg', 'Proyecto realizado por...'),
-(3, 2, 'Construcción Clínica Sana', 'proceso', 10, '2018-01-01', '7c341998028c55ea41507b3a65b56067.jpg', 'El proyecto se viene realizando...');
-
 -- --------------------------------------------------------
 
 --
@@ -327,8 +380,12 @@ CREATE TABLE `servicios` (
 --
 
 INSERT INTO `servicios` (`id`, `servicio`, `img`, `descripcion`) VALUES
-(1, 'Arquitectura', '6dc53312028016fd8ff5d97bf50af0ef.png', 'Ofrecemos el servicio de arquitectura'),
-(2, 'Ingeniería', '88a255a590e6a5afe9ec67bddfa28de1.jpg', 'Expertos en Ingeniería');
+(3, 'Construcción de Obra Civil', '43b2125fc5dad6b904f9bac771228235.png', 'Para Hammer Contratistas no hay nada más importante que nuestros clientes y sus proyectos, por ello realizamos con eficacia, cuidado en el rendimiento económico y profesionalismo la construcción de Accesos, Vialidades, Estacionamientos y Patios de Maniobras, así como todo tipo de Urbanizaciones.'),
+(4, 'Estudios Preliminares', '0a03701bae1056bff473bc74acb9af3b.png', 'Enfocados en la realización de proyectos integrales, en Hammer Contratistas ofrecemos una amplia gama de procesos para el desarrollo de todo proyecto y durante la construcción de toda obra, nuestra experiencia y precisión, nos permite realizar trabajos de planimetría y altimetría, así como diversos estudios preliminares propios de cada obra.'),
+(5, 'Proyectos Arquitectónicos', 'cf5464d24fa3ee3655ce2e5a2ac634e7.png', 'En Hammer Contratistas cada proyecto representa un compromiso profundo con la calidad, para lograr esto conjugamos elementos clave de nuestro equipo para trabajar con nuestros clientes y poder desarrollar así proyectos de calidad total a la altura de las expectativas y que sean capaces de satisfacer todas sus necesidades actuales y futuras.'),
+(6, 'Terracerías', '6fdea52579fd8e972627492788960181.png', 'Para cualquier desarrollo y construcción, el manejo de suelos representa una piedra angular para acceso, soporte y planeación de la obra, ofrecemos soluciones en Cortes, Rellenos, Nivelaciones y Mejoramiento de Suelos.\r\n\r\nmanejo de suelos representa una piedra angular para acceso, soporte y planeación de la obra, ofrecemos soluciones en Cortes, Rellenos, Nivelaciones y Mejoramiento de Suelos. Todos son realizados con el mayor factor de seguridad, apoyándolos con Pruebas de Laboratorio para verificar Pesos Volumétricos, Contenido de Humedad y Porcentajes de Compactación requeridos, según el Diseño y Cálculos previamente establecidos.'),
+(7, 'Edificaciones', 'a41e472e00ee098ddf95d84446572174.png', 'En CONSTRUCTORA INSUR queremos convertir grandes ideas en grandes construcciones, por ello establecemos y ejecutamos modelos y planes de trabajo estructurado para lograr levantar cualquier edificación. Contamos con la asesoría técnica y profesional para la realización del Proyecto y Construcción de la Edificación que su empresa requiera.'),
+(8, 'Estructuras metálicas y cubiertas', 'aeea1a33c72b7e245e9f63d048497e68.png', 'En Hammer Contratistas estamos orgullosos de poder contribuir en con nuestros clientes desde el primer momento, te ofrecemos Diseño, Fabricación, Transporte y Montaje de estructuras metálicas a base de Marcos Rígidos de sección variable, los cuales poseen una gran versatilidad para ser empleados en Construcciones Industriales, Bodegas y Edificios Comerciales, cubriendo Grandes Claros con gran Rapidez, Economía y proporcionando una Apariencia Inmejorable.');
 
 -- --------------------------------------------------------
 
@@ -349,7 +406,8 @@ CREATE TABLE `slides_portada` (
 
 INSERT INTO `slides_portada` (`id`, `img`, `titulo`, `subtitulo`) VALUES
 (1, 'fb1f1e324ccc60d85326676c8c38ae49.png', 'Arquitectura', 'Expertos en diseño de construcciones'),
-(2, 'ecfed1ec1eebec0e2985ad7c4a80271a.png', 'Angular', 'Excelente framework JS');
+(3, '4369f602fdb6f4f0b47d91cd521abcba.png', 'Ingeniería', 'Ingeniería de calidad'),
+(4, '90cef3db842d4fca360f0b5f0cb37b8c.png', 'Construcción', 'Construcción de calidad');
 
 -- --------------------------------------------------------
 
@@ -393,6 +451,12 @@ CREATE TABLE `usuario` (
 ALTER TABLE `cliente`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `cliente_UNIQUE` (`cliente`);
+
+--
+-- Indices de la tabla `contacto`
+--
+ALTER TABLE `contacto`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `empresa`
@@ -461,7 +525,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT de la tabla `contacto`
+--
+ALTER TABLE `contacto`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `empresa`
@@ -485,19 +555,19 @@ ALTER TABLE `galeria`
 -- AUTO_INCREMENT de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `slides_portada`
 --
 ALTER TABLE `slides_portada`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tarea_servicio`

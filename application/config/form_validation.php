@@ -18,6 +18,16 @@ $config = array(
 		array('field' => 'presentacion', 'label' => 'Presentación', 'rules' => 'required|is_string|trim'),
 	//array('field' => 'rut','label' => 'RUT','rules' => 'required|is_string|xss_clean|trim|esRut'),
 	),
+
+	'contacto'
+	=> array(//dentro de este arreglo crear una linea de arreglos por cada campo que quiera trabajar
+
+		array('field' => 'name', 'label' => 'Nombre', 'rules' => 'required|is_string|trim|max_length[255]|min_length[2]'),
+		array('field' => 'phone', 'label' => 'Telefono de contacto', 'rules' => 'required|numeric|trim|max_length[15]|min_length[6]'),
+		array('field' => 'correo', 'label' => 'E-Mail', 'rules' => 'required|is_string|trim|valid_email'),
+		array('field' => 'mensaje', 'label' => 'Presentación', 'rules' => 'required|is_string|trim'),
+	//array('field' => 'rut','label' => 'RUT','rules' => 'required|is_string|xss_clean|trim|esRut'),
+	),
 	/**
 	 * elefante
 	 * */

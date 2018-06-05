@@ -8,6 +8,15 @@ class Slides extends CI_Model {
 		parent::__construct();
 	}
 
+	public function listarPortada(){
+
+		$query = "CALL sp_listar_slides";
+		$this->load->database();
+		$slides = $this->db->query($query);
+		$this->db->close();
+		return $slides->result();
+	}
+
 	public function registrar($data){
 
 		$query = "CALL sp_registrar_slides(?,?,?,@s)";
