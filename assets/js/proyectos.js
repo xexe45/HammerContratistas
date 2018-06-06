@@ -2,6 +2,11 @@ $(function(){
 
 	const BASE_URL = "http://localhost:8090/HammerContratistas/";
 
+	//Tabla de datos
+    const $table = $('#table');
+    const $rutaDefinitivia = 'http://localhost:8090/HammerContratistas/';
+    llenarTabla($table,$rutaDefinitivia);
+
 	comboServicios(BASE_URL + "Servicio");
 	comboClientes(BASE_URL + "Clientes");
 
@@ -37,6 +42,9 @@ $(function(){
 					Swal('El sistema informa', response['mensaje'], 'success');
 						$("#cliente_id").tokenInput("clear");
 						$('#form')[0].reset();
+						$table.bootstrapTable('refresh', {
+			             	url: $rutaDefinitivia + 'Proyectos'
+			        	});
 					}else{
 						Swal('Oops...', response['mensaje'] , 'error');
 					}
@@ -88,4 +96,23 @@ function comboClientes(ruta){
 		}
 	});
 
+}
+
+function llenarTabla($table,rutaDefinitivia){
+	$.get(rutaDefinitivia + 'Proyectos', function(response){
+		console.log(response);
+    		
+    		$(function () {
+        		$table.bootstrapTable({data: response['data']});
+        		$table.bootstrapTable('hideColumn','v1');
+        		$table.bootstrapTable('hideColumn','v2');
+        		$table.bootstrapTable('hideColumn','v6');
+    		});
+	},'json');
+	
+}
+
+function imageFormatter(value, row){
+ 	let r =  "http://localhost:8090/HammerContratistas/assets/imgs/proyectos/" + value;
+ 	return '<img width="150" class="img-fluid" src="'+r+'" />';
 }

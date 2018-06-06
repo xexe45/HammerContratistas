@@ -51,6 +51,12 @@ class Administracion extends CI_Controller {
 		$this->load->view('administracion/proyectos');
 	}
 
+	
+	public function tareas(){
+		$this->load->view('administracion/header');
+		$this->load->view('administracion/tareas');
+	}
+
 	public function portada(){
 		$this->load->view('administracion/header');
 		$this->load->view('administracion/portada');

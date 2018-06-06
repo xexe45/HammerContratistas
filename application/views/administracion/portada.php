@@ -51,7 +51,30 @@
 
 					  	</div>
 					  </div>
-					  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+					  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+					  	<br>
+					  	<table id="table" 
+		                data-sort-name="v1"
+		                data-sort-order="desc"
+		                data-search="true"
+		                data-pagination="true"               
+		                data-page-size="5"
+		                data-page-list="[5,8,10]"
+		                data-pagination-first-text="Primero"
+		                data-pagination-pre-text="Anterior"
+		                data-pagination-next-text="Siguiente"
+		                data-pagination-last-text="Último">
+		                  <thead>
+		                    <tr>
+		                      <!--<th data-field="state" data-radio="true"></th>-->
+		                      <th data-field="v1">ID</th>
+		                      <th data-field="v2" data-formatter="imageFormatter">Imagen</th>
+		                      <th data-field="v4">Título</th>
+		                      <th data-field="v5">Subtítulo</th>
+		                    </tr>
+		                  </thead>
+		                </table>
+					  </div>
 					</div>
 			  </div>
 			</div>
@@ -64,6 +87,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 <script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
 <script src="<?=base_url()?>assets/js/sweetalert2.all.js"></script>
+<script src="<?=base_url()?>assets/btable/bootstrap-table.min.js"></script>
 <script src="<?=base_url()?>assets/js/portada.js"></script>
 </body>	
 </html>

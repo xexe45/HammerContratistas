@@ -1,5 +1,4 @@
-
-			<div class="card top-bottom">
+<div class="card top-bottom">
 			  <div class="card-body">
 			    <ul class="nav nav-tabs" id="myTab" role="tablist">
 					  <li class="nav-item">
@@ -17,20 +16,19 @@
 					  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 					  	<div class="top">
 
-					  		<?=form_open_multipart('Servicio/registrar', array("id" => "form"))?>
+					  		<?=form_open_multipart('Tarea/registrar', array("id" => "form"))?>
 					  		
 					  			<div class="form-group">
-					  				<label for="servicio">Nombre de servicio *</label>
-					  				<input type="text" name="servicio" id="servicio" required="" class="form-control" maxlength="150" minlength="4" placeholder="Nombre de servicio">
+					  				<label for="tarea">Nombre de Tarea *</label>
+					  				<input type="text" name="tarea" id="tarea" required="" class="form-control" maxlength="200" minlength="4" placeholder="Nombre de tarea">
 					  			</div>
 					  			<div class="form-group">
-					  				<label for="logo">Imagen de servicio *</label>
-					  				<input type="file" class="form-control" name="file" id="file">
-					  			</div>
-					  			<div class="form-group">
-					  				<label for="descripcion">Descripción de servicio *</label>
-					  				<textarea name="descripcion" id="descripcion" cols="30" rows="5" class="form-control"></textarea>
-					  			</div>
+								  	<label for="servicio_id">Servicio al que corresponde*</label>
+								  	<select name="servicio_id" id="servicio_id" class="form-control">
+								  		<option value="">Seleccionar Servicio...</option>
+								  	</select>
+								  	</div>
+					  			
 					  			
 							  <button type="submit" class="btn btn-success">Registrar</button>
 							<?=form_close()?>
@@ -39,6 +37,8 @@
 					  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 					  	<table id="table" 
 		                data-sort-name="v1"
+		                data-group-by="true"
+               			data-group-by-field="v4"
 		                data-sort-order="desc"
 		                data-search="true"
 		                data-pagination="true"               
@@ -53,8 +53,8 @@
 		                      <!--<th data-field="state" data-radio="true"></th>-->
 		                      <th data-field="v1">ID</th>
 		                      <th data-field="v2">SERVICIO</th>
-		                      <th data-field="v3" data-formatter="imageFormatter">Imagen</th>
-		                      <th data-field="v4">Descripción</th>
+		                      <th data-field="v3">Tarea</th>
+		                      <th data-field="v4">Servicio</th>
 		                    </tr>
 		                  </thead>
 		                </table>
@@ -71,8 +71,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 <script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
 <script src="<?=base_url()?>assets/btable/bootstrap-table.min.js"></script>
+<script src="<?=base_url()?>assets/btable/bootstrap-table-group-by.js"></script>
 <script src="<?=base_url()?>assets/js/sweetalert2.all.js"></script>
-<script src="<?=base_url()?>assets/js/servicios.js"></script>
+<script src="<?=base_url()?>assets/js/tareas.js"></script>
 </body>	
 </html>
-

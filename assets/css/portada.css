@@ -27,6 +27,10 @@
     text-align: justify;
 }
 
+.linea{
+    line-height: 60px;
+}
+
 .servicios{
     background: #EFF1F6;
     padding: 50px;

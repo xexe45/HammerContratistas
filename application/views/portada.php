@@ -59,7 +59,7 @@
 				<p class="parrafo">
 					¿Quiénes Somos?
 				</p>
-				<p class="parrafo">
+				<p class="parrafo linea">
 					<?=$info->v8?>
 				</p>
 				

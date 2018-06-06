@@ -8,6 +8,16 @@ class Proyecto extends CI_Model {
 		parent::__construct();			
 	}
 
+	public function listarProyectos(){
+
+		$query = "CALL sp_get_proyectos";
+		$this->load->database();
+		$proyectos = $this->db->query($query);
+		$this->db->close();
+		return $proyectos->result();
+
+	}
+
 	public function insert(array $data){
 
 		$query = "CALL sp_registrar_proyecto(?,?,?,?,?,?,?,@s)";

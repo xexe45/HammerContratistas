@@ -1,5 +1,10 @@
 $(function(){
 
+	//Tabla de datos
+    const $table = $('#table');
+    const $rutaDefinitivia = 'http://localhost:8090/HammerContratistas/';
+    llenarTabla($table,$rutaDefinitivia);
+
 
 	$('#form').on('submit', function(e){
 
@@ -27,11 +32,31 @@ $(function(){
 					
 					Swal('El sistema informa', response['mensaje'], 'success');
 						$('#form')[0].reset();
+						$table.bootstrapTable('refresh', {
+			             	url: $rutaDefinitivia + 'Servicio'
+			        	});
 					}else{
 						Swal('Oops...', response['mensaje'] , 'error');
 					}
 				}
 			});
-	})
+	});
 
 })
+
+function llenarTabla($table,rutaDefinitivia){
+	$.get(rutaDefinitivia + 'Servicio', function(response){
+		console.log(response);
+    		
+    		$(function () {
+        		$table.bootstrapTable({data: response['data']});
+        		$table.bootstrapTable('hideColumn','v1');
+    		});
+	},'json');
+	
+}
+
+function imageFormatter(value, row){
+ 	let r =  "http://localhost:8090/HammerContratistas/assets/imgs/servicios/" + value;
+ 	return '<img class="img-fluid" src="'+r+'" />';
+}

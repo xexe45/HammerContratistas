@@ -14,7 +14,9 @@ class Portada extends CI_Controller {
 
 	public function index()
 	{
-		
+		$slides['data'] = $this->Slides->listarPortada();
+		header('Content-Type: application/x-json; charset:utf-8');
+		echo json_encode($slides);
 	}
 
 	public function registrar(){

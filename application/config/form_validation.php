@@ -31,9 +31,15 @@ $config = array(
 	/**
 	 * elefante
 	 * */
+	'tareas'
+	=> array(
+		array('field' => 'servicio_id', 'label' => 'Servicio al que pertenece el proyecto', 'rules' => 'required|numeric|trim'),
+		array('field' => 'tarea', 'label' => 'Nombre de Tarea', 'rules' => 'required|is_string|trim|min_length[4]|max_length[200]'),
+	),
+	
 	'store_customer'
 	=> array(
-		array('field' => 'cliente', 'label' => 'Cliente', 'rules' => 'required|is_string|trim|max_length[200]|min_length[5]'),
+		array('field' => 'cliente', 'label' => 'Cliente', 'rules' => 'required|is_string|trim|max_length[200]|min_length[2]'),
 	),
 
 	'store_proyect'

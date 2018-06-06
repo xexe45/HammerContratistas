@@ -6,6 +6,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<?=base_url()?>assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?=base_url()?>assets/btable/bootstrap-table.min.css">
+    <link rel="stylesheet" href="<?=base_url()?>assets/btable/bootstrap-table-group-by.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/css/token-input-facebook.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/fontawesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/css/home.css">
@@ -46,6 +48,7 @@
 			  <a href="<?=base_url()?>Administracion/empresa" class="list-group-item list-group-item-action">Nuestra empresa</a>
 			  <a href="<?=base_url()?>Administracion/filosofia" class="list-group-item list-group-item-action">Filosofía empresarial</a>
 			  <a href="<?=base_url()?>Administracion/servicios" class="list-group-item list-group-item-action">Servicios</a>
+			   <a href="<?=base_url()?>Administracion/tareas" class="list-group-item list-group-item-action">Tareas x Servicio</a>
 			  <a href="<?=base_url()?>Administracion/proyectos" class="list-group-item list-group-item-action">Proyectos</a>
 			  <a href="<?=base_url()?>Administracion/usuarios" class="list-group-item list-group-item-action">Usuarios</a>
 			  <a href="<?=base_url()?>Administracion/clientes" class="list-group-item list-group-item-action">Clientes</a>
@@ -55,7 +58,7 @@
 		<div class="col-md-9">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
-				   <li class="breadcrumb-item"><a href="<?=base_url()?>inicio">Home</a></li>
+				   <li class="breadcrumb-item"><a href="<?=base_url()?>Administracion/inicio">Home</a></li>
 				   
 				   <li class="breadcrumb-item active" aria-current="page"><?=$this->uri->segment(2)?></li>
 				 </ol>

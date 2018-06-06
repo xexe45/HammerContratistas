@@ -52,7 +52,7 @@
 							  	</div>
 					  			
 					  			<div class="form-group">
-					  				<label for="img_principal">Imagen del proyecto *</label>
+					  				<label for="img_principal">Imagen del proyecto</label>
 					  				<input type="file" class="form-control" name="file" id="file" class="form-control">
 					  			</div>
 					  			<div class="form-group">
@@ -64,7 +64,35 @@
 							<?=form_close()?>
 					  	</div>
 					  </div>
-					  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+					  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+					  	<table id="table" 
+		                data-sort-name="v1"
+		                data-sort-order="desc"
+		                data-search="true"
+		                data-pagination="true"               
+		                data-page-size="5"
+		                data-page-list="[5,8,10]"
+		                data-pagination-first-text="Primero"
+		                data-pagination-pre-text="Anterior"
+		                data-pagination-next-text="Siguiente"
+		                data-pagination-last-text="Último">
+		                  <thead>
+		                    <tr>
+		                      <!--<th data-field="state" data-radio="true"></th>-->
+		                      <th data-field="v1">ID</th>
+		                      <th data-field="v2">SERVICIO_ID</th>
+		                      <th data-field="v3">SERVICIO</th>
+		                      <th data-field="v4">PROYECTO</th>
+		                      <th data-field="v5">ESTADO</th>
+		                      <th data-field="v6">CLIENTE_ID</th>
+		                      <th data-field="v7">CLIENTE</th>
+		                      <th data-field="v8">FECHA DE INICIO</th>
+		                      <th data-field="v9" data-formatter="imageFormatter">Imagen</th>
+		                      <th data-field="v10">DESCRIPCION</th>
+		                    </tr>
+		                  </thead>
+		                </table>
+					  </div>
 					</div>
 			  </div>
 			</div>
@@ -76,6 +104,7 @@
 <script src="<?=base_url()?>assets/js/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 <script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
+<script src="<?=base_url()?>assets/btable/bootstrap-table.min.js"></script>
 <script src="<?=base_url()?>assets/js/sweetalert2.all.js"></script>
 <script src="<?=base_url()?>assets/js/jquery.tokeninput.js"></script>
 <script src="<?=base_url()?>assets/js/proyectos.js"></script>

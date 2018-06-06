@@ -15,6 +15,9 @@ class Proyectos extends CI_Controller {
 	public function index()
 	{
 		
+		$proyectos['data'] = $this->Proyecto->listarProyectos();
+		header('Content-Type: application/x-json; charset:utf-8');
+		echo json_encode($proyectos);
 	}
 
 	public function store(){
