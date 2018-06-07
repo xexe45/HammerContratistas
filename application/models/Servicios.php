@@ -30,6 +30,15 @@ class Servicios extends CI_Model {
 		return $res->row()->res;
 		
 	}
+
+	public function servicio($id){
+		
+		$query = "CALL sp_servicio_id(?)";
+		$this->load->database();
+		$servicio = $this->db->query($query,$id);
+		$this->db->close();
+		return $servicio->row();
+	}
 	
 
 }

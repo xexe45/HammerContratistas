@@ -14,6 +14,7 @@
     
     <link rel="stylesheet" href="<?=base_url()?>assets/fontawesome/css/font-awesome.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>assets/imgs/logo.ico">
+    
     <title>HammerContratistas</title>
   </head>
   <body>
@@ -32,30 +33,26 @@
             <li class="nav-item">
               <a class="nav-link <?php if($this->uri->segment(1) == 'Conocenos'){ ?> active <?php }   ?>" href="<?=base_url()?>Conocenos">Conócenos</a>
             </li>
-            <li class="nav-item">
+            <!--<li class="nav-item">
               <a class="nav-link" href="http://blog.bootswatch.com">Servicios</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">Proyectos<span class="caret"></span></a>
-              <div class="dropdown-menu" aria-labelledby="download">
-                <a class="dropdown-item" href="https://jsfiddle.net/bootswatch/rnjfzjjo/">Open in JSFiddle</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="../4/litera/bootstrap.min.css">bootstrap.min.css</a>
-                <a class="dropdown-item" href="../4/litera/bootstrap.css">bootstrap.css</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="../4/litera/_variables.scss">_variables.scss</a>
-                <a class="dropdown-item" href="../4/litera/_bootswatch.scss">_bootswatch.scss</a>
+            </li>-->
+            <li class="nav-item dropdown <?php if($this->uri->segment(1) == 'HammerProyectos'){ ?> active <?php }   ?>">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Proyectos
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="<?=base_url()?>HammerProyectos/concluidos">Concluidos</a>
+                <a class="dropdown-item" href="<?=base_url()?>HammerProyectos/proceso">Proceso</a>
+                
               </div>
             </li>
           </ul>
 
           <ul class="nav navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="http://builtwithbootstrap.com/" target="_blank">Clientes</a>
+              <a class="nav-link" href="http://builtwithbootstrap.com/">Clientes</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://wrapbootstrap.com/?ref=bsw" target="_blank">Contacto</a>
-            </li>
+            
           </ul>
 
         </div>

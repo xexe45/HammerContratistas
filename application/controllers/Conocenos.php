@@ -7,12 +7,15 @@ class Conocenos extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->helper('url');
+		$this->load->model('Info');
 	}
 
 	public function index()
 	{
+		$data['info'] = $this->Info->getFilosofia();
+
 		$this->load->view('templates/header');
-		$this->load->view('conocenos');
+		$this->load->view('conocenos',$data);
 		$this->load->view('templates/footer');
 	}
 

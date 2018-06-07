@@ -10,10 +10,10 @@
 					</div>
 				</div>
 				<div class="row">
-					<p class="parrafo">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum quibusdam, ad placeat voluptatibus enim, possimus vero quam et iusto quasi aliquam pariatur, recusandae blanditiis omnis magni culpa laudantium modi, sapiente.</p>
 					<p class="parrafo">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore vel, blanditiis consequuntur non, ipsam rem expedita deserunt eius. Similique autem eos tempore incidunt doloremque tempora natus aliquam sequi architecto officia.
+						<?=$info->v2?>
 					</p>
+					
 				</div>
 				
 				
@@ -22,10 +22,10 @@
 				<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
 				  <div class="carousel-inner">
 				    <div class="carousel-item active">
-				      <img class="d-block w-100" height="600" src="<?=base_url()?>assets/imgs/filosofia/slide1.jpg" alt="First slide">
+				      <img class="d-block w-100" height="600" src="<?=base_url()?>assets/imgs/filosofia/<?=$info->v5?>" alt="First slide">
 				    </div>
 				    <div class="carousel-item">
-				      <img class="d-block w-100" height="600" src="<?=base_url()?>assets/imgs/filosofia/slide2.jpg" alt="Second slide">
+				      <img class="d-block w-100" height="600" src="<?=base_url()?>assets/imgs/filosofia/<?=$info->v6?>" alt="Second slide">
 				    </div>
 				    
 				  </div>
@@ -42,16 +42,20 @@
 			<div class="col-md-4">
 				<div class="card">
 				  <div class="card-body">
-				    <h3>MISIÓN</h3>
-				    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas corrupti accusantium nihil ipsam asperiores debitis, qui doloremque aspernatur. Nihil numquam sequi tenetur, recusandae. Repellat, fugit.</p>
+				    <h3 class="vis">MISIÓN</h3>
+				    <p class="vismis">
+				    	<?=$info->v3?>
+				    </p>
 				  </div>
 				</div>
 			</div>
 			<div class="col-md-4">
 			<div class="card">
 			  <div class="card-body">
-			    <h3>MISIÓN</h3>
-			    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed adipisci, sit, eligendi optio rerum ex voluptate blanditiis ratione, ducimus eaque aut voluptas illo aspernatur voluptatum.</p>
+			    <h3 class="vis">VISIÓN</h3>
+			    <p class="vismis">
+			    	<?=$info->v4?>
+			    </p>
 			  </div>
 			</div>
 			</div>
@@ -59,8 +63,3 @@
 		
 	</div>
 </section>
-
-<script src="<?=base_url()?>assets/js/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
-</body>

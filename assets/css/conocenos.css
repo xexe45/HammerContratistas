@@ -56,6 +56,61 @@
     margin-bottom: 20px;
 }
 
+.vis{
+    color: #1B2B56;
+}
+
+.vismis{
+    color: #768493;
+}
+
+.proyecto{
+    margin-top: -33px;
+    background: url(../imgs/slide_proy.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 50px;
+    height: 350px;
+    color: #fff;
+}
+
+.proyecto .titulo-p{
+    margin-top: 6%;
+    font-size: 2.8em;
+}
+
+.servicio{
+    margin-top: -33px;
+    background: url(../imgs/slide_serv.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 50px;
+    height: 350px;
+    color: #fff;
+}
+
+.servicio .titulo-s{
+    margin-top: 6%;
+    font-size: 2.8em;
+}
+
+.servicios{
+    background: #EFF1F6;
+}
+
+.servicios .service .serviceh2{
+    color: #1B2B56;
+    margin-bottom: 10px;
+}
+
+.servicios .service .servicep{
+    color: #86748B;
+    line-height: 40px;
+}
 @media only screen and (max-width: 800px) {
     .filosofia .titulo-f{
 		font-size: 2.2em;

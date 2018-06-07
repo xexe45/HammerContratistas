@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-06-2018 a las 08:52:04
+-- Tiempo de generación: 07-06-2018 a las 08:27:11
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.1
 
@@ -28,12 +28,14 @@ DELIMITER $$
 --
 -- Procedimientos
 --
+DROP PROCEDURE IF EXISTS `sp_buscar_cliente`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_buscar_cliente` (IN `v_parametro` VARCHAR(25))  BEGIN
 select id as id, cliente as name
 from cliente
 where cliente like concat('%', v_parametro, '%');
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_contacto`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_contacto` (IN `v_nombre` VARCHAR(255), IN `v_telefono` VARCHAR(15), IN `v_correo` VARCHAR(255), IN `v_mensaje` TEXT, OUT `v_res` BOOLEAN)  BEGIN
 declare exit handler for sqlexception
 begin
@@ -47,6 +49,7 @@ commit;
 set v_res = true;
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_editar_empresa`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_editar_empresa` (IN `v_id` INT, IN `v_nombre` VARCHAR(150), IN `v_ruc` CHAR(11), IN `v_direccion` VARCHAR(200), IN `v_telefono` VARCHAR(15), IN `v_correo` VARCHAR(200), IN `v_presentacion` TEXT, OUT `v_res` BOOLEAN)  BEGIN
 declare exit handler for sqlexception
 begin
@@ -61,6 +64,7 @@ commit;
 set v_res = true;
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_editar_filosofia`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_editar_filosofia` (IN `v_id` INT, IN `v_historia` TEXT, IN `v_mision` TEXT, IN `v_vision` TEXT, IN `v_valores` TEXT, OUT `v_res` BOOLEAN)  BEGIN
 declare exit handler for sqlexception
 begin
@@ -77,6 +81,7 @@ commit;
 set v_res = true;
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_editar_logo`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_editar_logo` (IN `v_id` INT, IN `v_logo` VARCHAR(200), OUT `v_res` BOOLEAN)  BEGIN
 declare exit handler for sqlexception
 begin
@@ -90,6 +95,7 @@ commit;
 set v_res = true;
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_editar_slides`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_editar_slides` (IN `v_slide1` VARCHAR(255), IN `v_slide2` VARCHAR(255), OUT `v_res` BOOLEAN)  BEGIN
 declare exit handler for sqlexception
 begin
@@ -102,39 +108,61 @@ commit;
 set v_res = true;
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_get_clientes`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_clientes` ()  BEGIN
 select id as v1, cliente as v2, logo as v3, web as v4
 from cliente;
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_get_empresa`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_empresa` ()  BEGIN
 select id as v1, nombre as v2, logo as v3, ruc as v4, direccion as v5,
 telefono as v6, correo as v7, presentacion as v8
 from empresa;
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_get_filosofia`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_filosofia` ()  BEGIN
 SELECT id as v1, historia as v2, mision as v3, vision as v4, 
 slide1 as v5, slide2 as v6, valores as v7
 FROM filosofia;
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_get_info`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_info` ()  BEGIN
 select id as v1, nombre as v2, logo as v3, ruc as v4,
 direccion as v5, telefono as v6, correo as v7, presentacion as v8
 from empresa;
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_get_proyectos`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_proyectos` ()  BEGIN
+select p.id as v1, p.servicio_id as v2, s.servicio as v3, p.nombre as v4,
+p.tipo as v5, p.cliente_id as v6, c.cliente as v7, p.fecha as v8, p.img_principal as v9,
+p.descripcion as v10
+from proyecto p inner join servicios s on p.servicio_id = s.id
+inner join cliente c on p.cliente_id = c.id;
+END$$
+
+DROP PROCEDURE IF EXISTS `sp_get_servicios`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_servicios` ()  BEGIN
 select id as v1, servicio as v2, img as v3, descripcion as v4
 from servicios;
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_listar_slides`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listar_slides` ()  BEGIN
 select id as v1, img as v2, titulo as v4, subtitulo as v5
 from slides_portada;
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_listar_tareas`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listar_tareas` ()  BEGIN
+select t.id as v1, t.servicio_id as v2, t.tarea as v3, s.servicio as v4
+from tarea_servicio t inner join servicios s on t.servicio_id = s.id;
+END$$
+
+DROP PROCEDURE IF EXISTS `sp_registrar_cliente`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_cliente` (IN `v_cliente` VARCHAR(200), IN `v_logo` VARCHAR(200), IN `v_web` VARCHAR(200), OUT `v_res` BOOLEAN)  BEGIN
 declare exit handler for sqlexception
 begin
@@ -148,6 +176,7 @@ commit;
 set v_res = true;
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_registrar_filosofia`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_filosofia` (IN `v_historia` TEXT, IN `v_mision` TEXT, IN `v_vision` TEXT, IN `v_slide1` VARCHAR(255), IN `v_slide2` VARCHAR(255), IN `v_valores` TEXT, OUT `v_res` BOOLEAN)  BEGIN
 declare exit handler for sqlexception
 begin
@@ -161,6 +190,7 @@ commit;
 set v_res = true;
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_registrar_galeria`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_galeria` (IN `v_proyecto_id` INT, IN `v_img` VARCHAR(150), OUT `v_res` BOOLEAN)  BEGIN
 declare exit handler for sqlexception
 begin
@@ -174,6 +204,7 @@ commit;
 set v_res = true;
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_registrar_proyecto`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_proyecto` (IN `v_servicio_id` INT, IN `v_nombre` TEXT, IN `v_tipo` ENUM('proceso','concluido'), IN `v_cliente_id` INT, IN `v_fecha` DATE, IN `v_img_principal` VARCHAR(150), IN `v_descripcion` TEXT, OUT `v_res` BOOLEAN)  BEGIN
 declare exit handler for sqlexception
 begin
@@ -187,6 +218,7 @@ commit;
 set v_res = true;
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_registrar_servicio`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_servicio` (IN `v_servicio` VARCHAR(150), IN `v_img` VARCHAR(150), IN `v_descripcion` TEXT, OUT `v_res` BOOLEAN)  BEGIN
 declare exit handler for sqlexception
 begin
@@ -200,6 +232,7 @@ commit;
 set v_res = true;
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_registrar_slides`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_slides` (IN `v_img` VARCHAR(150), IN `v_titulo` VARCHAR(200), IN `v_subtitulo` VARCHAR(200), OUT `v_res` BOOLEAN)  BEGIN
 declare exit handler for sqlexception
 begin
@@ -213,7 +246,8 @@ commit;
 set v_res = true;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_tarea` (IN `v_servicio_id` INT, IN `v_tarea` VARCHAR(200), IN `v_res` BOOLEAN)  BEGIN
+DROP PROCEDURE IF EXISTS `sp_registrar_tarea`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_tarea` (IN `v_servicio_id` INT, IN `v_tarea` VARCHAR(200), OUT `v_res` BOOLEAN)  BEGIN
 declare exit handler for sqlexception
 begin
 rollback;
@@ -226,6 +260,7 @@ commit;
 set v_res = true;
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_registrar_usuario`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_usuario` (IN `v_nombres` VARCHAR(80), IN `v_apellidos` VARCHAR(160), IN `v_dni` CHAR(8), IN `v_telefono` VARCHAR(12), IN `v_direccion` VARCHAR(255), IN `v_correo` VARCHAR(150), IN `v_password` VARCHAR(200), IN `v_rol` ENUM('user','admin'), OUT `v_res` BOOLEAN)  BEGIN
 declare exit handler for sqlexception
 begin
@@ -239,6 +274,13 @@ commit;
 set v_res = true;
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_servicio_id`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_servicio_id` (IN `v_id` INT)  BEGIN
+select id as v1, servicio as v2, img as v3, descripcion as v4
+from servicios
+where id = v_id;
+END$$
+
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -247,6 +289,7 @@ DELIMITER ;
 -- Estructura de tabla para la tabla `cliente`
 --
 
+DROP TABLE IF EXISTS `cliente`;
 CREATE TABLE `cliente` (
   `id` int(11) NOT NULL,
   `cliente` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
@@ -262,7 +305,12 @@ INSERT INTO `cliente` (`id`, `cliente`, `logo`, `web`) VALUES
 (13, 'Navarro Solutions', '31c60edc1157df6b2f249468fa690368.jpg', 'https://www.navarro.com'),
 (14, 'Chunatec', '7b5a466946cbc52ab4224acb7752a4ba.jpg', 'https://www.chunated.com'),
 (15, 'Clínica Miraflores', 'f9ad0e0e6e49faf0a21195622ac703c0.jpg', 'https://www.clinicamiraflores.com'),
-(16, 'Clínica Sana', '8e8d0b53a112664fa49f00053738db6a.jpg', 'https://www.sana.com');
+(16, 'Clínica Sana', '8e8d0b53a112664fa49f00053738db6a.jpg', 'https://www.sana.com'),
+(17, 'Maza Solutions', '6fba6592f79d14cb748fd7873a0d5f9e.jpg', 'https://www.maza.com'),
+(18, 'ClaudiaSolutions', '23ae64d423933ff6587a5cfc75dc3399.jpg', ''),
+(19, 'MazaHidalgo S.A', 'df5020c544bc4d52a9ab681c33d75907.jpg', 'https://www.hidalgos.com'),
+(20, 'TeroTec', '6c5836fd3ff367b06d5acece23251fa4.jpg', 'https://www.terococa.com'),
+(21, 'SicchaTec', '97b906fff5c23beeb3a58c9ac40a1597.jpg', 'https://www.siccha.com');
 
 -- --------------------------------------------------------
 
@@ -270,6 +318,7 @@ INSERT INTO `cliente` (`id`, `cliente`, `logo`, `web`) VALUES
 -- Estructura de tabla para la tabla `contacto`
 --
 
+DROP TABLE IF EXISTS `contacto`;
 CREATE TABLE `contacto` (
   `id` int(11) NOT NULL,
   `nombre` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
@@ -292,6 +341,7 @@ INSERT INTO `contacto` (`id`, `nombre`, `telefono`, `correo`, `mensaje`, `fecha`
 -- Estructura de tabla para la tabla `empresa`
 --
 
+DROP TABLE IF EXISTS `empresa`;
 CREATE TABLE `empresa` (
   `id` int(11) NOT NULL,
   `nombre` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
@@ -316,6 +366,7 @@ INSERT INTO `empresa` (`id`, `nombre`, `logo`, `ruc`, `direccion`, `telefono`, `
 -- Estructura de tabla para la tabla `filosofia`
 --
 
+DROP TABLE IF EXISTS `filosofia`;
 CREATE TABLE `filosofia` (
   `id` int(11) NOT NULL,
   `historia` text COLLATE utf8_spanish_ci NOT NULL,
@@ -339,6 +390,7 @@ INSERT INTO `filosofia` (`id`, `historia`, `mision`, `vision`, `slide1`, `slide2
 -- Estructura de tabla para la tabla `galeria`
 --
 
+DROP TABLE IF EXISTS `galeria`;
 CREATE TABLE `galeria` (
   `id` int(11) NOT NULL,
   `proyecto_id` int(11) NOT NULL,
@@ -351,6 +403,7 @@ CREATE TABLE `galeria` (
 -- Estructura de tabla para la tabla `proyecto`
 --
 
+DROP TABLE IF EXISTS `proyecto`;
 CREATE TABLE `proyecto` (
   `id` int(11) NOT NULL,
   `servicio_id` int(11) NOT NULL,
@@ -362,12 +415,21 @@ CREATE TABLE `proyecto` (
   `descripcion` text COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `proyecto`
+--
+
+INSERT INTO `proyecto` (`id`, `servicio_id`, `nombre`, `tipo`, `cliente_id`, `fecha`, `img_principal`, `descripcion`) VALUES
+(1, 7, 'Clínica Sana', 'concluido', 16, '2017-01-01', 'c4998a876714fbc0815ab2690681dbed.png', 'Clínica'),
+(2, 7, 'Clínica Miraflores', 'concluido', 15, '2010-01-01', '390f4c5dee74edc6801f7c5c28bfb034.jpg', 'Clínica Belén');
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `servicios`
 --
 
+DROP TABLE IF EXISTS `servicios`;
 CREATE TABLE `servicios` (
   `id` int(11) NOT NULL,
   `servicio` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
@@ -384,7 +446,7 @@ INSERT INTO `servicios` (`id`, `servicio`, `img`, `descripcion`) VALUES
 (4, 'Estudios Preliminares', '0a03701bae1056bff473bc74acb9af3b.png', 'Enfocados en la realización de proyectos integrales, en Hammer Contratistas ofrecemos una amplia gama de procesos para el desarrollo de todo proyecto y durante la construcción de toda obra, nuestra experiencia y precisión, nos permite realizar trabajos de planimetría y altimetría, así como diversos estudios preliminares propios de cada obra.'),
 (5, 'Proyectos Arquitectónicos', 'cf5464d24fa3ee3655ce2e5a2ac634e7.png', 'En Hammer Contratistas cada proyecto representa un compromiso profundo con la calidad, para lograr esto conjugamos elementos clave de nuestro equipo para trabajar con nuestros clientes y poder desarrollar así proyectos de calidad total a la altura de las expectativas y que sean capaces de satisfacer todas sus necesidades actuales y futuras.'),
 (6, 'Terracerías', '6fdea52579fd8e972627492788960181.png', 'Para cualquier desarrollo y construcción, el manejo de suelos representa una piedra angular para acceso, soporte y planeación de la obra, ofrecemos soluciones en Cortes, Rellenos, Nivelaciones y Mejoramiento de Suelos.\r\n\r\nmanejo de suelos representa una piedra angular para acceso, soporte y planeación de la obra, ofrecemos soluciones en Cortes, Rellenos, Nivelaciones y Mejoramiento de Suelos. Todos son realizados con el mayor factor de seguridad, apoyándolos con Pruebas de Laboratorio para verificar Pesos Volumétricos, Contenido de Humedad y Porcentajes de Compactación requeridos, según el Diseño y Cálculos previamente establecidos.'),
-(7, 'Edificaciones', 'a41e472e00ee098ddf95d84446572174.png', 'En CONSTRUCTORA INSUR queremos convertir grandes ideas en grandes construcciones, por ello establecemos y ejecutamos modelos y planes de trabajo estructurado para lograr levantar cualquier edificación. Contamos con la asesoría técnica y profesional para la realización del Proyecto y Construcción de la Edificación que su empresa requiera.'),
+(7, 'Edificaciones', 'a41e472e00ee098ddf95d84446572174.png', 'En Hammer Contratistas queremos convertir grandes ideas en grandes construcciones, por ello establecemos y ejecutamos modelos y planes de trabajo estructurado para lograr levantar cualquier edificación. Contamos con la asesoría técnica y profesional para la realización del Proyecto y Construcción de la Edificación que su empresa requiera.'),
 (8, 'Estructuras metálicas y cubiertas', 'aeea1a33c72b7e245e9f63d048497e68.png', 'En Hammer Contratistas estamos orgullosos de poder contribuir en con nuestros clientes desde el primer momento, te ofrecemos Diseño, Fabricación, Transporte y Montaje de estructuras metálicas a base de Marcos Rígidos de sección variable, los cuales poseen una gran versatilidad para ser empleados en Construcciones Industriales, Bodegas y Edificios Comerciales, cubriendo Grandes Claros con gran Rapidez, Economía y proporcionando una Apariencia Inmejorable.');
 
 -- --------------------------------------------------------
@@ -393,6 +455,7 @@ INSERT INTO `servicios` (`id`, `servicio`, `img`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `slides_portada`
 --
 
+DROP TABLE IF EXISTS `slides_portada`;
 CREATE TABLE `slides_portada` (
   `id` int(11) NOT NULL,
   `img` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
@@ -415,11 +478,21 @@ INSERT INTO `slides_portada` (`id`, `img`, `titulo`, `subtitulo`) VALUES
 -- Estructura de tabla para la tabla `tarea_servicio`
 --
 
+DROP TABLE IF EXISTS `tarea_servicio`;
 CREATE TABLE `tarea_servicio` (
   `id` int(11) NOT NULL,
   `servicio_id` int(11) NOT NULL,
   `tarea` varchar(200) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tarea_servicio`
+--
+
+INSERT INTO `tarea_servicio` (`id`, `servicio_id`, `tarea`) VALUES
+(1, 5, 'Diseñado 3D'),
+(2, 5, 'Diseñado Interiores'),
+(3, 5, 'Diseñado Medieval');
 
 -- --------------------------------------------------------
 
@@ -427,6 +500,7 @@ CREATE TABLE `tarea_servicio` (
 -- Estructura de tabla para la tabla `usuario`
 --
 
+DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
@@ -525,7 +599,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `contacto`
@@ -555,7 +629,7 @@ ALTER TABLE `galeria`
 -- AUTO_INCREMENT de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
@@ -573,7 +647,7 @@ ALTER TABLE `slides_portada`
 -- AUTO_INCREMENT de la tabla `tarea_servicio`
 --
 ALTER TABLE `tarea_servicio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`

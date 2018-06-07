@@ -39,7 +39,7 @@
                     cards += '<div class="card">'
                     cards +=   '<img class="card-img-top" src="'+BASE_URL+"assets/imgs/servicios/"+response['data'][i]['v3']+'" alt="Card image cap">'
                     cards +=   '<div class="card-body">'
-                    cards +=     '<a href="#"><h5 class="card-title">'+response['data'][i]['v2']+'</h5></a>'
+                    cards +=     '<a href="'+BASE_URL+'HammerServicios/servicios/'+response['data'][i]['v1']+'"><h5 class="card-title">'+response['data'][i]['v2']+'</h5></a>'
                     //cards +=     '<p class="card-text">'+response['data'][i]['v4']+'</p>'
                    
                      cards +=  '</div>'
