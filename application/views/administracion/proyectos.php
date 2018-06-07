@@ -48,7 +48,7 @@
 							  	</div>
 							  	<div class="form-group">
 							  		<label for="fecha">Fecha de inicio *</label>
-							  		<input type="date" class="form-control" name="fecha" id="fecha">
+							  		<input type="date" class="form-control" name="fecha" id="fecha" required>
 							  	</div>
 					  			
 					  			<div class="form-group">

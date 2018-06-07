@@ -1,7 +1,7 @@
 $(function(){
 
 	const BASE_URL = "http://localhost:8090/HammerContratistas/";
-	const hoy = new Date().getFullYear();
+	const hoy = new Date();
 	//Tabla de datos
     const $table = $('#table');
     const $rutaDefinitivia = 'http://localhost:8090/HammerContratistas/';
@@ -20,10 +20,15 @@ $(function(){
 
 		e.preventDefault();
 		let $fecha = $('#fecha').val();
-		let anio = new Date($fecha).getFullYear();
+		let anio = new Date($fecha);
 
 		if(!anio){
 			Swal('Oops...', 'Ingrese una fecha' , 'error');
+			return;
+		}
+
+		if (anio.getFullYear() > hoy.getFullYear() && $('#tipo').val() == 'concluido') {
+			Swal('Oops...', 'Ingrese una fecha correcta' , 'error');
 			return;
 		}
 
@@ -31,6 +36,7 @@ $(function(){
 			Swal('Oops...', 'Ingrese una fecha correcta' , 'error');
 			return;
 		}
+
 
 		const metodo = $(this).attr('method');
 		const ruta = $(this).attr('action');
