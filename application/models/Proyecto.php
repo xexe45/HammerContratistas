@@ -36,7 +36,7 @@ class Proyecto extends CI_Model {
 		switch($quehago){
 			case 'limit';
 				$query = $this->db
-						->select("proyecto.id as v1,proyecto.servicio_id as v2,servicios.servicio as v3,proyecto.nombre as v4,proyecto.img_principal as v5")
+						->select("proyecto.id as v1,proyecto.servicio_id as v2,servicios.servicio as v3,proyecto.nombre as v4,proyecto.img_principal as v5, proyecto.descripcion as v6")
 						->from("proyecto")
 						->join('servicios', 'servicios.id = proyecto.servicio_id')
 						->where('proyecto.tipo',$tipo)
@@ -49,7 +49,7 @@ class Proyecto extends CI_Model {
 
 			case 'cuantos';
 				$query = $this->db
-						->select("proyecto.id as v1,proyecto.servicio_id as v2,servicios.servicio as v3,proyecto.nombre as v4,proyecto.img_principal as v5")
+						->select("proyecto.id as v1,proyecto.servicio_id as v2,servicios.servicio as v3,proyecto.nombre as v4,proyecto.img_principal as v5, proyecto.descripcion as v6")
 						->from("proyecto")
 						->join('servicios', 'servicios.id = proyecto.servicio_id')
 						->where('proyecto.tipo',$tipo)

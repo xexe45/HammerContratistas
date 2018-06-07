@@ -103,7 +103,7 @@ class HammerProyectos extends CI_Controller {
 		$config['last_tagl_close'] 	= '</span></li>';
 		$this->pagination->initialize($config);
 		//$this->load->view('home/index') --> use this code if you dont have layout library;
-		$opc = 3;
+		$opc = 2;
 		$this->load->view('templates/header');
 		$this->load->view('proyectos',compact('datos','cuantos','pagina','opc'));
 		$this->load->view('templates/footer');

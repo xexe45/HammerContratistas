@@ -104,9 +104,21 @@
                     }
                 }
             });
-    });
+        });
 
-    	});
+        $('.enlace').on('click',function(e){
+            e.preventDefault();
+            var idproyecto = $(this).attr('idproyecto');
+            var name = $(this).attr('nameproyecto');
+            var descripcion = $(this).attr('descripcion');
+
+            $('.modal-title').text(name);
+            $('#describeme').text(descripcion);
+            $('#exampleModal').modal();
+        })
+
+});
+
     	
     </script>
   </body>
