@@ -19,18 +19,14 @@ $(function(){
 	$('#form').on('submit', function(e){
 
 		e.preventDefault();
-		let $fecha = $('#fecha').val();
-		let anio = new Date($fecha);
+		var $fecha = $('#fecha').val();
+		var anio = new Date($fecha);
 
 		if(!anio){
 			Swal('Oops...', 'Ingrese una fecha' , 'error');
 			return;
 		}
 
-		if (anio.getFullYear() > hoy.getFullYear() && $('#tipo').val() == 'concluido') {
-			Swal('Oops...', 'Ingrese una fecha correcta' , 'error');
-			return;
-		}
 
 		if (anio > hoy && $('#tipo').val() == 'concluido') {
 			Swal('Oops...', 'Ingrese una fecha correcta' , 'error');

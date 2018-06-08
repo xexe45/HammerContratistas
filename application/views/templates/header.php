@@ -52,6 +52,9 @@
             <li class="nav-item">
               <a class="nav-link" href="http://builtwithbootstrap.com/">Clientes</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?=base_url()?>Login">Login</a>
+            </li>
             
           </ul>
 

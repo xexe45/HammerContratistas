@@ -29,6 +29,10 @@ $(function(){
 				console.log(response);
 				if(response['valido']){
 					Swal('El sistema informa', response['mensaje'], 'success');
+					$('#form')[0].reset();
+					$table.bootstrapTable('refresh', {
+			             url: $rutaDefinitivia + 'Tarea'
+			        });
 				}else{
 					Swal('Oops...', response['mensaje'] , 'error')
 				}

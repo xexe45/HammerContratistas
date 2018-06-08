@@ -28,7 +28,10 @@
 		     <ul class="navbar-nav justify-content-end">
 		        <li class="nav-item">
 			        <a class="nav-link" href="#">Bienvenido Usuario</a>
-			     </li>
+			    </li>
+			    <li class="nav-item">
+			        <a class="nav-link" href="<?=base_url()?>"><i class="fa fa-home"></i></a>
+			    </li>
 		    </ul>
 		    
 		  </div>
