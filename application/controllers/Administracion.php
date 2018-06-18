@@ -17,6 +17,11 @@ class Administracion extends CI_Controller {
 		$this->load->view('administracion/home');
 	}
 
+	public function mensajes(){
+		$this->load->view('administracion/header');
+		$this->load->view('administracion/mensajes');
+	}
+
 	public function usuarios(){
 		$this->load->view('administracion/header');
 		$this->load->view('administracion/usuario');

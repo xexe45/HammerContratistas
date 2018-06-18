@@ -47,6 +47,7 @@
 			<a href="#" class="list-group-item list-group-item-action active">
 			   <i class="fa fa-dashboard"></i> Dashboard 
 			 </a>
+			 <a href="<?=base_url()?>Administracion/mensajes" class="list-group-item list-group-item-action"><i class="fa fa-envelope"></i> Mensajes</a>
 			 <a href="<?=base_url()?>Administracion/portada" class="list-group-item list-group-item-action"><i class="fa fa-home"></i> Portada</a>
 			  <a href="<?=base_url()?>Administracion/empresa" class="list-group-item list-group-item-action"><i class="fa fa-id-card"></i> Nuestra empresa</a>
 			  <a href="<?=base_url()?>Administracion/filosofia" class="list-group-item list-group-item-action"><i class="fa fa-handshake-o"></i> Filosofía empresarial</a>
