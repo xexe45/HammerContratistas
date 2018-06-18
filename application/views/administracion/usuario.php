@@ -16,11 +16,11 @@
 					  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
 					  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 					  	<div class="top">
-					  		<form>
+					  		<?=form_open('Usuario/registrar',array("id" => "form"))?>
 					  		
 					  			<div class="form-group">
 					  				<label for="nombre">Nombres *</label>
-					  				<input type="text" name="nombres" id="nombres" required="" class="form-control" maxlength="80" minlength="2" placeholder="Nombres de Usuario">
+					  				<input type="text" name="nombre" id="nombre" required="" class="form-control" maxlength="80" minlength="2" placeholder="Nombres de Usuario">
 					  			</div>
 					  			<div class="form-group">
 					  				<label for="apellidos">Apellidos *</label>
@@ -52,15 +52,42 @@
 							  	<label for="rol">Rol *</label>
 							  	<select name="rol" id="rol" class="form-control">
 							  		<option value="">Seleccionar Rol...</option>
-							  		<option value="admininstrador">Administrador</option>
-							  		<option value="usuario">Usuario</option>
+							  		<option value="admin">Administrador</option>
+							  		<option value="user">Usuario</option>
 							  	</select>
 							  </div>
 							  <button type="submit" class="btn btn-success">Registrar</button>
-							</form>
+							<?=form_close()?>
 					  	</div>
 					  </div>
-					  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+					  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+					  	<table id="table" 
+		                data-sort-name="v1"
+		                data-sort-order="desc"
+		                data-search="true"
+		                data-pagination="true"               
+		                data-page-size="5"
+		                data-page-list="[5,8,10]"
+		                data-pagination-first-text="Primero"
+		                data-pagination-pre-text="Anterior"
+		                data-pagination-next-text="Siguiente"
+		                data-pagination-last-text="Último">
+		                  <thead>
+		                    <tr>
+		                      <!--<th data-field="state" data-radio="true"></th>-->
+		                      <th data-field="v1">ID</th>
+		                      <th data-field="v2">Nombres</th>
+		                      <th data-field="v3">Apellidos</th>
+		                      <th data-field="v4">Dni</th>
+		                      <th data-field="v5">Teléfono</th>
+		                      <th data-field="v6">Dirección</th>
+		                      <th data-field="v7">Correo</th>
+		                      <th data-field="v8">Rol</th>
+		                      <th data-field="v9">Fecha de registro</th>
+		                    </tr>
+		                  </thead>
+		                </table>
+					  </div>
 					</div>
 			  </div>
 			</div>
@@ -69,9 +96,12 @@
 		
 	</section>
 
-<script src="<?=base_url()?>assets/js/jquery-3.3.1.slim.min.js"></script>
+<script src="<?=base_url()?>assets/js/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 <script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
+<script src="<?=base_url()?>assets/btable/bootstrap-table.min.js"></script>
+<script src="<?=base_url()?>assets/js/sweetalert2.all.js"></script>
+<script src="<?=base_url()?>assets/js/usuario.js"></script>
 </body>	
 </html>
 

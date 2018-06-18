@@ -7,6 +7,7 @@ $config = array(
 	/**
 	 * add_formulario
 	 * */
+
 	'update_info'
 	=> array(//dentro de este arreglo crear una linea de arreglos por cada campo que quiera trabajar
 
@@ -19,6 +20,12 @@ $config = array(
 	//array('field' => 'rut','label' => 'RUT','rules' => 'required|is_string|xss_clean|trim|esRut'),
 	),
 
+	'login'
+        => array(
+            array('field' => 'correo','label' => 'Correo ','rules' => 'required|is_string|trim|valid_email'),
+            array('field' => 'pass','label' => 'Contraseña','rules' => 'required|is_string|trim'), 
+    ),
+     
 	'contacto'
 	=> array(//dentro de este arreglo crear una linea de arreglos por cada campo que quiera trabajar
 
@@ -88,11 +95,7 @@ $config = array(
 		array('field' => 'precio', 'label' => 'Precio', 'rules' => 'required|numeric|trim'),
 		array('field' => 'stock', 'label' => 'Stock', 'rules' => 'required|numeric|trim'),
 	),
-	'login'
-	=> array(
-		array('field' => 'email', 'label' => 'Correo ', 'rules' => 'required|is_string|trim|valid_email'),
-		array('field' => 'password', 'label' => 'Contraseña', 'rules' => 'required|is_string|trim'),
-	),
+	
 	'estante'
 	=> array(
 		array('field' => 'nombre', 'label' => 'Nombre', 'rules' => 'required|is_string|trim|max_length[45]'),
@@ -143,14 +146,14 @@ $config = array(
 	'add_usuario'
 	=> array(//dentro de este arreglo crear una linea de arreglos por cada campo que quiera trabajar
 
-		array('field' => 'nombre', 'label' => 'Nombre', 'rules' => 'required|is_string|trim|max_length[80]'),
-		array('field' => 'apellidos', 'label' => 'Apellidos', 'rules' => 'required|is_string|trim|max_length[80]'),
+		array('field' => 'nombre', 'label' => 'Nombre', 'rules' => 'required|is_string|trim|max_length[50]'),
+		array('field' => 'apellidos', 'label' => 'Apellidos', 'rules' => 'required|is_string|trim|max_length[100]'),
 		array('field' => 'dni', 'label' => 'DNI', 'rules' => 'required|numeric|trim|max_length[8]|min_length[8]'),
-		array('field' => 'telefono', 'label' => 'Telefono', 'rules' => 'required|numeric|trim|max_length[10]'),
-		array('field' => 'domicilio', 'label' => 'Direccion', 'rules' => 'required|is_string|trim|max_length[100]'),
-		array('field' => 'email', 'label' => 'E-Mail', 'rules' => 'required|is_string|trim|valid_email'),
+		array('field' => 'telefono', 'label' => 'Telefono', 'rules' => 'required|numeric|trim|max_length[12]'),
+		array('field' => 'direccion', 'label' => 'Direccion', 'rules' => 'required|is_string|trim|max_length[255]'),
+		array('field' => 'correo', 'label' => 'Correo Electrónico', 'rules' => 'required|is_string|trim|valid_email'),
 		array('field' => 'password', 'label' => 'Password', 'rules' => 'required|is_string|trim|max_length[200]'),
-		array('field' => 'tipo', 'label' => 'Tipo', 'rules' => 'required|numeric|trim|is_natural_no_zero'),
+		array('field' => 'rol', 'label' => 'Rol de usuario', 'rules' => 'required|is_string|in_list[user,admin]'),
 	//array('field' => 'rut','label' => 'RUT','rules' => 'required|is_string|xss_clean|trim|esRut'),
 	),
 	

@@ -28,13 +28,13 @@
 				    <hr>
 				    <div class="row">
 				    	<div class="col-md-12">
-				    		<form>
+				    		<?=form_open('Login/login', array("id" => "form"))?>
 				    		<div class="form-group">
 				    			<div class="input-group mb-3">
 								  <div class="input-group-prepend">
 								    <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
 								  </div>
-								  <input type="email" class="form-control" placeholder="Correo Electrónico" aria-label="Username" aria-describedby="basic-addon1" required maxlength="200" minlength="12">
+								  <input type="email" class="form-control" placeholder="Correo Electrónico" aria-label="Username" aria-describedby="basic-addon1" required maxlength="200" minlength="12" name="correo">
 								</div>
 				    		</div>
 				    		<div class="form-group">
@@ -42,13 +42,13 @@
 								  <div class="input-group-prepend">
 								    <span class="input-group-text" id="basic-addon12"><i class="fa fa-key"></i></span>
 								  </div>
-								  <input type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon12" required maxlength="200" minlength="6">
+								  <input type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon12" required maxlength="200" name="pass" minlength="6">
 								</div>
 				    		</div>
 				    		<div class="form-group">
 				    			<button type="submit" class="btn btn-success btn-block"><i class="fa fa-sign-in" aria-hidden="true"></i> Ingresar</button>
 				    		</div>
-				    	</form>
+				    	<?=form_close()?>
 				    	</div>
 				    </div>
 				  </div>
@@ -56,5 +56,10 @@
 			</div>
 		</div>
 	</div>
+	<script src="<?=base_url()?>assets/js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
+    <script src="<?=base_url()?>assets/js/sweetalert2.all.js"></script>
+    <script src="<?=base_url()?>assets/js/login.js"></script>
 </body>
 </html>

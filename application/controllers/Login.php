@@ -9,6 +9,8 @@ class Login extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+        $this->load->library('Bcrypt');
+        $this->load->model('Mlogin');
 	}
 
 	public function index()
@@ -18,28 +20,53 @@ class Login extends CI_Controller {
 
 	public function login(){
 
-		$respuesta = array();
-        $respuesta['error'] = "";
- 
-		$this->form_validation->set_rules('correo','Correo Electronico','required|valid_email|max_length[200]|min_length[12]');
+        if(!$this->input->is_ajax_request()){return;}
 
-		$this->form_validation->set_rules('password','Contraseña','max_length[200]|min_length[6]');
+        if(!$this->input->post()){return;}
 
-	 	if ($this->form_validation->run() == FALSE)
-       	{
-               $respuesta['error'] = validation_errors();
-    
+        $responder = array();
+
+
+
+        if($this->form_validation->run('login')){
+
+            $email = $this->security->xss_clean(strip_tags($this->input->post('correo')));
+            $password = $this->security->xss_clean(strip_tags($this->input->post('pass')));
+
+            $user = $this->Mlogin->loginAdmin($email,$password);
+
+                if(isset($user)){
+                        
+                    $login = array(
+                        'id' => $user->id,
+                        'user' => $user->nombre." ".$user->apellidos,
+                        'rol' => $user->rol
+                    );
+                        
+                    $this->session->set_userdata( $login );
+
+                    $responder["valido"] = true;
+                        
+                }else{
+                    $responder["valido"] = false;
+                    $responder["mensaje"] = "Usuario y/o clave incorrecto";
+                }
+
+        }else{
+            $responder["valido"] = false;
+            $responder["mensaje"] = validation_errors();
         }
-        else
-        {
-            //acierto 
-            $respuesta['ok'] = "Validacion correcta";
-   
-        }
 
-   		header('Content-Type: application/x-json; charset=utf-8');
-        echo json_encode($respuesta);                    
-	}
+        header('Content-Type: application/x-json; charset:utf-8');
+        echo json_encode($responder);
+
+        
+    }  
+
+     public function salir(){
+        $this->session->sess_destroy();
+        redirect(base_url());
+     } 
 
 }
 

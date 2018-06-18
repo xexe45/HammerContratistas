@@ -10,6 +10,8 @@ class HammerServicios extends CI_Controller {
 		$this->load->model('Servicios');
 	}
 
+
+
 	public function servicios($id)
 	{
 		$servicio = $this->Servicios->servicio($id);
@@ -20,6 +22,15 @@ class HammerServicios extends CI_Controller {
 		}else{
 			redirect(base_url());
 		}
+		
+	}
+
+	public function listar()
+	{
+		
+		$servicios['data'] = $this->Servicios->listar();
+		header('Content-Type: application/x-json; charset:utf-8');
+		echo json_encode($servicios);
 		
 	}
 

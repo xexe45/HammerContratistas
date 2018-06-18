@@ -25,7 +25,7 @@
     	$(document).ready(function(){
         const BASE_URL = '<?=base_url()?>';
         $.ajax({
-            url: BASE_URL + 'Servicio',
+            url: BASE_URL + 'HammerServicios/listar',
             type: 'GET',
             dataType: 'json',
             success: function(response){
