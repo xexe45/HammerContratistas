@@ -19,6 +19,11 @@ class Portada extends CI_Controller {
 		echo json_encode($slides);
 	}
 
+	public function portada(){
+		$this->load->view('administracion/header');
+		$this->load->view('administracion/portada');
+	}
+
 	public function registrar(){
 
 		if(!$this->input->is_ajax_request()){ return; }

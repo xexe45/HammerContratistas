@@ -20,6 +20,12 @@ class Proyectos extends CI_Controller {
 		echo json_encode($proyectos);
 	}
 
+	
+	public function proyectos(){
+		$this->load->view('administracion/header');
+		$this->load->view('administracion/proyectos');
+	}
+
 	public function store(){
 		
 		if( !$this->input->is_ajax_request() ){ return; }

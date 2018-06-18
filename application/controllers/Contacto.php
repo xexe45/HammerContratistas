@@ -9,6 +9,11 @@ class Contacto extends CI_Controller {
 		$this->load->model('Mcontacto');
 	}
 
+	public function mensajes(){
+		$this->load->view('administracion/header');
+		$this->load->view('administracion/mensajes');
+	}
+
 	public function index()
 	{
 		$mensajes['data'] = $this->Mcontacto->listar();
@@ -23,7 +28,7 @@ class Contacto extends CI_Controller {
 			$resp[] = $this->Mcontacto->update($valor['v1']);
 		}
 		$resp['valido'] = true;
-		$resp['mensaje'] = "Mensajes editados como visto";
+		$resp['mensaje'] = "Mensajes editados como vistos";
 		header('Content-Type: application/x-json; charset:utf-8');
 		echo json_encode($resp);
 	}

@@ -19,7 +19,7 @@ $(function(){
 			success: function(response){
 				console.log(response);
 				if(response['valido']){
-					location.href = base_url + "Administracion/inicio";
+					location.href = base_url + "inicio";
 				}else{
 					Swal('Oops...', response['mensaje'] , 'error')
 				}

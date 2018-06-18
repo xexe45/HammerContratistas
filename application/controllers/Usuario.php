@@ -21,6 +21,11 @@ class Usuario extends CI_Controller {
 		echo json_encode($usuarios);
 	}
 
+	public function usuarios(){
+		$this->load->view('administracion/header');
+		$this->load->view('administracion/usuario');
+	}
+
 	public function registrar()
 	{
 		if(!$this->input->is_ajax_request()){ return; }

@@ -24,8 +24,10 @@ class Security extends CI_Hooks
 		$rol = $this->instancia->session->userdata('rol');
 
 		$noValidados = array('Login','Home','Conocenos','HammerProyectos','HammerServicios');
+
+		$administrador = array('Empresa','Usuario');
 		
-		$r = array();
+
 
 		//$permisos = $this->instancia->Permiso->permisos($rol);
 		/*
@@ -40,6 +42,13 @@ class Security extends CI_Hooks
 		if(!in_array($controlador, $noValidados)){
 			if(empty($s)){
 				redirect(base_url());
+			}
+		}
+
+		if(in_array($controlador, $administrador)){
+			if($rol != 'admin'){
+				$this->instancia->session->set_flashdata('norole', 'No tiene permisos para acceder a la página requerida, consulte con el administrador.');
+				redirect(base_url()."inicio");
 			}
 		}
 		/*	

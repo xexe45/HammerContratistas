@@ -21,6 +21,11 @@ class Servicio extends CI_Controller {
 		
 	}
 
+	public function servicios(){
+		$this->load->view('administracion/header');
+		$this->load->view('administracion/servicios');
+	}
+
 	public function registrar(){
 
 		if(!$this->input->is_ajax_request()){ return; }

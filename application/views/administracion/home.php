@@ -1,4 +1,9 @@
-
+			
+			<?php if ($this->session->flashdata('norole')): ?>
+				<div class="alert alert-warning">
+					<?=$this->session->flashdata('norole')?>
+				</div>
+			<?php endif ?>
 			<div class="card top">
 			  <div class="card-body">
 			    This is some text within a card body.

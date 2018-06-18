@@ -2,7 +2,7 @@
 			<div class="card top-bottom">
 			  <div class="card-body">
 			  	<div id="toolbar">
-            		<button id="button" class="btn btn-success">Marcar como visto</button>
+            		<button id="button" class="btn btn-success"><i class="fa fa-check-square-o" aria-hidden="true"></i> Marcar como visto</button>
         		</div>
 			    <table id="table"
 						

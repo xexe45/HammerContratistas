@@ -47,15 +47,15 @@
 			<a href="#" class="list-group-item list-group-item-action active">
 			   <i class="fa fa-dashboard"></i> Dashboard 
 			 </a>
-			 <a href="<?=base_url()?>Administracion/mensajes" class="list-group-item list-group-item-action"><i class="fa fa-envelope"></i> Mensajes</a>
-			 <a href="<?=base_url()?>Administracion/portada" class="list-group-item list-group-item-action"><i class="fa fa-home"></i> Portada</a>
-			  <a href="<?=base_url()?>Administracion/empresa" class="list-group-item list-group-item-action"><i class="fa fa-id-card"></i> Nuestra empresa</a>
-			  <a href="<?=base_url()?>Administracion/filosofia" class="list-group-item list-group-item-action"><i class="fa fa-handshake-o"></i> Filosofía empresarial</a>
-			  <a href="<?=base_url()?>Administracion/servicios" class="list-group-item list-group-item-action"><i class="fa fa-server"></i> Servicios</a>
-			   <a href="<?=base_url()?>Administracion/tareas" class="list-group-item list-group-item-action"><i class="fa fa-briefcase"></i> Tareas x Servicio</a>
-			  <a href="<?=base_url()?>Administracion/proyectos" class="list-group-item list-group-item-action"><i class="fa fa-archive"></i> Proyectos</a>
-			  <a href="<?=base_url()?>Administracion/usuarios" class="list-group-item list-group-item-action"><i class="fa fa-users"></i> Usuarios</a>
-			  <a href="<?=base_url()?>Administracion/clientes" class="list-group-item list-group-item-action"><i class="fa fa-user-circle"></i> Clientes</a>
+			 <a href="<?=base_url()?>mensajes" class="list-group-item list-group-item-action"><i class="fa fa-envelope"></i> Mensajes</a>
+			 <a href="<?=base_url()?>portada" class="list-group-item list-group-item-action"><i class="fa fa-home"></i> Portada</a>
+			  <a href="<?=base_url()?>empresa" class="list-group-item list-group-item-action"><i class="fa fa-id-card"></i> Nuestra empresa</a>
+			  <a href="<?=base_url()?>filosofia-empresarial" class="list-group-item list-group-item-action"><i class="fa fa-handshake-o"></i> Filosofía empresarial</a>
+			  <a href="<?=base_url()?>servicios" class="list-group-item list-group-item-action"><i class="fa fa-server"></i> Servicios</a>
+			   <a href="<?=base_url()?>tareas" class="list-group-item list-group-item-action"><i class="fa fa-briefcase"></i> Tareas x Servicio</a>
+			  <a href="<?=base_url()?>proyectos" class="list-group-item list-group-item-action"><i class="fa fa-archive"></i> Proyectos</a>
+			  <a href="<?=base_url()?>usuarios" class="list-group-item list-group-item-action"><i class="fa fa-users"></i> Usuarios</a>
+			  <a href="<?=base_url()?>clientes" class="list-group-item list-group-item-action"><i class="fa fa-user-circle"></i> Clientes</a>
 			  <a href="<?=base_url()?>Login/salir" class="list-group-item list-group-item-action"><i class="fa fa-sign-out"></i> Salir del sistema</a>
 			</ul>
 		</div>
@@ -64,7 +64,7 @@
 				<ol class="breadcrumb">
 				   <li class="breadcrumb-item"><a href="<?=base_url()?>Administracion/inicio">Home</a></li>
 				   
-				   <li class="breadcrumb-item active" aria-current="page"><?=$this->uri->segment(2)?></li>
+				   <li class="breadcrumb-item active" aria-current="page"><?=$this->uri->segment(1)?></li>
 				 </ol>
 			</nav>
 

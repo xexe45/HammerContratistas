@@ -19,6 +19,11 @@ class Clientes extends CI_Controller {
 		echo json_encode($clientes);
 	}
 
+	public function clientes(){
+		$this->load->view('administracion/header');
+		$this->load->view('administracion/cliente');
+	}
+
 	public function buscar(){
 
 		if($this->input->is_ajax_request()){

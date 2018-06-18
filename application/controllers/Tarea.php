@@ -21,6 +21,11 @@ class Tarea extends CI_Controller {
 		
 	}
 
+	public function tareas(){
+		$this->load->view('administracion/header');
+		$this->load->view('administracion/tareas');
+	}
+
 	public function registrar(){
 
 		if(!$this->input->is_ajax_request()){ return; }

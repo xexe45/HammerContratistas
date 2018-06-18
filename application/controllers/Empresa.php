@@ -13,6 +13,20 @@ class Empresa extends CI_Controller {
 		$this->load->model('Slides');
 	}
 
+	public function empresa(){
+
+		$info = $this->Info->info();
+		$this->load->view('administracion/header');
+		$this->load->view('administracion/empresa', compact('info'));
+	
+	}
+
+	public function filosofiaEmpresarial(){
+		$filosofia = $this->Info->getFilosofia();
+		$this->load->view('administracion/header');
+		$this->load->view('administracion/filosofia', compact('filosofia'));
+	}
+
 	public function update()
 	{
 		if(!$this->input->is_ajax_request()){ return; }
