@@ -56,6 +56,7 @@
 			  <a href="<?=base_url()?>proyectos" class="list-group-item list-group-item-action"><i class="fa fa-archive"></i> Proyectos</a>
 			  <a href="<?=base_url()?>usuarios" class="list-group-item list-group-item-action"><i class="fa fa-users"></i> Usuarios</a>
 			  <a href="<?=base_url()?>clientes" class="list-group-item list-group-item-action"><i class="fa fa-user-circle"></i> Clientes</a>
+			  <a href="<?=base_url()?>Reportes" class="list-group-item list-group-item-action"><i class="fa fa-pie-chart"></i> Reportes</a>
 			  <a href="<?=base_url()?>Login/salir" class="list-group-item list-group-item-action"><i class="fa fa-sign-out"></i> Salir del sistema</a>
 			</ul>
 		</div>

@@ -23,9 +23,11 @@ class Contacto extends CI_Controller {
 
 	public function vistos(){
 		$data = $this->input->post('data');
+		$user_id = $this->session->userdata('id');
 		$resp = array();
 		foreach ($data as $key => $valor) {
-			$resp[] = $this->Mcontacto->update($valor['v1']);
+			$editar = array($valor['v1'],$user_id,'Mensaje de '.$valor['v2'].' puesto en visto');
+			$resp[] = $this->Mcontacto->update($editar);
 		}
 		$resp['valido'] = true;
 		$resp['mensaje'] = "Mensajes editados como vistos";

@@ -2,7 +2,19 @@ $(function(){
 	const BASE_URL = "http://localhost:8090/HammerContratistas/";
 	//Tabla de datos
 	const $table = $('#table');
-    const $rutaDefinitivia = 'http://localhost:8090/HammerContratistas/';	    llenarTabla($table,$rutaDefinitivia);
+    const $rutaDefinitivia = 'http://localhost:8090/HammerContratistas/';	    
+    //llenarTabla($table,$rutaDefinitivia);
+    const $clientes = $('#btn-clientes');
+
+    $table.hide();
+    //llenarTabla($table,$rutaDefinitivia);
+
+    $clientes.on('click', function(){
+      llenarTabla($table,$rutaDefinitivia);
+      $table.show();
+      $(this).hide();
+    })
+    
 	$('#form').on('submit', function(e){
 		
 		e.preventDefault();

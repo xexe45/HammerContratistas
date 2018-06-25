@@ -36,6 +36,7 @@ class Proyectos extends CI_Controller {
 		if($this->form_validation->run('store_proyect')){
 
 			$servicio_id = $this->security->xss_clean(strip_tags($this->input->post('servicio_id')));
+			$user_id = $this->session->userdata('id');
 			$nombre = $this->security->xss_clean(strip_tags($this->input->post('nombre')));
 			$tipo = $this->security->xss_clean(strip_tags($this->input->post('tipo')));
 			$cliente_id = $this->security->xss_clean(strip_tags($this->input->post('cliente_id')));
@@ -67,7 +68,7 @@ class Proyectos extends CI_Controller {
 
 					$file_name = $ima['file_name'];
 
-					$data = array($servicio_id,$nombre,$tipo,$cliente_id, $fecha ,$file_name ,$descripcion);	
+					$data = array($servicio_id,$user_id, $nombre,$tipo,$cliente_id, $fecha ,$file_name ,$descripcion);	
 
 					if($this->Proyecto->insert($data)){
 		
@@ -84,7 +85,7 @@ class Proyectos extends CI_Controller {
 				}
 			}else{
 
-				$data = array($servicio_id,$nombre,$tipo,$cliente_id, $fecha,null ,$descripcion);	
+				$data = array($servicio_id,$user_id, $nombre,$tipo,$cliente_id, $fecha,null ,$descripcion);	
 
 				if($this->Proyecto->insert($data)){
 	

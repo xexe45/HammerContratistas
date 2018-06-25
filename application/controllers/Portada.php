@@ -32,7 +32,7 @@ class Portada extends CI_Controller {
 		$respuesta = array();
 
 		if($this->form_validation->run('slides')){
-
+			$user_id = $this->session->userdata('id');
 			$titulo = $this->security->xss_clean(strip_tags($this->input->post('titulo')));
 
 			$subtitulo = $this->security->xss_clean(strip_tags($this->input->post('subtitulo')));
@@ -60,7 +60,7 @@ class Portada extends CI_Controller {
 
 				$file_name = $ima['file_name'];
 
-				$data = array($file_name, $titulo, $subtitulo);
+				$data = array($user_id,$file_name, $titulo, $subtitulo);
 
 				if($this->Slides->registrar($data)){
 

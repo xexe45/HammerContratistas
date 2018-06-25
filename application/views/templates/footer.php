@@ -20,10 +20,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
     <script src="<?=base_url()?>assets/js/sweetalert2.all.js"></script>
+    <script src="<?=base_url()?>assets/js/moment.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
     <script>
     	$(document).ready(function(){
         const BASE_URL = '<?=base_url()?>';
+      
         $.ajax({
             url: BASE_URL + 'HammerServicios/listar',
             type: 'GET',
@@ -118,6 +120,7 @@
         })
 
 });
+
 
     	
     </script>

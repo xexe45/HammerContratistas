@@ -5,7 +5,10 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6">
-				<img class="img-fluid" src="<?=base_url()?>assets/imgs/servicios/<?=$servicio->v3?>" alt="">
+				 <div class="card">
+				    <img class="card-img" src="<?=base_url()?>assets/imgs/servicios/<?=$servicio->v3?>" alt="Card image">
+				  </div>
+				
 			</div>
 			<div class="col-md-6 service">
 				<h2 class="serviceh2"><?=$servicio->v2?></h2>

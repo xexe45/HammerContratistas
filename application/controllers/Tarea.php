@@ -37,10 +37,11 @@ class Tarea extends CI_Controller {
 		if($this->form_validation->run('tareas')){
 
 			$servicio_id = $this->security->xss_clean(strip_tags($this->input->post('servicio_id')));
+			$user_id = $this->session->userdata('id');
 			$tarea = $this->security->xss_clean(strip_tags($this->input->post('tarea')));
 			
 
-			$data = array($servicio_id, $tarea);
+			$data = array($servicio_id, $user_id, $tarea);
 			
 			if($this->Tareas->registrar($data)){
 

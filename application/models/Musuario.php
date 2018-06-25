@@ -19,7 +19,7 @@ class Musuario extends CI_Model {
 
 	public function registrar(array $data){
 
-		$query = "CALL sp_registrar_usuario(?,?,?,?,?,?,?,?,@s)";
+		$query = "CALL sp_registrar_usuario(?,?,?,?,?,?,?,?,?,@s)";
 		$this->load->database();
 		$this->db->trans_start();
 		$this->db->query($query,$data);

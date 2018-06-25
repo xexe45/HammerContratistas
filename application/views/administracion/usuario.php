@@ -61,6 +61,8 @@
 					  	</div>
 					  </div>
 					  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+					  	<br>
+					  	<button id="btn-clientes" class="btn btn-primary"><i class="fa fa-list"></i> Cargar Listado...</button>
 					  	<table id="table" 
 		                data-sort-name="v1"
 		                data-sort-order="desc"

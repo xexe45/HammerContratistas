@@ -20,7 +20,7 @@ class Cliente extends CI_Model {
 
 	public function insert(array $data){
 
-		$query = "CALL sp_registrar_cliente(?,?,?,@s)";
+		$query = "CALL sp_registrar_cliente(?,?,?,?,@s)";
 		$this->load->database();
 		$this->db->trans_start();
 		$this->db->query($query,$data);

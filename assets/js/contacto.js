@@ -4,7 +4,18 @@ $(function(){
     const $table = $('#table');
     const $rutaDefinitivia = 'http://localhost:8090/HammerContratistas/';
     const $button = $('#button');
-    llenarTabla($table,$rutaDefinitivia);
+    const $mensajes = $('#btn-mensajes');
+
+    $button.hide();
+    $table.hide();
+    //llenarTabla($table,$rutaDefinitivia);
+
+    $mensajes.on('click', function(){
+      llenarTabla($table,$rutaDefinitivia);
+      $table.show();
+      $button.show();
+      $(this).hide();
+    })
 
    $button.on('click', function(){
    		var selections = $table.bootstrapTable('getSelections');

@@ -21,7 +21,7 @@ class Mcontacto extends CI_Model {
 	
 	public function update($data){
 
-		$query = "CALL sp_editar_mensaje(?,@s)";
+		$query = "CALL sp_editar_mensaje(?,?,?,@s)";
 		$this->load->database();
 		$this->db->trans_start();
 		$this->db->query($query,$data);

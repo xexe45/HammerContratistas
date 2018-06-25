@@ -35,7 +35,7 @@ class Usuario extends CI_Controller {
 		$respuesta = array();
 
 		if($this->form_validation->run('add_usuario')){
-
+			$user_id = $this->session->userdata('id');
 			$nombre = $this->security->xss_clean(strip_tags($this->input->post('nombre')));
 			$apellidos = $this->security->xss_clean(strip_tags($this->input->post('apellidos')));
 			$dni = $this->security->xss_clean(strip_tags($this->input->post('dni')));
@@ -45,7 +45,7 @@ class Usuario extends CI_Controller {
 			$password = $this->security->xss_clean(strip_tags($this->input->post('password')));
 			$rol = $this->security->xss_clean(strip_tags($this->input->post('rol')));
 
-			$data = array($nombre,$apellidos,$dni,$telefono,$direccion,$correo,$this->bcrypt->hash_password($password),$rol);
+			$data = array($user_id,$nombre,$apellidos,$dni,$telefono,$direccion,$correo,$this->bcrypt->hash_password($password),$rol);
 
 			if($this->Musuario->registrar($data)){
 				$respuesta["valido"] = true;

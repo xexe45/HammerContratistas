@@ -1,6 +1,7 @@
 
 			<div class="card top-bottom">
 			  <div class="card-body">
+			  	<button id="btn-mensajes" class="btn btn-primary"><i class="fa fa-envelope"></i> Cargar Mensajes...</button>
 			  	<div id="toolbar">
             		<button id="button" class="btn btn-success"><i class="fa fa-check-square-o" aria-hidden="true"></i> Marcar como visto</button>
         		</div>

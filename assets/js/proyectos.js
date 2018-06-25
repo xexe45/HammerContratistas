@@ -5,15 +5,27 @@ $(function(){
 	//Tabla de datos
     const $table = $('#table');
     const $rutaDefinitivia = 'http://localhost:8090/HammerContratistas/';
-    llenarTabla($table,$rutaDefinitivia);
+    //llenarTabla($table,$rutaDefinitivia);
+    const $clientes = $('#btn-clientes');
 
-	comboServicios(BASE_URL + "Servicio");
+    comboServicios(BASE_URL + "Servicio");
 	comboClientes(BASE_URL + "Clientes");
 
 	$("#cliente_id").tokenInput(BASE_URL + "Clientes/buscar", {
         theme: "facebook",
         tokenLimit: 1
     });
+
+    $table.hide();
+    //llenarTabla($table,$rutaDefinitivia);
+
+    $clientes.on('click', function(){
+      llenarTabla($table,$rutaDefinitivia);
+      $table.show();
+      $(this).hide();
+    })
+
+	
 
 
 	$('#form').on('submit', function(e){

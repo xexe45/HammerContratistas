@@ -34,7 +34,7 @@ class Servicio extends CI_Controller {
 		$respuesta = array();
 
 		if($this->form_validation->run('servicios')){
-
+			$user_id = $this->session->userdata('id');
 			$servicio = $this->security->xss_clean(strip_tags($this->input->post('servicio')));
 
 			$descripcion = $this->security->xss_clean(strip_tags($this->input->post('descripcion')));
@@ -62,7 +62,7 @@ class Servicio extends CI_Controller {
 
 				$file_name = $ima['file_name'];
 
-				$data = array($servicio,$file_name,$descripcion);
+				$data = array($user_id,$servicio,$file_name,$descripcion);
 
 				if($this->Servicios->registrar($data)){
 

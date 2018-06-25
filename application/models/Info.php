@@ -20,7 +20,7 @@ class Info extends CI_Model {
 
 	public function update(array $data){
 
-		$query = "CALL sp_editar_empresa(?,?,?,?,?,?,?,@s)";
+		$query = "CALL sp_editar_empresa(?,?,?,?,?,?,?,?,@s)";
 		$this->load->database();
 		$this->db->trans_start();
 		$this->db->query($query,$data);
@@ -32,7 +32,7 @@ class Info extends CI_Model {
 	}
 
 	public function updateLogo(array $data){
-		$query = "CALL sp_editar_logo(?,?,@s)";
+		$query = "CALL sp_editar_logo(?,?,?,@s)";
 		$this->load->database();
 		$this->db->trans_start();
 		$this->db->query($query,$data);
@@ -68,7 +68,7 @@ class Info extends CI_Model {
 
 	public function update_filosofia(array $data){
 
-		$query = "CALL sp_editar_filosofia(?,?,?,?,?,@s)";
+		$query = "CALL sp_editar_filosofia(?,?,?,?,?,?,@s)";
 		$this->load->database();
 		$this->db->trans_start();
 		$this->db->query($query,$data);

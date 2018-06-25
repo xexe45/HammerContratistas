@@ -26,8 +26,6 @@ class Login extends CI_Controller {
 
         $responder = array();
 
-
-
         if($this->form_validation->run('login')){
 
             $email = $this->security->xss_clean(strip_tags($this->input->post('correo')));

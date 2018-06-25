@@ -48,6 +48,7 @@ class Clientes extends CI_Controller {
 
 		if($this->form_validation->run('store_customer')){
 
+			$user_id = $this->session->userdata('id');
 			$cliente = $this->security->xss_clean(strip_tags($this->input->post('cliente')));
 			$web = $this->security->xss_clean(strip_tags($this->input->post('web')));
 			
@@ -76,7 +77,7 @@ class Clientes extends CI_Controller {
 
 					$file_name = $ima['file_name'];
 
-					$data = array($cliente, $file_name ,$web);	
+					$data = array($user_id,$cliente, $file_name ,$web);	
 
 					if($this->Cliente->insert($data)){
 		
@@ -93,7 +94,7 @@ class Clientes extends CI_Controller {
 				}
 			}else{
 
-				$data = array($cliente, null ,$web);	
+				$data = array($user_id,$cliente, null ,$web);	
 
 				if($this->Cliente->insert($data)){
 	

@@ -19,7 +19,7 @@ class Slides extends CI_Model {
 
 	public function registrar($data){
 
-		$query = "CALL sp_registrar_slides(?,?,?,@s)";
+		$query = "CALL sp_registrar_slides(?,?,?,?,@s)";
 		$this->load->database();
 		$this->db->trans_start();
 		$this->db->query($query,$data);
@@ -32,7 +32,7 @@ class Slides extends CI_Model {
 
 	public function editar($data){
 
-		$query = "CALL sp_editar_slides(?,?,@s)";
+		$query = "CALL sp_editar_slides(?,?,?,@s)";
 		$this->load->database();
 		$this->db->trans_start();
 		$this->db->query($query,$data);

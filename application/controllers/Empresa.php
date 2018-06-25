@@ -38,6 +38,7 @@ class Empresa extends CI_Controller {
 		if($this->form_validation->run('update_info')){
 
 			$id = $this->security->xss_clean(strip_tags($this->input->post('id')));
+			$user_id = $this->session->userdata('id');
 			$nombre = $this->security->xss_clean(strip_tags($this->input->post('nombre')));
 			$ruc = $this->security->xss_clean(strip_tags($this->input->post('ruc')));
 			$direccion = $this->security->xss_clean(strip_tags($this->input->post('direccion')));
@@ -45,7 +46,7 @@ class Empresa extends CI_Controller {
 			$correo = $this->security->xss_clean(strip_tags($this->input->post('correo')));
 			$presentacion = $this->security->xss_clean(strip_tags($this->input->post('presentacion')));
 
-			$data = array($id,$nombre,$ruc,$direccion,$telefono,$correo,$presentacion);
+			$data = array($id,$user_id,$nombre,$ruc,$direccion,$telefono,$correo,$presentacion);
 
 			if($this->Info->update($data)){
 				$respuesta["valido"] = true;
@@ -95,9 +96,10 @@ class Empresa extends CI_Controller {
 			$ima = $this->upload->data();
 
 			$id = $this->security->xss_clean(strip_tags($this->input->post('id')));
+			$user_id = $this->session->userdata('id');
 			$file_name = $ima['file_name'];
 
-			$data = array($id, $file_name);
+			$data = array($id, $user_id,$file_name);
 
 			if($this->Info->updateLogo($data)){
 				$file = "./assets/imgs/".$fotoActual->logo;
@@ -135,12 +137,13 @@ class Empresa extends CI_Controller {
 		if($this->form_validation->run('edit_filosofia')){
 
 			$id = $this->security->xss_clean(strip_tags($this->input->post('id')));
+			$user_id = $this->session->userdata('id');
 			$historia = $this->security->xss_clean(strip_tags($this->input->post('historia')));
 			$mision = $this->security->xss_clean(strip_tags($this->input->post('mision')));
 			$vision = $this->security->xss_clean(strip_tags($this->input->post('vision')));
 			$valores = $this->security->xss_clean(strip_tags($this->input->post('valores')));
 
-			$data = array($id, $historia, $mision, $vision, $valores);
+			$data = array($id, $user_id, $historia, $mision, $vision, $valores);
 			
 			if($this->Info->update_filosofia($data)){
 
@@ -173,11 +176,11 @@ class Empresa extends CI_Controller {
 
 		// Cargamos la libreria Upload
         $this->load->library('upload');
-
+        $user_id = $this->session->userdata('id');
         $filosofia = $this->Info->getFilosofia();
 		$respuesta = array();
 
-		$data = array($filosofia->v5,$filosofia->v6);
+		$data = array($user_id,$filosofia->v5,$filosofia->v6);
 		$error = array();
 		$error['error'] = '';
 
@@ -200,7 +203,7 @@ class Empresa extends CI_Controller {
 			    //obtenemos el nombre del archivo
 				$ima = $this->upload->data();
 				$file_name = $ima['file_name'];
-				$data[0] = $file_name;
+				$data[1] = $file_name;
 
 			}else{
 				$error['error'] = $error['error'].$this->upload->display_errors();
@@ -227,7 +230,7 @@ class Empresa extends CI_Controller {
 			            
 			    $ima2 = $this->upload->data();
 			    $file_name2 = $ima2['file_name'];
-			    $data[1] = $file_name2;
+			    $data[2] = $file_name2;
 
 			}else{	            
 			   $error['error'] = $error['error'].$this->upload->display_errors();

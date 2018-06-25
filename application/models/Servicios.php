@@ -20,7 +20,7 @@ class Servicios extends CI_Model {
 
 	public function registrar($data){
 
-		$query = "CALL sp_registrar_servicio(?,?,?,@s)";
+		$query = "CALL sp_registrar_servicio(?,?,?,?,@s)";
 		$this->load->database();
 		$this->db->trans_start();
 		$this->db->query($query,$data);
