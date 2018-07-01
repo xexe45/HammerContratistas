@@ -1,8 +1,7 @@
-$(function(){
-	const BASE_URL = "http://localhost:8090/HammerContratistas/";
+function ejecutar(){
+
 	//Tabla de datos
-	const $table = $('#table');
-    const $rutaDefinitivia = 'http://localhost:8090/HammerContratistas/';	    
+	const $table = $('#table');	    
     //llenarTabla($table,$rutaDefinitivia);
     const $clientes = $('#btn-clientes');
 
@@ -10,7 +9,14 @@ $(function(){
     //llenarTabla($table,$rutaDefinitivia);
 
     $clientes.on('click', function(){
-      llenarTabla($table,$rutaDefinitivia);
+      $.get($r + 'Usuario', function(response){
+		console.log(response);
+    		
+    		$(function () {
+        		$table.bootstrapTable({data: response['data']});
+        		$table.bootstrapTable('hideColumn','v1');  		
+    		});
+	},'json');
       $table.show();
       $(this).hide();
     })
@@ -37,7 +43,7 @@ $(function(){
 					Swal('El sistema informa', response['mensaje'], 'success');
 					$('#form')[0].reset();
 					$table.bootstrapTable('refresh', {
-			             url: $rutaDefinitivia + 'Usuario'
+			             url: $r + 'Usuario'
 			        });
 				}else{
 					Swal('Oops...', response['mensaje'] , 'error')
@@ -47,17 +53,5 @@ $(function(){
 
 	})
 
-})
-
-function llenarTabla($table,rutaDefinitivia){
-
-	$.get(rutaDefinitivia + 'Usuario', function(response){
-		console.log(response);
-    		
-    		$(function () {
-        		$table.bootstrapTable({data: response['data']});
-        		$table.bootstrapTable('hideColumn','v1');  		
-    		});
-	},'json');
-	
 }
+	

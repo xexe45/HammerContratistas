@@ -26,6 +26,57 @@ class Usuario extends CI_Controller {
 		$this->load->view('administracion/usuario');
 	}
 
+	public function doreg(){
+		$respuesta = array();
+        $respuesta['error'] = "";
+        $usuario_id = $this->session->userdata('id');
+        $this->form_validation->set_rules('nombre','Nombre','required|is_string|trim|max_length[50]');
+
+        $this->form_validation->set_rules('apellidos','Apellidos','required|is_string|trim|max_length[100]');
+
+        $this->form_validation->set_rules('dni','DNI','required|numeric|trim|max_length[8]|min_length[8]');
+
+        $this->form_validation->set_rules('telefono','Telefono','required|numeric|trim|max_length[12]');
+
+        $this->form_validation->set_rules('direccion','Direccion','required|is_string|trim|max_length[255]');
+
+        $this->form_validation->set_rules('correo','Correo Electrónico','required|is_string|trim|valid_email');
+
+        $this->form_validation->set_rules('password','Password','required|is_string|trim|max_length[200]');
+
+        $this->form_validation->set_rules('rol','Rol de usuario','required|is_string|in_list[user,admin]');
+
+	 if ($this->form_validation->run() == FALSE)
+                {
+                  	$respuesta["valido"] = false;
+					$respuesta["mensaje"]  = validation_errors();
+    
+                }
+                else
+                {
+                    $d= array($usuario_id,$this->input->post('nombre'),$this->input->post('apellidos'),$this->input->post('dni'),$this->input->post('telefono'),$this->input->post('direccion'),$this->input->post('correo'),$this->bcrypt->hash_password($this->input->post('password'))
+						,$this->input->post('rol'));
+
+                     if ($this->Musuario->registrar($d)){
+
+                        $respuesta["valido"] = true;
+						$respuesta["mensaje"]  = 'Usuario registrado correctamente';
+
+                     }
+
+                     else{
+
+                        $respuesta["valido"] = false;
+						$respuesta["mensaje"]  = "No se pudo registrar usuario";
+
+                     }
+                }
+               
+   header('Content-Type: application/x-json; charset=utf-8');
+        echo(json_encode($respuesta));                          
+
+	}
+
 	public function registrar()
 	{
 		if(!$this->input->is_ajax_request()){ return; }

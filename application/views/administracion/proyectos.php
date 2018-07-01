@@ -28,6 +28,10 @@
 					  				<input type="text" name="nombre" id="nombre" required="" class="form-control" maxlength="80" minlength="2" placeholder="Nombre de Proyecto">
 					  			</div>
 					  			<div class="form-group">
+					  				<label for="slug">Slug</label>
+					  				<input type="text" readonly name="slug" class="form-control" id="slug">
+					  			</div>
+					  			<div class="form-group">
 								  	<label for="tipo">Estado de Proyecto*</label>
 								  	<select name="tipo" id="tipo" class="form-control">
 								  		<option value="">Seleccionar Estado de proyecto...</option>
@@ -91,6 +95,7 @@
 		                      <th data-field="v8">FECHA DE INICIO</th>
 		                      <th data-field="v9" data-formatter="imageFormatter">Imagen</th>
 		                      <th data-field="v10">DESCRIPCION</th>
+		                      <th data-formatter="buttonFormatter" data-field="v4">Galería</th>
 		                    </tr>
 		                  </thead>
 		                </table>
@@ -109,6 +114,8 @@
 <script src="<?=base_url()?>assets/btable/bootstrap-table.min.js"></script>
 <script src="<?=base_url()?>assets/js/sweetalert2.all.js"></script>
 <script src="<?=base_url()?>assets/js/jquery.tokeninput.js"></script>
+<script src="<?=base_url()?>assets/js/speakingurl.min.js"></script>
+<script src="<?=base_url()?>assets/js/slugify.min.js"></script>
 <script src="<?=base_url()?>assets/js/proyectos.js"></script>
 </body>	
 </html>

@@ -25,12 +25,17 @@ $(function(){
       $(this).hide();
     })
 
-	
+	$('#nombre').on('change', function(){
+		 const slug =  $.slugify($(this).val());
+		 $('#slug').val(slug);
+	})
 
 
 	$('#form').on('submit', function(e){
 
 		e.preventDefault();
+
+		
 		var $fecha = $('#fecha').val();
 		var anio = new Date($fecha);
 
@@ -142,4 +147,10 @@ function llenarTabla($table,rutaDefinitivia){
 function imageFormatter(value, row){
  	let r =  "http://localhost:8090/HammerContratistas/assets/imgs/proyectos/" + value;
  	return '<img width="150" class="img-fluid" src="'+r+'" />';
+}
+
+
+function buttonFormatter(value){
+	return '<a href="http://localhost:8090/HammerContratistas/proyectos/'+value+'" class="btn btn-success">Galería de Imágenes</a>';
+	
 }

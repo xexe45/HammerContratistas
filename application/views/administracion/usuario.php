@@ -16,7 +16,7 @@
 					  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
 					  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 					  	<div class="top">
-					  		<?=form_open('Usuario/registrar',array("id" => "form"))?>
+					  		<?=form_open('Usuario/doreg',array("id" => "form"))?>
 					  		
 					  			<div class="form-group">
 					  				<label for="nombre">Nombres *</label>
@@ -104,6 +104,12 @@
 <script src="<?=base_url()?>assets/btable/bootstrap-table.min.js"></script>
 <script src="<?=base_url()?>assets/js/sweetalert2.all.js"></script>
 <script src="<?=base_url()?>assets/js/usuario.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+    	$r='<?= base_url()?>';  
+    	ejecutar();
+  	});
+</script>
 </body>	
 </html>
 

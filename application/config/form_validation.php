@@ -53,6 +53,7 @@ $config = array(
 	=> array(
 		array('field' => 'servicio_id', 'label' => 'Servicio al que pertenece el proyecto', 'rules' => 'required|numeric|trim'),
 		array('field' => 'nombre', 'label' => 'Nombre del Proyecto', 'rules' => 'required|is_string|trim|min_length[5]'),
+		array('field' => 'slug', 'label' => 'Slug', 'rules' => 'required|is_string|trim|min_length[5]|max_length[255]'),
 		array('field' => 'tipo', 'label' => 'Estado del proyecto', 'rules' => 'required|in_list[proceso,concluido]'),
 		array('field' => 'cliente_id', 'label' => 'Cliente al que se realizó el proyecto', 'rules' => 'required|numeric|trim'),
 		array('field' => 'fecha', 'label' => 'Fecha de inicio del proyecto', 'rules' => 'required'),
