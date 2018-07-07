@@ -50,7 +50,7 @@
 
           <ul class="nav navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="http://builtwithbootstrap.com/">Clientes</a>
+              <a class="nav-link <?php if($this->uri->segment(1) == 'nuestros-clientes'){ ?> active <?php }   ?>" href="<?=base_url()?>nuestros-clientes">Clientes</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="<?=base_url()?>Login">Login</a>

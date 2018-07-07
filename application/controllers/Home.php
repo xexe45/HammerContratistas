@@ -26,6 +26,13 @@ class Home extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
+	public function clientes(){
+		$data['clientes'] = $this->Cliente->listar();
+		$this->load->view('templates/header');
+		$this->load->view('customers', $data);
+		$this->load->view('templates/footer');
+	}
+
 	public function contacto()
 	{
 		if(!$this->input->is_ajax_request()){ return; }

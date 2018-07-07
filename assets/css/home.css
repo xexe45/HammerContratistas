@@ -1,8 +1,12 @@
-.top{
-	margin-top: 20px;
+.top {
+    margin-top: 20px;
 }
 
-.top-bottom{
-	margin-top: 20px;
-	margin-bottom: 20px;
+.top-bottom {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.margen-abajo {
+    margin-bottom: 20px;
 }

@@ -41,7 +41,7 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <section class="container-fluid top">
 	<div class="row">
-		<div class="col-md-3">
+		<div class="col-md-3 margen-abajo">
 			<ul class="list-group">
 
 			<a href="#" class="list-group-item list-group-item-action active">
@@ -57,6 +57,7 @@
 			  <a href="<?=base_url()?>usuarios" class="list-group-item list-group-item-action"><i class="fa fa-users"></i> Usuarios</a>
 			  <a href="<?=base_url()?>clientes" class="list-group-item list-group-item-action"><i class="fa fa-user-circle"></i> Clientes</a>
 			  <a href="<?=base_url()?>Reportes" class="list-group-item list-group-item-action"><i class="fa fa-pie-chart"></i> Reportes</a>
+				<a href="<?=base_url()?>Sistema" class="list-group-item list-group-item-action"><i class="fa fa-cogs"></i> Sistema</a>
 			  <a href="<?=base_url()?>Login/salir" class="list-group-item list-group-item-action"><i class="fa fa-sign-out"></i> Salir del sistema</a>
 			</ul>
 		</div>

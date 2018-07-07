@@ -29,7 +29,8 @@ class Usuario extends CI_Controller {
 	public function doreg(){
 		$respuesta = array();
         $respuesta['error'] = "";
-        $usuario_id = $this->session->userdata('id');
+		$usuario_id = $this->session->userdata('id');
+		
         $this->form_validation->set_rules('nombre','Nombre','required|is_string|trim|max_length[50]');
 
         $this->form_validation->set_rules('apellidos','Apellidos','required|is_string|trim|max_length[100]');

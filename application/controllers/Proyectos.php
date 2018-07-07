@@ -10,12 +10,30 @@ class Proyectos extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->load->model('Proyecto');
+		$this->load->model('Servicios');
 	}
 
 	public function index()
 	{
 		
 		$proyectos['data'] = $this->Proyecto->listarProyectos();
+		header('Content-Type: application/x-json; charset:utf-8');
+		echo json_encode($proyectos);
+	}
+
+	public function servicios()
+	{
+		
+		$servicios['data'] = $this->Servicios->listar();
+		header('Content-Type: application/x-json; charset:utf-8');
+		echo json_encode($servicios);
+		
+	}
+
+	public function miGaleria($slug)
+	{
+		
+		$proyectos['data'] = $this->Proyecto->listarGaleriaSlug($slug);
 		header('Content-Type: application/x-json; charset:utf-8');
 		echo json_encode($proyectos);
 	}
@@ -69,8 +87,8 @@ class Proyectos extends CI_Controller {
 
 					$file_name = $ima['file_name'];
 
-					$data = array($servicio_id,$user_id, $nombre,$tipo,$cliente_id, $fecha ,$file_name ,$descripcion, $slug);	
-
+					$data = array($servicio_id,$user_id, $nombre, $slug, $tipo,$cliente_id, $fecha ,$file_name ,$descripcion);	
+					
 					if($this->Proyecto->insert($data)){
 		
 						$respuesta["valido"] = true;
@@ -86,8 +104,8 @@ class Proyectos extends CI_Controller {
 				}
 			}else{
 
-				$data = array($servicio_id,$user_id, $nombre,$tipo,$cliente_id, $fecha,null ,$descripcion, $slug);	
-
+				$data = array($servicio_id,$user_id, $nombre,$slug, $tipo,$cliente_id, $fecha,null ,$descripcion);	
+		
 				if($this->Proyecto->insert($data)){
 	
 					$respuesta["valido"] = true;
@@ -112,6 +130,72 @@ class Proyectos extends CI_Controller {
 			echo json_encode($respuesta);
 		
 	}
+
+	public function galeria($slug){
+		$this->load->view('administracion/header');
+		$uri = $this->uri->segment(3);
+		$this->load->view('administracion/galeria',compact('uri'));
+	}
+
+	public function fotos($slug=null)
+    {
+		
+        if(!$slug){return;}
+		$proyecto=$this->Proyecto->listarProyectosSlug($slug);
+		
+		$user_id = $this->session->userdata('id');
+
+		if(!isset($proyecto)){return;}
+			if(!empty($_FILES['file']['name'][0])){
+				
+				$total=sizeof($_FILES['file']['name']);
+				$contador=0;
+				$respuesta = array();
+				for($i=0;$i<$total;$i++)
+				{
+				   switch($_FILES['file']['type'][$i])
+				   {
+					   case 'image/jpeg':
+						   //insertamos el registro con la foto vacía
+						   $data = array($proyecto->v1,$user_id,$proyecto->v2,'');
+						   
+						   $valor=$this->Proyecto->insertGallery($data);
+						   //subimos la foto
+						   $picture='foto_'.$proyecto->v1.'_'.$valor.'.jpg';
+						   copy($_FILES['file']['tmp_name'][$i],"assets/imgs/galeria/".$picture);
+						   //actualizamos el registro con el nombre de la foto
+						   $data1=array($valor,$picture);
+						   $v = $this->Proyecto->updateGallery($data1);
+						   $respuesta[]  = "Imagen ".$contador." agregada";
+						   
+					   break;
+					   case 'image/png':
+						   //insertamos el registro con la foto vacía
+						   $data = array($proyecto->v1,$user_id,$proyecto->v2,'');
+						   $valor=$this->Proyecto->insertGallery($data);
+						   //subimos la foto
+						   $picture='foto_'.$proyecto->v1.'_'.$valor.'.png';
+						   copy($_FILES['file']['tmp_name'][$i],"assets/imgs/galeria/".$picture);
+						   //actualizamos el registro con el nombre de la foto
+						   $data1=array($valor,$picture);
+						   $v = $this->Proyecto->updateGallery($data1);
+						   $respuesta[]  = "Imagen ".$contador." agregada";
+					   break;
+					   default:
+					   	$respuesta[]  = "Archivo ".$contador." no es imagen";
+					   break;
+				   }
+				$contador++;
+				}
+			   
+			   header('Content-Type: application/x-json; charset:utf-8');
+			   echo json_encode($respuesta);
+			}
+            
+             
+        
+        
+    }
 
 }
 

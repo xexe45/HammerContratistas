@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-06-2018 a las 05:33:11
+-- Tiempo de generación: 07-07-2018 a las 08:47:58
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.1
 
@@ -174,6 +174,25 @@ slide1 as v5, slide2 as v6, valores as v7
 FROM filosofia;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_galeria` (IN `v_slug` TEXT)  BEGIN
+select id as v1, proyecto_id as v2, img as v3
+from galeria
+where proyecto_id = (select id from proyecto where slug = v_slug);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_gallery_slug` (IN `v_slug` TEXT)  BEGIN
+set @id = (select id from proyecto where slug = v_slug);
+select id as v1, proyecto_id as v2, img as v3
+from galeria
+where proyecto_id = @id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_historial` ()  BEGIN
+select h.id as v1, h.tipo as v2, h.slug as v3, h.descripcion as v4, usuario_id as v5,
+CONCAT(u.nombre,' ', u.apellidos) as v6,h.fecha as v7
+from historial h inner join usuario u on h.usuario_id = u.id;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_info` ()  BEGIN
 select id as v1, nombre as v2, logo as v3, ruc as v4,
 direccion as v5, telefono as v6, correo as v7, presentacion as v8
@@ -183,9 +202,15 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_proyectos` ()  BEGIN
 select p.id as v1, p.servicio_id as v2, s.servicio as v3, p.nombre as v4,
 p.tipo as v5, p.cliente_id as v6, c.cliente as v7, p.fecha as v8, p.img_principal as v9,
-p.descripcion as v10
+p.descripcion as v10, p.slug as v11
 from proyecto p inner join servicios s on p.servicio_id = s.id
 inner join cliente c on p.cliente_id = c.id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_proyect_slug` (IN `v_slug` TEXT)  BEGIN
+select id as v1, nombre as v2
+from proyecto
+where slug = v_slug;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_servicios` ()  BEGIN
@@ -250,20 +275,24 @@ commit;
 set v_res = true;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_galeria` (IN `v_proyecto_id` INT, IN `v_img` VARCHAR(150), OUT `v_res` BOOLEAN)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_galeria` (IN `v_proyecto_id` INT, IN `v_user` INT, IN `v_proyecto` TEXT, IN `v_img` VARCHAR(150), OUT `v_res` INT)  BEGIN
 declare exit handler for sqlexception
 begin
 rollback;
-set v_res = false;
+set v_res = 0;
 end;
 start transaction;
 INSERT INTO galeria (proyecto_id, img) 
 VALUES(v_proyecto_id, v_img);
+SET @last_id = LAST_INSERT_ID();
+
+INSERT INTO historial(tipo,slug,descripcion,usuario_id,fecha)
+VALUES('registro','galeria',CONCAT('Registro de foto',' ', v_proyecto),v_user, NOW());
 commit;
-set v_res = true;
+set v_res = @last_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_proyecto` (IN `v_servicio_id` INT, IN `v_user` INT, IN `v_nombre` TEXT, IN `v_tipo` ENUM('proceso','concluido'), IN `v_cliente_id` INT, IN `v_fecha` DATE, IN `v_img_principal` VARCHAR(150), IN `v_descripcion` TEXT, OUT `v_res` BOOLEAN)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrar_proyecto` (IN `v_servicio_id` INT, IN `v_user` INT, IN `v_nombre` TEXT, IN `v_slug` VARCHAR(255), IN `v_tipo` ENUM('proceso','concluido'), IN `v_cliente_id` INT, IN `v_fecha` DATE, IN `v_img_principal` VARCHAR(150), IN `v_descripcion` TEXT, OUT `v_res` BOOLEAN)  BEGIN
 declare exit handler for sqlexception
 begin
 rollback;
@@ -273,8 +302,8 @@ start transaction;
 INSERT INTO historial(tipo,slug,descripcion,usuario_id,fecha)
 VALUES('registro','proyecto',CONCAT('Registro de proyecto',' ', v_nombre),v_user, NOW());
 
-INSERT INTO proyecto (servicio_id, nombre, tipo, cliente_id, fecha, img_principal, descripcion) 
-VALUES(v_servicio_id, v_nombre, v_tipo, v_cliente_id, v_fecha ,v_img_principal, v_descripcion);
+INSERT INTO proyecto (servicio_id, nombre, tipo, cliente_id, fecha, img_principal, descripcion, slug) 
+VALUES(v_servicio_id, v_nombre, v_tipo, v_cliente_id, v_fecha ,v_img_principal, v_descripcion, v_slug);
 commit;
 set v_res = true;
 END$$
@@ -355,6 +384,19 @@ from servicios
 where id = v_id;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_update_foto` (IN `v_id` INT, IN `v_img` TEXT, OUT `v_res` BOOLEAN)  BEGIN
+declare exit handler for sqlexception
+begin
+rollback;
+set v_res = false;
+end;
+start transaction;
+UPDATE galeria set img = v_img
+where id = v_id;
+commit;
+set v_res = true;
+END$$
+
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -384,7 +426,8 @@ INSERT INTO `cliente` (`id`, `cliente`, `logo`, `web`) VALUES
 (19, 'MazaHidalgo S.A', 'df5020c544bc4d52a9ab681c33d75907.jpg', 'https://www.hidalgos.com'),
 (20, 'TeroTec', '6c5836fd3ff367b06d5acece23251fa4.jpg', 'https://www.terococa.com'),
 (21, 'SicchaTec', '97b906fff5c23beeb3a58c9ac40a1597.jpg', 'https://www.siccha.com'),
-(22, 'MoroTec', '217b3c2b1116caea3a0f30e0647f93ed.png', 'https://www.morotec.com');
+(22, 'MoroTec', '217b3c2b1116caea3a0f30e0647f93ed.png', 'https://www.morotec.com'),
+(23, 'Don Bife', 'a8885e802bdaf4c0ff5b105c1cbd1093.jpg', 'http://www.donbife.cl/');
 
 -- --------------------------------------------------------
 
@@ -469,6 +512,22 @@ CREATE TABLE `galeria` (
   `img` varchar(150) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `galeria`
+--
+
+INSERT INTO `galeria` (`id`, `proyecto_id`, `img`) VALUES
+(1, 5, 'foto_5_1.png'),
+(2, 5, 'foto_5_2.jpg'),
+(3, 4, 'foto_4_3.png'),
+(4, 4, 'foto_4_4.jpg'),
+(5, 7, 'foto_7_5.png'),
+(6, 7, 'foto_7_6.png'),
+(7, 7, 'foto_7_7.jpg'),
+(8, 1, 'foto_1_8.jpg'),
+(9, 3, 'foto_3_9.png'),
+(10, 3, 'foto_3_10.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -502,7 +561,14 @@ INSERT INTO `historial` (`id`, `tipo`, `slug`, `descripcion`, `usuario_id`, `fec
 (12, 'registro', 'tarea', 'Registro de tarea Diseño de planos 3D', 1, '2018-06-24 20:20:05'),
 (13, 'registro', 'usuario', 'Registro de usuario Oscar Milano', 1, '2018-06-24 20:24:12'),
 (14, 'edicion', 'filosofia', 'edición filosofía empresarial', 1, '2018-06-24 21:33:21'),
-(15, 'edicion', 'filosofia', 'edición filosofía empresarial', 1, '2018-06-24 21:34:34');
+(15, 'edicion', 'filosofia', 'edición filosofía empresarial', 1, '2018-06-24 21:34:34'),
+(16, 'registro', 'usuario', 'Registro de usuario Jorge Cáceres', 1, '2018-07-01 16:54:10'),
+(17, 'registro', 'usuario', 'Registro de usuario Carlos Coba Roa', 1, '2018-07-01 17:00:09'),
+(18, 'registro', 'usuario', 'Registro de usuario Fernando Abarca', 1, '2018-07-01 17:29:47'),
+(19, 'registro', 'galeria', 'Registro de foto Contrucción Civil', 1, '2018-07-07 00:37:53'),
+(20, 'registro', 'galeria', 'Registro de foto Contrucción Civil', 1, '2018-07-07 00:37:53'),
+(21, 'registro', 'cliente', 'Registro de Don Bife', 2, '2018-07-07 01:15:42'),
+(25, 'registro', 'proyecto', 'Registro de proyecto Terracería Don Bife', 2, '2018-07-07 01:24:24');
 
 -- --------------------------------------------------------
 
@@ -533,21 +599,23 @@ CREATE TABLE `proyecto` (
   `cliente_id` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `img_principal` varchar(150) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `descripcion` text COLLATE utf8_spanish_ci NOT NULL
+  `descripcion` text COLLATE utf8_spanish_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `proyecto`
 --
 
-INSERT INTO `proyecto` (`id`, `servicio_id`, `nombre`, `tipo`, `cliente_id`, `fecha`, `img_principal`, `descripcion`) VALUES
-(1, 7, 'Clínica Sana', 'concluido', 16, '2017-01-01', 'c4998a876714fbc0815ab2690681dbed.png', 'Clínica'),
-(2, 7, 'Clínica Miraflores', 'concluido', 15, '2010-01-01', '390f4c5dee74edc6801f7c5c28bfb034.jpg', 'Clínica Belén'),
-(3, 3, 'Contrucción Civil', 'concluido', 18, '2014-01-01', 'e193e14d9beecbb46c91968730cc13cd.png', 'Proyecto realizado'),
-(4, 3, 'Obra', 'proceso', 17, '2017-01-01', 'df505fdb7415e3b561ffdda3d303805b.jpg', 'Proyecto Maza Solutions'),
-(5, 6, 'Terracería', 'proceso', 20, '2018-12-12', 'fe96e7935630aa189d8056c9577c1252.png', 'Terracería'),
-(6, 7, 'Edificacion', 'concluido', 19, '2017-12-12', '1bec1eb30e310cd21d7c3ee1e91991b6.png', 'Proyecto'),
-(7, 7, 'Edificación Suma', 'concluido', 16, '2017-01-01', 'a7294ab8773dcaa142e6c665c909e33d.png', 'Un proyecto de gran alcance...');
+INSERT INTO `proyecto` (`id`, `servicio_id`, `nombre`, `tipo`, `cliente_id`, `fecha`, `img_principal`, `descripcion`, `slug`) VALUES
+(1, 7, 'Clínica Sana', 'concluido', 16, '2017-01-01', 'c4998a876714fbc0815ab2690681dbed.png', 'Clínica', 'clinica-sana'),
+(2, 7, 'Clínica Miraflores', 'concluido', 15, '2010-01-01', '390f4c5dee74edc6801f7c5c28bfb034.jpg', 'Clínica Belén', 'clinica-miraflores'),
+(3, 3, 'Contrucción Civil', 'concluido', 18, '2014-01-01', 'e193e14d9beecbb46c91968730cc13cd.png', 'Proyecto realizado', 'construccion-civil'),
+(4, 3, 'Obra', 'proceso', 17, '2017-01-01', 'df505fdb7415e3b561ffdda3d303805b.jpg', 'Proyecto Maza Solutions', 'obra'),
+(5, 6, 'Terracería', 'proceso', 20, '2018-12-12', 'fe96e7935630aa189d8056c9577c1252.png', 'Terracería', 'terraceria'),
+(6, 7, 'Edificacion', 'concluido', 19, '2017-12-12', '1bec1eb30e310cd21d7c3ee1e91991b6.png', 'Proyecto', 'edificacion'),
+(7, 7, 'Edificación Suma', 'concluido', 16, '2017-01-01', 'a7294ab8773dcaa142e6c665c909e33d.png', 'Un proyecto de gran alcance...', 'edificacion-suma'),
+(9, 6, 'Terracería Don Bife', 'proceso', 23, '2018-06-01', '03a607a98f56931f658eb1f005447996.jpg', 'Terracería para Don Bife', 'terraceria-don-bife');
 
 -- --------------------------------------------------------
 
@@ -648,7 +716,10 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `dni`, `telefono`, `direccion`, `correo`, `password`, `rol`, `fecha_creacion`, `fecha_edicion`) VALUES
 (1, 'César', 'Maza Hidalgo', '70365813', '965088182', 'Urb. Las Mercedes k-1', 'cmaza@gmail.com', '$2a$08$Kynil62N430dcxNN9gj4Rux6YBKBpLSzHm2BwBzTg9BEBULe4ypja', 'admin', '2018-06-17 18:36:24', '2018-06-18 03:39:00'),
 (2, 'Claudia', 'Serpa', '12345452', '967988102', 'Urb. Las Magnolias j12', 'claudia@gmail.com', '$2a$08$GrLmMIDNnpPMEkgUS02XNeVGu967SKuKv6PFrw00ixH.ot1BQEd8.', 'user', '2018-06-17 22:47:02', '2018-06-18 03:47:02'),
-(3, 'Oscar', 'Milano', '78690913', '967099194', 'Av. Sullana 216', 'milano@gmail.com', '$2a$08$9YDa6dOx6sAhGnZ1IIu3Lel7kd6Y9aVyb02b4stvH80E7MA6WLhr.', 'user', '2018-06-24 20:24:12', '2018-06-25 01:24:12');
+(3, 'Oscar', 'Milano', '78690913', '967099194', 'Av. Sullana 216', 'milano@gmail.com', '$2a$08$9YDa6dOx6sAhGnZ1IIu3Lel7kd6Y9aVyb02b4stvH80E7MA6WLhr.', 'user', '2018-06-24 20:24:12', '2018-06-25 01:24:12'),
+(4, 'Jorge', 'Cáceres', '56765312', '965088112', 'AA.HH. 18 de Mayo', 'jorgito@gmail.com', '$2a$08$uki7KwlU4NCc0X/FHJavx.ijYKlFvc1iupUeWoacdgHaUXP9QZj/y', 'user', '2018-07-01 16:54:11', '2018-07-01 21:54:11'),
+(5, 'Carlos', 'Coba Roa', '78653489', '965099105', 'Av. Sullana 216', 'coba@gmail.com', '$2a$08$9Kq0CnrWnXrITi4sT2fk5uvrWuPV9R4mrFgO0pCuv.SpLQ4Drg0V.', 'user', '2018-07-01 17:00:09', '2018-07-01 22:00:09'),
+(6, 'Fernando', 'Abarca', '49856320', '965088189', 'Jose Olaya j-10', 'fabarca@gmail.com', '$2a$08$ByIhoTOQQ6JpFDsiCICJS.oiMYnYCgJnHEwBr/DY0QTTtSzTM/XVG', 'user', '2018-07-01 17:29:48', '2018-07-01 22:29:48');
 
 --
 -- Índices para tablas volcadas
@@ -708,6 +779,7 @@ ALTER TABLE `logindiario`
 --
 ALTER TABLE `proyecto`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `slug` (`slug`),
   ADD KEY `fk_proyecto_servicio_idx` (`servicio_id`),
   ADD KEY `fk_proyecto_cliente_idx` (`cliente_id`);
 
@@ -749,7 +821,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `contacto`
@@ -773,13 +845,13 @@ ALTER TABLE `filosofia`
 -- AUTO_INCREMENT de la tabla `galeria`
 --
 ALTER TABLE `galeria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `logindiario`
@@ -791,7 +863,7 @@ ALTER TABLE `logindiario`
 -- AUTO_INCREMENT de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
@@ -815,7 +887,7 @@ ALTER TABLE `tarea_servicio`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas

@@ -18,9 +18,55 @@ class Proyecto extends CI_Model {
 
 	}
 
+	public function listarProyectosSlug($slug){
+
+		$query = "CALL sp_get_proyect_slug(?)";
+		$this->load->database();
+		$proyecto = $this->db->query($query,$slug);
+		$this->db->close();
+		return $proyecto->row();
+
+	}
+
+	public function listarGaleriaSlug($slug){
+
+		$query = "CALL sp_get_galeria(?)";
+		$this->load->database();
+		$galeria = $this->db->query($query,$slug);
+		$this->db->close();
+		return $galeria->result();
+
+	}
+
 	public function insert(array $data){
 
 		$query = "CALL sp_registrar_proyecto(?,?,?,?,?,?,?,?,?,@s)";
+		$this->load->database();
+		$this->db->trans_start();
+		$this->db->query($query,$data);
+		$res = $this->db->query('select @s as res');
+		$this->db->trans_complete();
+		$this->db->close();
+		return $res->row()->res;
+
+	}
+
+	public function insertGallery(array $data){
+
+		$query = "CALL sp_registrar_galeria(?,?,?,?,@s)";
+		$this->load->database();
+		$this->db->trans_start();
+		$this->db->query($query,$data);
+		$res = $this->db->query('select @s as res');
+		$this->db->trans_complete();
+		$this->db->close();
+		return $res->row()->res;
+
+	}
+
+	public function updateGallery(array $data){
+
+		$query = "CALL sp_update_foto(?,?,@s)";
 		$this->load->database();
 		$this->db->trans_start();
 		$this->db->query($query,$data);

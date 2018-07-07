@@ -25,7 +25,7 @@ class Security extends CI_Hooks
 
 		$noValidados = array('Login','Home','Conocenos','HammerProyectos','HammerServicios');
 
-		$administrador = array('Empresa','Usuario','Servicio','Tarea');
+		$administrador = array('Empresa','Usuario','Servicio','Tarea','Sistema');
 		
 
 

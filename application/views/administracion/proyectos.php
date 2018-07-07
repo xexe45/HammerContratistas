@@ -95,7 +95,7 @@
 		                      <th data-field="v8">FECHA DE INICIO</th>
 		                      <th data-field="v9" data-formatter="imageFormatter">Imagen</th>
 		                      <th data-field="v10">DESCRIPCION</th>
-		                      <th data-formatter="buttonFormatter" data-field="v4">Galería</th>
+		                      <th data-formatter="buttonFormatter" data-field="v11">Galería</th>
 		                    </tr>
 		                  </thead>
 		                </table>
