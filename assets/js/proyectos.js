@@ -39,14 +39,22 @@ $(function() {
         var $fecha = $('#fecha').val();
         var anio = new Date($fecha);
 
+
+
         if (!anio) {
-            Swal('Oops...', 'Ingrese una fecha', 'error');
+            Swal('Oops...', 'Ingrese una fecha', 'warning');
+            return;
+        }
+
+        if (anio.getFullYear() < 2016) {
+            Swal('Oops...', 'Recuerda que la empresa empezó a funcionar en el año 2016', 'warning');
             return;
         }
 
 
+
         if (anio > hoy && $('#tipo').val() == 'concluido') {
-            Swal('Oops...', 'Ingrese una fecha correcta', 'error');
+            Swal('Oops...', 'Ingrese una fecha correcta', 'warning');
             return;
         }
 
