@@ -66,5 +66,11 @@
     <script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
     <script src="<?=base_url()?>assets/js/sweetalert2.all.js"></script>
     <script src="<?=base_url()?>assets/js/login.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+				$r='<?= base_url()?>';  
+				ejecutar();
+			});
+	</script>
 </body>
 </html>
