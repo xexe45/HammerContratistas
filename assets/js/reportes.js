@@ -1,8 +1,9 @@
-$(function() {
+function ejecutar() {
+
     const $rutaDefinitivia = window.location.href;
     const $btn1 = $('#btn1');
     const $btn2 = $('#btn2');
-    const BASE_URL = "http://localhost:8090/HammerContratistas/";
+    const BASE_URL = ruta;
 
     $('#chartContainer, #chartContainer2, #chartContainer3').hide();
 
@@ -14,7 +15,7 @@ $(function() {
 
     $btn1.on('click', function() {
         $.ajax({
-            url: $rutaDefinitivia + '/registros',
+            url: BASE_URL + 'Reportes/registros',
             type: 'get',
             data: {},
             dataType: 'json',
@@ -41,7 +42,7 @@ $(function() {
 
     $btn2.on('click', function() {
         $.ajax({
-            url: $rutaDefinitivia + '/iteracciones',
+            url: BASE_URL + 'Reportes/iteracciones',
             type: 'get',
             data: {},
             dataType: 'json',
@@ -121,4 +122,4 @@ $(function() {
         });
     })
 
-})
+}

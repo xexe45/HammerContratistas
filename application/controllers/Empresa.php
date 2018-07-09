@@ -182,87 +182,95 @@ class Empresa extends CI_Controller {
 		if(!$this->input->is_ajax_request()){ return; }
 		//if(!$this->input->post()){ return; }
 		//return array('hola' => 'mundo');
-
-		// Cargamos la libreria Upload
-        $this->load->library('upload');
-        $user_id = $this->session->userdata('id');
-        $filosofia = $this->Info->getFilosofia();
 		$respuesta = array();
 
-		$data = array($user_id,$filosofia->v5,$filosofia->v6);
-		$error = array();
-		$error['error'] = '';
-
-		//imagen 1
-		if (!empty($_FILES['file1']['name'])){
-			        
-			// Configuración para el Archivo 1
-			$config['upload_path'] = './assets/imgs/filosofia';
-			$config['allowed_types'] = 'gif|jpg|png';
-			//$config['max_size'] = '100';
-			//$config['max_width']  = '1024';
-			//$config['max_height']  = '768';       
-			$config['encrypt_name'] = true;
-
-			// Cargamos la configuración del Archivo 1
-			$this->upload->initialize($config);
-
-			// Subimos archivo 1
-			if ($this->upload->do_upload('file1')){
-			    //obtenemos el nombre del archivo
-				$ima = $this->upload->data();
-				$file_name = $ima['file_name'];
-				$data[1] = $file_name;
-
-			}else{
-				$error['error'] = $error['error'].$this->upload->display_errors();
-			}
-		}
-
-		// Revisamos si existe un segundo archivo
-		if (!empty($_FILES['file2']['name'])){
-			        
-			// La configuración del Archivo 2, debe ser diferente del archivo 1
-			// si configuras como el Archivo 1 no hará nada
-			$config2['upload_path'] = './assets/imgs/filosofia';
-			$config2['allowed_types'] = 'gif|jpg|png';
-			//$config['max_size'] = '100';
-			//$config['max_width']  = '1024';
-			//$config['max_height']  = '768';
-			$config2['encrypt_name'] = true;
-
-			// Cargamos la nueva configuración
-			$this->upload->initialize($config2);
-
-			// Subimos el segundo Archivo
-			if ($this->upload->do_upload('file2')){
-			            
-			    $ima2 = $this->upload->data();
-			    $file_name2 = $ima2['file_name'];
-			    $data[2] = $file_name2;
-
-			}else{	            
-			   $error['error'] = $error['error'].$this->upload->display_errors();
-			}
-		}
-
-		if(empty($error['error'])){
-
-			if($this->Slides->editar($data)){
+		if (!empty($_FILES['file1']['name']) || !empty($_FILES['file2']['name'])){
+			// Cargamos la libreria Upload
+			$this->load->library('upload');
+			$user_id = $this->session->userdata('id');
+			$filosofia = $this->Info->getFilosofia();
+			
 	
-					$respuesta["valido"] = true;
-					$respuesta["mensaje"] = "Slides editados correctamente";
-							
-				}else{
+			$data = array($user_id,$filosofia->v5,$filosofia->v6);
+			$error = array();
+			$error['error'] = '';
+	
+			//imagen 1
+			if (!empty($_FILES['file1']['name'])){
 						
-					$respuesta['valido'] = false;
-					$respuesta['mensaje'] = 'No se pudo editar slides.';
+				// Configuración para el Archivo 1
+				$config['upload_path'] = './assets/imgs/filosofia';
+				$config['allowed_types'] = 'gif|jpg|png';
+				//$config['max_size'] = '100';
+				//$config['max_width']  = '1024';
+				//$config['max_height']  = '768';       
+				$config['encrypt_name'] = true;
+	
+				// Cargamos la configuración del Archivo 1
+				$this->upload->initialize($config);
+	
+				// Subimos archivo 1
+				if ($this->upload->do_upload('file1')){
+					//obtenemos el nombre del archivo
+					$ima = $this->upload->data();
+					$file_name = $ima['file_name'];
+					$data[1] = $file_name;
+	
+				}else{
+					$error['error'] = $error['error'].$this->upload->display_errors();
 				}
+			}
+	
+			// Revisamos si existe un segundo archivo
+			if (!empty($_FILES['file2']['name'])){
+						
+				// La configuración del Archivo 2, debe ser diferente del archivo 1
+				// si configuras como el Archivo 1 no hará nada
+				$config2['upload_path'] = './assets/imgs/filosofia';
+				$config2['allowed_types'] = 'gif|jpg|png';
+				//$config['max_size'] = '100';
+				//$config['max_width']  = '1024';
+				//$config['max_height']  = '768';
+				$config2['encrypt_name'] = true;
+	
+				// Cargamos la nueva configuración
+				$this->upload->initialize($config2);
+	
+				// Subimos el segundo Archivo
+				if ($this->upload->do_upload('file2')){
+							
+					$ima2 = $this->upload->data();
+					$file_name2 = $ima2['file_name'];
+					$data[2] = $file_name2;
+	
+				}else{	            
+				   $error['error'] = $error['error'].$this->upload->display_errors();
+				}
+			}
+	
+			if(empty($error['error'])){
+	
+				if($this->Slides->editar($data)){
+		
+						$respuesta["valido"] = true;
+						$respuesta["mensaje"] = "Slides editados correctamente";
+								
+					}else{
+							
+						$respuesta['valido'] = false;
+						$respuesta['mensaje'] = 'No se pudo editar slides.';
+					}
+			}else{
+				$respuesta['valido'] = false;
+				$respuesta['mensaje'] = $error['error'];
+				
+			}
 		}else{
 			$respuesta['valido'] = false;
-			$respuesta['mensaje'] = $error['error'];
-			
+			$respuesta['mensaje'] = "No ha seleccionado al menos una imagen";
 		}
+
+		
 
 		header('Content-Type: application/x-json; charset:utf-8');
 		echo json_encode($respuesta);

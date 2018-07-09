@@ -59,12 +59,12 @@
 					  		<?=form_open_multipart('Empresa/slides', array("id" => "form-slides"))?>
 							    		<div class="form-group">
 							    			<label class="" for="">Seleccionar Imagen 1 *</label>
-							    			<input type="file" name="file1" class="form-control">
+							    			<input type="file" name="file1" id="file1" class="form-control">
 							    		
 							    		</div>
 							    		<div class="form-group">
 							    			<label class="" for="">Seleccionar Imagen 2 *</label>
-							    			<input type="file" name="file2" class="form-control">
+							    			<input type="file" name="file2" id="file2" class="form-control">
 							    			
 							    		</div>
 							    		<button type="submit" class="btn btn-primary">Cambiar Imagen</button>
@@ -106,6 +106,12 @@
 <script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
 <script src="<?=base_url()?>assets/js/sweetalert2.all.js"></script>
 <script src="<?=base_url()?>assets/js/filosofia.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+    	ruta ='<?= base_url()?>';  
+    	ejecutar();
+  	});
+</script>
 </body>	
 </html>
 

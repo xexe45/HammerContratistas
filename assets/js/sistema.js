@@ -1,10 +1,10 @@
-$(function() {
+function ejecutar() {
 
-    const BASE_URL = "http://localhost:8090/HammerContratistas/";
+    const BASE_URL = ruta;
 
     //Tabla de datos
     const $table = $('#table');
-    const $rutaDefinitivia = 'http://localhost:8090/HammerContratistas/';
+    const $rutaDefinitivia = ruta;
     //llenarTabla($table,$rutaDefinitivia);
     const $historial = $('#btn-historial');
 
@@ -17,7 +17,7 @@ $(function() {
         $(this).hide();
     })
 
-})
+}
 
 function llenarTabla($table, rutaDefinitivia) {
     $.get(rutaDefinitivia + 'Sistema/registros', function(response) {

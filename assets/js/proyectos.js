@@ -1,10 +1,10 @@
-$(function() {
+function ejecutar() {
 
-    const BASE_URL = "http://localhost:8090/HammerContratistas/";
+    const BASE_URL = ruta;
     const hoy = new Date();
     //Tabla de datos
     const $table = $('#table');
-    const $rutaDefinitivia = 'http://localhost:8090/HammerContratistas/';
+    const $rutaDefinitivia = ruta;
     //llenarTabla($table,$rutaDefinitivia);
     const $clientes = $('#btn-clientes');
 
@@ -92,7 +92,7 @@ $(function() {
         });
     })
 
-})
+}
 
 function comboServicios(ruta) {
 
@@ -152,12 +152,12 @@ function llenarTabla($table, rutaDefinitivia) {
 }
 
 function imageFormatter(value, row) {
-    let r = "http://localhost:8090/HammerContratistas/assets/imgs/proyectos/" + value;
+    let r = ruta + "assets/imgs/proyectos/" + value;
     return '<img width="150" class="img-fluid" src="' + r + '" />';
 }
 
 
 function buttonFormatter(value) {
-    return '<a href="http://localhost:8090/HammerContratistas/Proyectos/galeria/' + value + '" class="btn btn-success">Galería de Imágenes</a>';
+    return '<a href="' + ruta + 'Proyectos/galeria/' + value + '" class="btn btn-success">Galería de Imágenes</a>';
 
 }

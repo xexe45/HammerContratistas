@@ -66,7 +66,12 @@
 <script src="<?=base_url()?>assets/js/canvasjs.min.js"></script>
 <script src="<?=base_url()?>assets/js/sweetalert2.all.js"></script>
 <script src="<?=base_url()?>assets/js/reportes.js"></script>
-
+<script type="text/javascript">
+	$(document).ready(function() {
+    	ruta ='<?= base_url()?>';  
+    	ejecutar();
+  	});
+</script>
 </body>	
 </html>
 

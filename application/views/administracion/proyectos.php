@@ -117,6 +117,12 @@
 <script src="<?=base_url()?>assets/js/speakingurl.min.js"></script>
 <script src="<?=base_url()?>assets/js/slugify.min.js"></script>
 <script src="<?=base_url()?>assets/js/proyectos.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+    	ruta ='<?= base_url()?>';  
+    	ejecutar();
+  	});
+</script>
 </body>	
 </html>
 

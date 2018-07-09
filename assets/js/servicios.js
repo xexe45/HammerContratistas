@@ -1,71 +1,71 @@
-$(function(){
+function ejecutar() {
 
-	//Tabla de datos
+    //Tabla de datos
     const $table = $('#table');
-    const $rutaDefinitivia = 'http://localhost:8090/HammerContratistas/';
+    const $rutaDefinitivia = ruta;
     //llenarTabla($table,$rutaDefinitivia);
     const $clientes = $('#btn-clientes');
 
     $table.hide();
     //llenarTabla($table,$rutaDefinitivia);
 
-    $clientes.on('click', function(){
-      llenarTabla($table,$rutaDefinitivia);
-      $table.show();
-      $(this).hide();
+    $clientes.on('click', function() {
+        llenarTabla($table, $rutaDefinitivia);
+        $table.show();
+        $(this).hide();
     })
 
-	$('#form').on('submit', function(e){
+    $('#form').on('submit', function(e) {
 
-		e.preventDefault();
+        e.preventDefault();
 
-		const metodo = $(this).attr('method');
-		const ruta = $(this).attr('action');
-		const formData = new FormData($('#form')[0]);
+        const metodo = $(this).attr('method');
+        const ruta = $(this).attr('action');
+        const formData = new FormData($('#form')[0]);
 
-		$.ajax({
-			url : ruta,
-			type: metodo,
-			data: formData,
-			dataType: 'json',
-			cache: false,
-			contentType: false,
-			processData: false,
-			beforeSend: function(){
-				console.log('enviando');
-			},
-			success: function(response){
-				console.log(response);
-				
-				if(response['valido']){
-					
-					Swal('El sistema informa', response['mensaje'], 'success');
-						$('#form')[0].reset();
-						$table.bootstrapTable('refresh', {
-			             	url: $rutaDefinitivia + 'Servicio'
-			        	});
-					}else{
-						Swal('Oops...', response['mensaje'] , 'error');
-					}
-				}
-			});
-	});
+        $.ajax({
+            url: ruta,
+            type: metodo,
+            data: formData,
+            dataType: 'json',
+            cache: false,
+            contentType: false,
+            processData: false,
+            beforeSend: function() {
+                console.log('enviando');
+            },
+            success: function(response) {
+                console.log(response);
 
-})
+                if (response['valido']) {
 
-function llenarTabla($table,rutaDefinitivia){
-	$.get(rutaDefinitivia + 'Servicio', function(response){
-		console.log(response);
-    		
-    		$(function () {
-        		$table.bootstrapTable({data: response['data']});
-        		$table.bootstrapTable('hideColumn','v1');
-    		});
-	},'json');
-	
+                    Swal('El sistema informa', response['mensaje'], 'success');
+                    $('#form')[0].reset();
+                    $table.bootstrapTable('refresh', {
+                        url: $rutaDefinitivia + 'Servicio'
+                    });
+                } else {
+                    Swal('Oops...', response['mensaje'], 'error');
+                }
+            }
+        });
+    });
+
 }
 
-function imageFormatter(value, row){
- 	let r =  "http://localhost:8090/HammerContratistas/assets/imgs/servicios/" + value;
- 	return '<img class="img-fluid" src="'+r+'" />';
+function llenarTabla($table, rutaDefinitivia) {
+    $.get(rutaDefinitivia + 'Servicio', function(response) {
+        console.log(response);
+
+        $(function() {
+            $table.bootstrapTable({ data: response['data'] });
+            $table.bootstrapTable('hideColumn', 'v1');
+        });
+    }, 'json');
+
+}
+
+function imageFormatter(value, row) {
+    let r = ruta + "assets/imgs/servicios/" + value;
+    return '<img class="img-fluid" src="' + r + '" />';
 }

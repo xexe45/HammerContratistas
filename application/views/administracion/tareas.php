@@ -76,5 +76,11 @@
 <script src="<?=base_url()?>assets/btable/bootstrap-table-group-by.js"></script>
 <script src="<?=base_url()?>assets/js/sweetalert2.all.js"></script>
 <script src="<?=base_url()?>assets/js/tareas.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+    	ruta ='<?= base_url()?>';  
+    	ejecutar();
+  	});
+</script>
 </body>	
 </html>

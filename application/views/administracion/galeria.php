@@ -65,6 +65,12 @@
 <script src="<?=base_url()?>assets/btable/bootstrap-table.min.js"></script>
 <script src="<?=base_url()?>assets/js/sweetalert2.all.js"></script>
 <script src="<?=base_url()?>assets/js/galeria.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+    	ruta ='<?= base_url()?>';  
+    	ejecutar();
+  	});
+</script>
 </body>	
 </html>
 
