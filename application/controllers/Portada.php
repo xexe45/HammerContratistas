@@ -91,6 +91,50 @@ class Portada extends CI_Controller {
 
 	}
 
+	public function delete(){
+
+		if(!$this->input->is_ajax_request()){ return; }
+		if(!$this->input->post('id')){ return; }
+
+		$respuesta = array();
+		$id = $this->input->post('id');
+		$user_id = $this->session->userdata('id');
+
+		$fotoActual = $this->Slides->listarSlice($id);
+
+		$data = array($id,$user_id);
+
+		$file = "./assets/imgs/portada/".$fotoActual->v2;
+		$do = unlink($file);
+			
+		if(!$do){
+
+			if($this->Slides->delete($data)){
+				$respuesta["valido"] = true;
+				$respuesta["mensaje"] = "Slide eliminado correctamente pero no se pudo eliminar el archivo anterior";
+			}else{
+				$respuesta["valido"] = false;
+				$respuesta["mensaje"] = "No se pudo eliminar el registro";
+			}
+			
+		}else{
+	
+			if($this->Slides->delete($data)){
+				$respuesta["valido"] = true;
+				$respuesta["mensaje"] = "Slide eliminado correctamente";
+			}else{
+				$respuesta["valido"] = false;
+				$respuesta["mensaje"] = "No se pudo eliminar el registro";
+			}
+				
+		}
+
+		header('Content-Type: application/x-json; charset:utf-8');
+		echo json_encode($respuesta);
+
+	}
+
+
 }
 
 /* End of file Portada.php */

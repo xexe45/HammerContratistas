@@ -5,15 +5,46 @@ function ejecutar() {
     const $rutaDefinitivia = ruta;
     //llenarTabla($table,$rutaDefinitivia);
     const $clientes = $('#btn-clientes');
+    const $button = $('#button');
 
     $table.hide();
+    $button.hide();
     //llenarTabla($table,$rutaDefinitivia);
 
     $clientes.on('click', function() {
         llenarTabla($table, $rutaDefinitivia);
         $table.show();
+        $button.show();
         $(this).hide();
     })
+
+    $button.on('click', function() {
+        var seleccionado = $table.bootstrapTable('getSelections');
+
+        if (seleccionado.length == 0) {
+            Swal('El sistema informa', 'No ha seleccionado ningún registro', 'warning');
+            return;
+        }
+
+        $.ajax({
+            url: $rutaDefinitivia + "Portada/delete",
+            type: 'post',
+            data: { id: seleccionado[0]['v1'] },
+            dataType: 'json',
+            success: function(response) {
+
+                if (response['valido']) {
+
+                    Swal('El sistema informa', response['mensaje'], 'success');
+                    $table.bootstrapTable('refresh', {
+                        url: $rutaDefinitivia + 'Portada'
+                    });
+                } else {
+                    Swal('Oops...', response['mensaje'], 'error');
+                }
+            }
+        });
+    });
 
     $('#form').on('submit', function(e) {
 

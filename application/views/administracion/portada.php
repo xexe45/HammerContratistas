@@ -54,8 +54,11 @@
 					  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 					  	<br>
 					  	<button id="btn-clientes" class="btn btn-primary"><i class="fa fa-list"></i> Cargar Listado...</button>
-					  	<table id="table" 
+							<br>
+							<button id="button" class="btn btn-danger">Eliminar</button>
+							<table id="table" 
 		                data-sort-name="v1"
+										data-click-to-select="true"
 		                data-sort-order="desc"
 		                data-search="true"
 		                data-pagination="true"               
@@ -67,7 +70,7 @@
 		                data-pagination-last-text="Último">
 		                  <thead>
 		                    <tr>
-		                      <!--<th data-field="state" data-radio="true"></th>-->
+		                      <th data-field="state" data-radio="true"></th>
 		                      <th data-field="v1">ID</th>
 		                      <th data-field="v2" data-formatter="imageFormatter">Imagen</th>
 		                      <th data-field="v4">Título</th>
@@ -92,7 +95,7 @@
 <script src="<?=base_url()?>assets/js/portada.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-    	ruta ='<?= base_url()?>';  
+			ruta ='<?= base_url()?>';  
     	ejecutar();
   	});
 </script>

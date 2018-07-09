@@ -67,7 +67,7 @@
 <script src="<?=base_url()?>assets/js/galeria.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-    	ruta ='<?= base_url()?>';  
+		ruta ='<?= base_url()?>';  
     	ejecutar();
   	});
 </script>

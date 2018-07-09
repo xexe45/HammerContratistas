@@ -77,8 +77,8 @@
 <script src="<?=base_url()?>assets/js/servicios.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-    	ruta ='<?= base_url()?>';  
-    	ejecutar();
+		ruta ='<?= base_url()?>';  
+    ejecutar();
   	});
 </script>
 </body>	

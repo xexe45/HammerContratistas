@@ -60,6 +60,18 @@
 			</div>
 			</div>
 		</div>
-		
+		<div class="row">
+			<div class="col-md-8 offset-md-4">
+				<div class="card">
+					<div class="card-body">
+						<h3 class="vis">NUESTROS VALORES</h3>
+						<p class="vismis">
+							<?=$info->v7?>
+						</p>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
 	</div>
 </section>

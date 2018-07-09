@@ -106,7 +106,7 @@
 <script src="<?=base_url()?>assets/js/usuario.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-    	$r='<?= base_url()?>';  
+		$r='<?= base_url()?>';  
     	ejecutar();
   	});
 </script>

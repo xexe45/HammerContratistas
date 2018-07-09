@@ -38,7 +38,7 @@ class Clientes extends CI_Controller {
 				echo json_encode($cliente);
 			}
 		}else{
-			show_404();
+			return;
 		}
 
 	}
