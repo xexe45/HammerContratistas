@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-07-2018 a las 02:18:49
+-- Tiempo de generación: 09-07-2018 a las 07:44:30
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.1
 
@@ -58,6 +58,12 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_buscar_cliente` (IN `v_parametro
 select id as id, cliente as name
 from cliente
 where cliente like concat('%', v_parametro, '%');
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_buscar_usuario` (IN `v_parametro` VARCHAR(25))  BEGIN
+select id as id, CONCAT(nombre,' ',apellidos) as name
+from usuario
+where CONCAT(nombre,' ',apellidos) like concat('%', v_parametro, '%');
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_contacto` (IN `v_nombre` VARCHAR(255), IN `v_telefono` VARCHAR(15), IN `v_correo` VARCHAR(255), IN `v_mensaje` TEXT, OUT `v_res` BOOLEAN)  BEGIN
@@ -406,6 +412,12 @@ where YEAR(fecha) = v_anio
 GROUP BY MONTH(fecha);
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_reporte_usuarios` (IN `v_user_id` INT, IN `v_fecha1` DATE, IN `v_fecha2` DATE)  BEGIN
+select count(*) as y, tipo as label
+from historial where usuario_id = v_user_id and (fecha BETWEEN v_fecha1 AND v_fecha2) 
+GROUP BY tipo;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_servicio_id` (IN `v_id` INT)  BEGIN
 select id as v1, servicio as v2, img as v3, descripcion as v4
 from servicios
@@ -602,7 +614,12 @@ INSERT INTO `historial` (`id`, `tipo`, `slug`, `descripcion`, `usuario_id`, `fec
 (26, 'edicion', 'filosofia', 'edición slides filosofía empresarial', 1, '2018-07-08 17:13:54'),
 (27, 'registro', 'cliente', 'Registro de Restaurante Espada', 1, '2018-07-08 18:53:40'),
 (28, 'registro', 'cliente', 'Registro de Empresa de Prueba', 1, '2018-07-08 19:01:56'),
-(29, 'registro', 'cliente', 'Registro de Facebook', 1, '2018-07-08 19:11:22');
+(29, 'registro', 'cliente', 'Registro de Facebook', 1, '2018-07-08 19:11:22'),
+(30, 'registro', 'proyecto', 'Registro de proyecto Obra mercado', 1, '2018-07-08 23:36:44'),
+(31, 'registro', 'proyecto', 'Registro de proyecto Obra mercado2', 1, '2018-07-08 23:37:19'),
+(32, 'registro', 'proyecto', 'Registro de proyecto yttyyr', 1, '2018-07-08 23:42:18'),
+(33, 'registro', 'proyecto', 'Registro de proyecto Restaurante Espada', 1, '2018-07-08 23:46:31'),
+(34, 'edicion', 'filosofia', 'edición filosofía empresarial', 1, '2018-07-09 00:42:56');
 
 -- --------------------------------------------------------
 
@@ -640,7 +657,9 @@ INSERT INTO `logueo` (`id`, `user`, `type`, `date`) VALUES
 (1, 'cmaza@gmail.com', 1, '2018-07-08 18:04:47'),
 (2, 'cmaza@gmail.com', 0, '2018-07-08 18:05:18'),
 (3, 'cmaza@gmail.com', 1, '2018-07-08 18:05:48'),
-(4, 'cmaza@gmail.com', 1, '2018-07-08 18:14:36');
+(4, 'cmaza@gmail.com', 1, '2018-07-08 18:14:36'),
+(5, 'cmaza@gmail.com', 1, '2018-07-08 23:29:11'),
+(6, 'cmaza@gmail.com', 1, '2018-07-08 23:45:35');
 
 -- --------------------------------------------------------
 
@@ -672,7 +691,8 @@ INSERT INTO `proyecto` (`id`, `servicio_id`, `nombre`, `tipo`, `cliente_id`, `fe
 (5, 6, 'Terracería', 'proceso', 20, '2018-12-12', 'fe96e7935630aa189d8056c9577c1252.png', 'Terracería', 'terraceria'),
 (6, 7, 'Edificacion', 'concluido', 19, '2017-12-12', '1bec1eb30e310cd21d7c3ee1e91991b6.png', 'Proyecto', 'edificacion'),
 (7, 7, 'Edificación Suma', 'concluido', 16, '2017-01-01', 'a7294ab8773dcaa142e6c665c909e33d.png', 'Un proyecto de gran alcance...', 'edificacion-suma'),
-(9, 6, 'Terracería Don Bife', 'proceso', 23, '2018-06-01', '03a607a98f56931f658eb1f005447996.jpg', 'Terracería para Don Bife', 'terraceria-don-bife');
+(9, 6, 'Terracería Don Bife', 'proceso', 23, '2018-06-01', '03a607a98f56931f658eb1f005447996.jpg', 'Terracería para Don Bife', 'terraceria-don-bife'),
+(13, 3, 'Restaurante Espada', 'concluido', 24, '2017-01-01', '778d5ef423ecc128591f7bc030b1bf43.jpg', 'Se realizó la construcción del restaurante espada', 'restaurante-espada');
 
 -- --------------------------------------------------------
 
@@ -914,7 +934,7 @@ ALTER TABLE `galeria`
 -- AUTO_INCREMENT de la tabla `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `logindiario`
@@ -926,13 +946,13 @@ ALTER TABLE `logindiario`
 -- AUTO_INCREMENT de la tabla `logueo`
 --
 ALTER TABLE `logueo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`

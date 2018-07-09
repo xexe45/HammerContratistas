@@ -43,6 +43,13 @@ $config = array(
 		array('field' => 'servicio_id', 'label' => 'Servicio al que pertenece el proyecto', 'rules' => 'required|numeric|trim'),
 		array('field' => 'tarea', 'label' => 'Nombre de Tarea', 'rules' => 'required|is_string|trim|min_length[4]|max_length[200]'),
 	),
+
+	'reporte_usuario'
+	=> array(
+		array('field' => 'user_id', 'label' => 'Usuario', 'rules' => 'required|numeric'),
+		array('field' => 'date1', 'label' => 'Fecha de Inicio', 'rules' => 'required'),
+		array('field' => 'date2', 'label' => 'Fecha de fin', 'rules' => 'required'),
+	),
 	
 	'store_customer'
 	=> array(

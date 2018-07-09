@@ -20,6 +20,37 @@
 						</div>
 			    	</div>
 			    </div>
+					<div class="row top">
+						<div class="col-md-12">
+						<div class="card">
+						  <div class="card-body">
+						  	
+								<?=form_open('Usuario/reporte', array("id" => "form"))?>
+									<div class="form-group">
+										<label for="usuario">Seleccionar Usuario*</label>
+										<input type="text" name="user_id" id="user_id" class="form-control" required>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="usuario">Fecha Inicio*</label>
+												<input type="date" name="date1" class="form-control" required>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="usuario">Fecha Fin *</label>
+												<input type="date" name="date2" class="form-control" required>
+											</div>
+										</div>
+									</div>
+									<button class="btn btn-info" id="btn2"><i class="fa fa-line-chart" aria-hidden="true"></i> Reporte Iteracciones de usuario entre fechas</button>
+								<?=form_close()?>
+						    <div id="chartContainer3" style="height: 300px; width: 100%;"></div>
+						  </div>
+						</div>
+						</div>
+					</div>
 			  </div>
 			</div>
 		</div>
@@ -31,6 +62,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 <script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
 <script src="<?=base_url()?>assets/btable/bootstrap-table.min.js"></script>
+<script src="<?=base_url()?>assets/js/jquery.tokeninput.js"></script>
 <script src="<?=base_url()?>assets/js/canvasjs.min.js"></script>
 <script src="<?=base_url()?>assets/js/sweetalert2.all.js"></script>
 <script src="<?=base_url()?>assets/js/reportes.js"></script>

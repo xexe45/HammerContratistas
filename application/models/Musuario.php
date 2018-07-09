@@ -30,6 +30,23 @@ class Musuario extends CI_Model {
 
 	}	
 
+	public function buscar($parametro){
+		$query = "CALL sp_buscar_usuario(?)";
+		$this->load->database();
+		$data = $this->db->query($query,$parametro);
+		$this->db->close();
+		return $data->result();
+	}
+
+	public function reporte(array $data){
+
+		$query = "CALL sp_reporte_usuarios(?,?,?)";
+		$this->load->database();
+		$info = $this->db->query($query,$data);
+		$this->db->close();
+		return $info->result();
+	}
+
 }
 
 /* End of file Musuario.php */

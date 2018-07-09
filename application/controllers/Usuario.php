@@ -22,12 +22,29 @@ class Usuario extends CI_Controller {
 		echo json_encode($usuarios);
 	}
 
+	
+
 	public function usuarios(){
 		$myEmail = $this->session->userdata('email');
 		
 		$lastConnection = $this->Mlogin->lastConnection($myEmail);
 		$this->load->view('administracion/header', compact('lastConnection'));
 		$this->load->view('administracion/usuario');
+	}
+
+	public function buscar(){
+
+		if($this->input->is_ajax_request()){
+			if($this->input->get('q')){
+				$letra = $this->input->get('q');
+				$usuario = $this->Musuario->buscar($letra);
+				header('Content-Type: application/x-json; charset:utf-8');
+				echo json_encode($usuario);
+			}
+		}else{
+			show_404();
+		}
+
 	}
 
 	public function doreg(){
@@ -119,6 +136,35 @@ class Usuario extends CI_Controller {
 		header('Content-Type: application/x-json; charset:utf-8');
 		echo json_encode($respuesta);
 		
+	}
+
+	public function reporte(){
+
+		if(!$this->input->is_ajax_request()){ return; }
+
+		if(!$this->input->post()){ return; }
+
+		$respuesta = array();
+
+		if($this->form_validation->run('reporte_usuario')){
+
+			$user_id = $this->security->xss_clean(strip_tags($this->input->post('user_id')));
+			$fecha1 = $this->security->xss_clean(strip_tags($this->input->post('date1')));
+			$fecha2 = $this->security->xss_clean(strip_tags($this->input->post('date2')));
+			
+			$data = array($user_id,$fecha1,$fecha2);
+
+			$respuesta["valido"] = true;
+			$respuesta['reporte'] = $this->Musuario->reporte($data);
+				
+
+		}else{
+			$respuesta["valido"] = false;
+			$respuesta["mensaje"]  = validation_errors();
+		}
+
+		header('Content-Type: application/x-json; charset:utf-8');
+		echo json_encode($respuesta);
 	}
 
 }
