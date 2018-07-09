@@ -11,19 +11,28 @@ class Empresa extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->model('Info');
 		$this->load->model('Slides');
+		$this->load->model('Mlogin');
 	}
 
 	public function empresa(){
 
 		$info = $this->Info->info();
-		$this->load->view('administracion/header');
+
+		$myEmail = $this->session->userdata('email');
+		
+		$lastConnection = $this->Mlogin->lastConnection($myEmail);
+
+		$this->load->view('administracion/header', compact('lastConnection'));
 		$this->load->view('administracion/empresa', compact('info'));
 	
 	}
 
 	public function filosofiaEmpresarial(){
 		$filosofia = $this->Info->getFilosofia();
-		$this->load->view('administracion/header');
+		$myEmail = $this->session->userdata('email');
+		
+		$lastConnection = $this->Mlogin->lastConnection($myEmail);
+		$this->load->view('administracion/header', compact('lastConnection'));
 		$this->load->view('administracion/filosofia', compact('filosofia'));
 	}
 

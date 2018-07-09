@@ -40,6 +40,30 @@ class Mlogin extends CI_Model {
 		}
 	}
 
+	
+	public function logueo($data){
+
+		$query = "CALL sp_accesos(?,?,@s)";
+		$this->load->database();
+		$this->db->trans_start();
+		$this->db->query($query,$data);
+		$res = $this->db->query('select @s as res');
+		$this->db->trans_complete();
+		$this->db->close();
+		return $res->row()->res;
+
+	}
+
+	public function lastConnection($user){
+
+		$this->load->database();  
+ 		$qry = "CALL sp_get_last_connection(?)";
+ 		$r = $this->db->query($qry,$user);
+		$this->db->close();	
+ 		return $r->row();	
+
+	}
+
 
 
 }

@@ -11,6 +11,7 @@ class Usuario extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->library('bcrypt');
 		$this->load->model('Musuario');
+		$this->load->model('Mlogin');
 		
 	}
 
@@ -22,7 +23,10 @@ class Usuario extends CI_Controller {
 	}
 
 	public function usuarios(){
-		$this->load->view('administracion/header');
+		$myEmail = $this->session->userdata('email');
+		
+		$lastConnection = $this->Mlogin->lastConnection($myEmail);
+		$this->load->view('administracion/header', compact('lastConnection'));
 		$this->load->view('administracion/usuario');
 	}
 

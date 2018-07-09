@@ -11,6 +11,7 @@ class Proyectos extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->model('Proyecto');
 		$this->load->model('Servicios');
+		$this->load->model('Mlogin');
 	}
 
 	public function index()
@@ -36,11 +37,14 @@ class Proyectos extends CI_Controller {
 		$proyectos['data'] = $this->Proyecto->listarGaleriaSlug($slug);
 		header('Content-Type: application/x-json; charset:utf-8');
 		echo json_encode($proyectos);
+		
 	}
-
 	
 	public function proyectos(){
-		$this->load->view('administracion/header');
+		$myEmail = $this->session->userdata('email');
+		
+		$lastConnection = $this->Mlogin->lastConnection($myEmail);
+		$this->load->view('administracion/header', compact('lastConnection'));
 		$this->load->view('administracion/proyectos');
 	}
 
@@ -132,10 +136,15 @@ class Proyectos extends CI_Controller {
 	}
 
 	public function galeria($slug){
-		$this->load->view('administracion/header');
+		$myEmail = $this->session->userdata('email');
+		
+		$lastConnection = $this->Mlogin->lastConnection($myEmail);
+		$this->load->view('administracion/header', compact('lastConnection'));
 		$uri = $this->uri->segment(3);
 		$this->load->view('administracion/galeria',compact('uri'));
 	}
+
+	
 
 	public function fotos($slug=null)
     {

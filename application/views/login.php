@@ -51,6 +51,11 @@
 				    	<?=form_close()?>
 				    	</div>
 				    </div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<a href="<?=base_url()?>">Ir a Portada</a>
+							</div>
+						</div>
 				  </div>
 				</div>
 			</div>

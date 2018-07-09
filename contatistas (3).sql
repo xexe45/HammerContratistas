@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-07-2018 a las 08:47:58
+-- Tiempo de generación: 09-07-2018 a las 02:18:49
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.1
 
@@ -28,6 +28,19 @@ DELIMITER $$
 --
 -- Procedimientos
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_accesos` (IN `v_user` VARCHAR(50), IN `v_status` TINYINT, OUT `v_res` BOOLEAN)  BEGIN
+declare exit handler for sqlexception
+begin
+rollback;
+set v_res = false;
+end;
+start transaction;
+INSERT INTO logueo (user, type, date) 
+VALUES(v_user, v_status, NOW());
+commit;
+set v_res = true;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_access_denied` (IN `v_fecha_fin` DATETIME, IN `v_user_id` INT, OUT `v_res` BOOLEAN)  BEGIN
 declare exit handler for sqlexception
 begin
@@ -159,7 +172,8 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_clientes` ()  BEGIN
 select id as v1, cliente as v2, logo as v3, web as v4
-from cliente;
+from cliente
+order by id desc;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_empresa` ()  BEGIN
@@ -180,6 +194,12 @@ from galeria
 where proyecto_id = (select id from proyecto where slug = v_slug);
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_gallery_id` (IN `v_idproyecto` INT)  BEGIN
+select id as v1, proyecto_id as v2, img as v3
+from galeria
+where proyecto_id = v_idproyecto;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_gallery_slug` (IN `v_slug` TEXT)  BEGIN
 set @id = (select id from proyecto where slug = v_slug);
 select id as v1, proyecto_id as v2, img as v3
@@ -197,6 +217,14 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_info` ()  BEGIN
 select id as v1, nombre as v2, logo as v3, ruc as v4,
 direccion as v5, telefono as v6, correo as v7, presentacion as v8
 from empresa;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_last_connection` (IN `v_user` VARCHAR(200))  BEGIN
+select id as v1, user as v2, type as v3, date as v4
+from logueo
+where user = v_user and type = 1
+order by id desc
+limit 1;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_proyectos` ()  BEGIN
@@ -427,7 +455,9 @@ INSERT INTO `cliente` (`id`, `cliente`, `logo`, `web`) VALUES
 (20, 'TeroTec', '6c5836fd3ff367b06d5acece23251fa4.jpg', 'https://www.terococa.com'),
 (21, 'SicchaTec', '97b906fff5c23beeb3a58c9ac40a1597.jpg', 'https://www.siccha.com'),
 (22, 'MoroTec', '217b3c2b1116caea3a0f30e0647f93ed.png', 'https://www.morotec.com'),
-(23, 'Don Bife', 'a8885e802bdaf4c0ff5b105c1cbd1093.jpg', 'http://www.donbife.cl/');
+(23, 'Don Bife', 'a8885e802bdaf4c0ff5b105c1cbd1093.jpg', 'http://www.donbife.cl/'),
+(24, 'Restaurante Espada', '3fd17064678e8b3f27beb7cf0667b316.jpg', 'http://www.espada.com.pe/'),
+(26, 'Facebook', '66d5435d91e2b81599e8a2df2b302790.png', 'https://www.facebook.com/');
 
 -- --------------------------------------------------------
 
@@ -498,7 +528,7 @@ CREATE TABLE `filosofia` (
 --
 
 INSERT INTO `filosofia` (`id`, `historia`, `mision`, `vision`, `slide1`, `slide2`, `valores`) VALUES
-(1, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Nuestra misión es', 'Nuestra visión es', 'a2a8285ffdff1f77a972135774659da2.png', '0016c7ac129a509316347e88d4da0202.jpg', 'Nuestros valores son');
+(1, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Nuestra misión es', 'Nuestra visión es', '42417640234da0df400232358909d735.jpg', '0016c7ac129a509316347e88d4da0202.jpg', 'Nuestros valores son');
 
 -- --------------------------------------------------------
 
@@ -568,7 +598,11 @@ INSERT INTO `historial` (`id`, `tipo`, `slug`, `descripcion`, `usuario_id`, `fec
 (19, 'registro', 'galeria', 'Registro de foto Contrucción Civil', 1, '2018-07-07 00:37:53'),
 (20, 'registro', 'galeria', 'Registro de foto Contrucción Civil', 1, '2018-07-07 00:37:53'),
 (21, 'registro', 'cliente', 'Registro de Don Bife', 2, '2018-07-07 01:15:42'),
-(25, 'registro', 'proyecto', 'Registro de proyecto Terracería Don Bife', 2, '2018-07-07 01:24:24');
+(25, 'registro', 'proyecto', 'Registro de proyecto Terracería Don Bife', 2, '2018-07-07 01:24:24'),
+(26, 'edicion', 'filosofia', 'edición slides filosofía empresarial', 1, '2018-07-08 17:13:54'),
+(27, 'registro', 'cliente', 'Registro de Restaurante Espada', 1, '2018-07-08 18:53:40'),
+(28, 'registro', 'cliente', 'Registro de Empresa de Prueba', 1, '2018-07-08 19:01:56'),
+(29, 'registro', 'cliente', 'Registro de Facebook', 1, '2018-07-08 19:11:22');
 
 -- --------------------------------------------------------
 
@@ -584,6 +618,29 @@ CREATE TABLE `logindiario` (
   `fecha_fin` datetime NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `logueo`
+--
+
+CREATE TABLE `logueo` (
+  `id` int(11) NOT NULL,
+  `user` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `type` tinyint(4) NOT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `logueo`
+--
+
+INSERT INTO `logueo` (`id`, `user`, `type`, `date`) VALUES
+(1, 'cmaza@gmail.com', 1, '2018-07-08 18:04:47'),
+(2, 'cmaza@gmail.com', 0, '2018-07-08 18:05:18'),
+(3, 'cmaza@gmail.com', 1, '2018-07-08 18:05:48'),
+(4, 'cmaza@gmail.com', 1, '2018-07-08 18:14:36');
 
 -- --------------------------------------------------------
 
@@ -775,6 +832,12 @@ ALTER TABLE `logindiario`
   ADD KEY `fk_logindiario_usuario` (`user_id`);
 
 --
+-- Indices de la tabla `logueo`
+--
+ALTER TABLE `logueo`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
@@ -821,7 +884,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `contacto`
@@ -851,13 +914,19 @@ ALTER TABLE `galeria`
 -- AUTO_INCREMENT de la tabla `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `logindiario`
 --
 ALTER TABLE `logindiario`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `logueo`
+--
+ALTER TABLE `logueo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `proyecto`

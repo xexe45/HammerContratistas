@@ -47,6 +47,7 @@ $config = array(
 	'store_customer'
 	=> array(
 		array('field' => 'cliente', 'label' => 'Cliente', 'rules' => 'required|is_string|trim|max_length[200]|min_length[2]'),
+		array('field' => 'web', 'label' => 'Página web', 'rules' => 'valid_url'),
 	),
 
 	'store_proyect'

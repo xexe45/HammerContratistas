@@ -10,6 +10,7 @@ class Portada extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->load->model('Slides');
+		$this->load->model('Mlogin');
 	}
 
 	public function index()
@@ -20,7 +21,10 @@ class Portada extends CI_Controller {
 	}
 
 	public function portada(){
-		$this->load->view('administracion/header');
+		$myEmail = $this->session->userdata('email');
+		
+		$lastConnection = $this->Mlogin->lastConnection($myEmail);
+		$this->load->view('administracion/header', compact('lastConnection'));
 		$this->load->view('administracion/portada');
 	}
 

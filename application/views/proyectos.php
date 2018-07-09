@@ -67,7 +67,7 @@
       </div>
       <div class="modal-body">
         <div class="row">
-        	<div class="col-md-6"></div>
+        	<div class="col-md-6" id="misFotos"></div>
         	<div class="col-md-6" id="describeme">
         		
         	</div>

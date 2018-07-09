@@ -38,6 +38,16 @@ class Proyecto extends CI_Model {
 
 	}
 
+	public function listarGaleriaId($id){
+
+		$query = "CALL sp_get_gallery_id(?)";
+		$this->load->database();
+		$galeria = $this->db->query($query,$id);
+		$this->db->close();
+		return $galeria->result();
+
+	}
+
 	public function insert(array $data){
 
 		$query = "CALL sp_registrar_proyecto(?,?,?,?,?,?,?,?,?,@s)";

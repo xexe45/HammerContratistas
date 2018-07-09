@@ -10,6 +10,7 @@ class Tarea extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->load->model('Tareas');
+		$this->load->model('Mlogin');
 	}
 
 	public function index()
@@ -22,7 +23,10 @@ class Tarea extends CI_Controller {
 	}
 
 	public function tareas(){
-		$this->load->view('administracion/header');
+		$myEmail = $this->session->userdata('email');
+		
+		$lastConnection = $this->Mlogin->lastConnection($myEmail);
+		$this->load->view('administracion/header', compact('lastConnection'));
 		$this->load->view('administracion/tareas');
 	}
 

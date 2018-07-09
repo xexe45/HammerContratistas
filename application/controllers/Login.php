@@ -38,14 +38,25 @@ class Login extends CI_Controller {
                     $login = array(
                         'id' => $user->id,
                         'user' => $user->nombre." ".$user->apellidos,
-                        'rol' => $user->rol
+                        'rol' => $user->rol,
+                        'email' => $user->correo
                     );
                         
                     $this->session->set_userdata( $login );
+                    
+
+                    $registrar = array($email,1);
+
+                    $logueado = $this->Mlogin->logueo($registrar);
 
                     $responder["valido"] = true;
                         
                 }else{
+
+                    $registrar = array($email,0);
+
+                    $logueado = $this->Mlogin->logueo($registrar);
+                    
                     $responder["valido"] = false;
                     $responder["mensaje"] = "Usuario y/o clave incorrecto";
                 }

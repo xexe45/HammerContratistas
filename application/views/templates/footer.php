@@ -113,10 +113,50 @@
             var idproyecto = $(this).attr('idproyecto');
             var name = $(this).attr('nameproyecto');
             var descripcion = $(this).attr('descripcion');
-
+            
             $('.modal-title').text(name);
             $('#describeme').text(descripcion);
-            $('#exampleModal').modal();
+
+            $.get(BASE_URL+'Home/miGaleria/'+idproyecto,{}, function(response){
+                if(response['data'].length > 0){
+                    var carousel = "<div id='carouselExampleControls2' class='carousel slide' data-ride='carousel'>";
+                    carousel += "<div class='carousel-inner'>";
+
+                    for(var i=0; i<response['data'].length; i++){
+                        
+                        console.log(response['data'][i]);
+
+                        if( i == 0 ){
+                            carousel += "<div class='carousel-item active'>";
+                        }else{
+                            carousel += "<div class='carousel-item'>";
+                        }
+                        carousel += "<img class='d-block w-100' src='"+BASE_URL+"assets/imgs/galeria/"+response['data'][i]['v3']+"' alt='First slide'>";
+                        carousel += "</div>";
+                    }
+
+                    carousel += "<a class='carousel-control-prev' href='#carouselExampleControls2' role='button' data-slide='prev'>";
+                    carousel += "<span class='carousel-control-prev-icon' aria-hidden='true'></span>";
+                    carousel += "<span class='sr-only'>Previous</span></a>";
+
+                    carousel += "<a class='carousel-control-next' href='#carouselExampleControls2' role='button' data-slide='next'>";
+                    carousel += "<span class='carousel-control-next-icon' aria-hidden='true'></span>";
+                    carousel += "<span class='sr-only'>Next</span></a>";
+
+                } else {
+
+                    var carousel = "<img class='img-fluid' src='"+BASE_URL+"assets/imgs/galeria/notfound.png'>"
+                
+                }
+                
+
+                $('#misFotos').html(carousel);
+
+                $('#exampleModal').modal();
+
+            },'json');
+
+           
         })
 
 });

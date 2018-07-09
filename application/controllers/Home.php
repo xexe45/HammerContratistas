@@ -12,6 +12,7 @@ class Home extends CI_Controller {
 		$this->load->model('Info');
 		$this->load->model('Cliente');
 		$this->load->model('Contactos');
+		$this->load->model('Proyecto');
 	}
 
 	public function index()
@@ -32,6 +33,17 @@ class Home extends CI_Controller {
 		$this->load->view('customers', $data);
 		$this->load->view('templates/footer');
 	}
+
+	
+	public function miGaleria($id)
+	{
+		
+		$proyectos['data'] = $this->Proyecto->listarGaleriaId($id);
+		header('Content-Type: application/x-json; charset:utf-8');
+		echo json_encode($proyectos);
+		
+	}
+
 
 	public function contacto()
 	{

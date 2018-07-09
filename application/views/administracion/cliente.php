@@ -29,7 +29,7 @@
 					  			</div>
 					  			<div class="form-group">
 					  				<label for="web">Página web *</label>
-					  				<input type="text" class="form-control" name="web" id="web" placeholder="www.webpage.com">
+					  				<input type="url" class="form-control" name="web" id="web" placeholder="www.webpage.com">
 					  			</div>
 					  			
 							  <button type="submit" class="btn btn-success">Registrar</button>

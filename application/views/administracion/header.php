@@ -26,12 +26,17 @@
 		      
 		    </ul>
 		     <ul class="navbar-nav justify-content-end">
+						
 		        <li class="nav-item">
 			        <a class="nav-link" href="#">Bienvenido <?=$this->session->userdata('user')?></a>
-			    </li>
-			    <li class="nav-item">
-			        <a class="nav-link" href="<?=base_url()?>"><i class="fa fa-home"></i></a>
-			    </li>
+			    	</li>
+						<li class="nav-item">
+								<a class="nav-link" href="#">Última Conexión:  <?=$lastConnection->v4?></a>
+						</li>
+						<li class="nav-item">
+								<a class="nav-link" href="<?=base_url()?>"><i class="fa fa-home"></i></a>
+						</li>
+						
 		    </ul>
 		    
 		  </div>
@@ -65,8 +70,9 @@
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
 				   <li class="breadcrumb-item"><a href="<?=base_url()?>Administracion/inicio">Home</a></li>
-				   
 				   <li class="breadcrumb-item active" aria-current="page"><?=$this->uri->segment(1)?></li>
+			
 				 </ol>
+
 			</nav>
 
