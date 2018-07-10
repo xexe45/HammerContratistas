@@ -15,6 +15,18 @@
 				<p class="servicep text-justify">
 					<?=$servicio->v4?>
 				</p>
+				
+				<?php if(count($tareas) > 0) : ?>
+				<h4 class="serviceh2">Tareas que realizamos</h4>
+					<ul class="servicep">
+					<?php foreach ($tareas as $tarea): ?>
+						<li><?=$tarea->v3?></li>
+					<?php endforeach; ?>
+					</ul>
+				<?php endif; ?>
+				
+					
+				
 			</div>
 		</div>
 	</div>

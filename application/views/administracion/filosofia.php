@@ -18,7 +18,7 @@
 					  
 					  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 					  	<div class="top">
-					  		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id alias pariatur doloribus beatae, magni non autem quibusdam laborum facere quis quos unde omnis ipsum quidem nisi suscipit totam voluptate debitis.
+					  		<p>Módulo para editar la filosofía empresarial.</p>
 					  	</div>
 					  
 					</div>
@@ -58,13 +58,13 @@
 					  	<div class="top">
 					  		<?=form_open_multipart('Empresa/slides', array("id" => "form-slides"))?>
 							    		<div class="form-group">
-							    			<label class="" for="">Seleccionar Imagen 1 *</label>
-							    			<input type="file" name="file1" id="file1" class="form-control">
+							    			<label class="" for="">Seleccionar Imagen 1 </label>
+							    			<input type="file" name="file1" class="form-control">
 							    		
 							    		</div>
 							    		<div class="form-group">
-							    			<label class="" for="">Seleccionar Imagen 2 *</label>
-							    			<input type="file" name="file2" id="file2" class="form-control">
+							    			<label class="" for="">Seleccionar Imagen 2 </label>
+							    			<input type="file" name="file2" class="form-control">
 							    			
 							    		</div>
 							    		<button type="submit" class="btn btn-primary">Cambiar Imagen</button>

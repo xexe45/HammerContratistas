@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-07-2018 a las 07:44:30
+-- Tiempo de generación: 10-07-2018 a las 08:19:33
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.1
 
@@ -50,6 +50,22 @@ end;
 start transaction;
 INSERT INTO logindiario (fecha, estado, fecha_inicio, fecha_fin, user_id) 
 VALUES(DATE_FORMAT(NOW(),'%y-%m-%d'), 0, NOW(), v_fecha_fin, v_user_id);
+commit;
+set v_res = true;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_borrar_slide` (IN `v_id` INT, IN `v_user` INT, OUT `v_res` BOOLEAN)  BEGIN
+declare exit handler for sqlexception
+begin
+rollback;
+set v_res = false;
+end;
+start transaction;
+INSERT INTO historial(tipo,slug,descripcion,usuario_id,fecha)
+VALUES('eliminar','empresa','Borrado de slide',v_user, NOW());
+
+DELETE FROM slides_portada
+where id = v_id;
 commit;
 set v_res = true;
 END$$
@@ -250,6 +266,18 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_servicios` ()  BEGIN
 select id as v1, servicio as v2, img as v3, descripcion as v4
 from servicios;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_slide_id` (IN `v_id` INT)  BEGIN
+select id as v1, img as v2, titulo as v4, subtitulo as v5
+from slides_portada
+where id = v_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_tarea_servicio` (IN `v_servicio` INT)  BEGIN
+select id as v1, servicio_id as v2, tarea as v3
+from tarea_servicio
+where servicio_id = v_servicio;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listar_mensajes` ()  BEGIN
@@ -493,7 +521,8 @@ CREATE TABLE `contacto` (
 
 INSERT INTO `contacto` (`id`, `nombre`, `telefono`, `correo`, `mensaje`, `fecha`, `visto`) VALUES
 (1, 'Juan Cosio Coma', '964088583', 'juanco@gmail.com', 'Hola comunicarse conmigo por favor, necesito un proyecto de una capilla', '2018-06-25 00:47:57', 1),
-(2, 'Juan Perez Perez', '967099183', 'juanchi@gmail.com', 'Necesito cotizar una piscina.', '2018-06-18 03:12:59', 1);
+(2, 'Juan Perez Perez', '967099183', 'juanchi@gmail.com', 'Necesito cotizar una piscina.', '2018-06-18 03:12:59', 1),
+(3, 'César Maza', '945450011', 'cmazah93@gmail.com', 'Necesito cotizar un departamento.', '2018-07-09 16:35:37', 1);
 
 -- --------------------------------------------------------
 
@@ -540,7 +569,7 @@ CREATE TABLE `filosofia` (
 --
 
 INSERT INTO `filosofia` (`id`, `historia`, `mision`, `vision`, `slide1`, `slide2`, `valores`) VALUES
-(1, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Nuestra misión es', 'Nuestra visión es', '42417640234da0df400232358909d735.jpg', '0016c7ac129a509316347e88d4da0202.jpg', 'Nuestros valores son');
+(1, 'Somos una empresa dedicada al rubro de la arquitectura, ingeniería y construcción, liderada por un equipo de profesionales calificados. Nuestro trabajo se basa en la exigencia y preocupación de cada detalle, además de caracterizarnos por brindar ideas innovadoras garantizando un trabajo de calidad.', 'Consolidarnos como una de las empresas más competentes, confiables y solventes en el rubro de construcción en el país; caracterizados por una base sólida de responsabilidad, disciplina y respeto; no solo con nuestros clientes sino también con nuestro contexto y el medio ambiente, además de una calidad de primera.', 'Brindar un trabajo de calidad, que consiga satisfacer las necesidades y exigencias de nuestros clientes; dentro del margen del mutuo respeto de las obligaciones contractuales que den beneficio a su entorno social, cultural y económico.\r\nResaltar el carácter ambiental y humanista; propio de nuestra empresa, tanto en la propuesta de nuevas tecnologías de construcción, como en la formulación de espacios más confortables, distinguiendo nuestro estilo de diseño e imagen de la competencia.', '42417640234da0df400232358909d735.jpg', '0016c7ac129a509316347e88d4da0202.jpg', 'Nos gusta trabajar con responsabilidad, comunicándonos constantemente con nuestros clientes para conocer mejor sus necesidades, comprometiéndonos a entregarles un trabajo de calidad e innovador.');
 
 -- --------------------------------------------------------
 
@@ -619,7 +648,20 @@ INSERT INTO `historial` (`id`, `tipo`, `slug`, `descripcion`, `usuario_id`, `fec
 (31, 'registro', 'proyecto', 'Registro de proyecto Obra mercado2', 1, '2018-07-08 23:37:19'),
 (32, 'registro', 'proyecto', 'Registro de proyecto yttyyr', 1, '2018-07-08 23:42:18'),
 (33, 'registro', 'proyecto', 'Registro de proyecto Restaurante Espada', 1, '2018-07-08 23:46:31'),
-(34, 'edicion', 'filosofia', 'edición filosofía empresarial', 1, '2018-07-09 00:42:56');
+(34, 'edicion', 'filosofia', 'edición filosofía empresarial', 1, '2018-07-09 00:42:56'),
+(35, 'edicion', 'filosofia', 'edición filosofía empresarial', 1, '2018-07-09 09:29:37'),
+(36, 'edicion', 'filosofia', 'edición filosofía empresarial', 1, '2018-07-09 09:31:55'),
+(37, 'edicion', 'filosofia', 'edición filosofía empresarial', 1, '2018-07-09 09:54:17'),
+(38, 'edicion', 'filosofia', 'edición slides filosofía empresarial', 1, '2018-07-09 09:54:25'),
+(39, 'edicion', 'filosofia', 'edición slides filosofía empresarial', 1, '2018-07-09 09:57:21'),
+(40, 'edicion', 'filosofia', 'edición slides filosofía empresarial', 1, '2018-07-09 09:57:32'),
+(41, 'registro', 'servicio', 'Registro de servicio Elaboración de imágenes fotorealistas', 1, '2018-07-09 10:42:44'),
+(42, 'registro', 'tarea', 'Registro de tarea Edificaciones', 1, '2018-07-09 10:47:31'),
+(43, 'registro', 'tarea', 'Registro de tarea Obras viales', 1, '2018-07-09 10:48:13'),
+(44, 'edicion', 'mensajes', 'Mensaje de César Maza puesto en visto', 1, '2018-07-09 11:35:37'),
+(47, 'registro', 'proyecto', 'Registro de proyecto Puente Tambogrande', 1, '2018-07-09 12:12:08'),
+(48, 'registro', 'portada', 'Registro de slides de portada', 1, '2018-07-09 12:31:21'),
+(49, 'eliminar', 'empresa', 'Borrado de slide', 1, '2018-07-09 12:42:57');
 
 -- --------------------------------------------------------
 
@@ -659,7 +701,27 @@ INSERT INTO `logueo` (`id`, `user`, `type`, `date`) VALUES
 (3, 'cmaza@gmail.com', 1, '2018-07-08 18:05:48'),
 (4, 'cmaza@gmail.com', 1, '2018-07-08 18:14:36'),
 (5, 'cmaza@gmail.com', 1, '2018-07-08 23:29:11'),
-(6, 'cmaza@gmail.com', 1, '2018-07-08 23:45:35');
+(6, 'cmaza@gmail.com', 1, '2018-07-08 23:45:35'),
+(7, 'cmaza@gmail.com', 1, '2018-07-09 09:16:55'),
+(8, 'claudia@gmail.com', 1, '2018-07-09 09:23:50'),
+(9, 'cmaza@gmail.com', 1, '2018-07-09 09:24:16'),
+(10, 'cmaza@gmail.com', 1, '2018-07-09 09:25:36'),
+(11, 'cmaza@gmail.com', 1, '2018-07-09 09:37:00'),
+(12, 'claudia@gmail.com', 1, '2018-07-09 09:44:07'),
+(13, 'cmaza@gmail.com', 1, '2018-07-09 09:44:42'),
+(14, 'cmaza@gmail.com', 1, '2018-07-09 09:47:14'),
+(15, 'claudia@gmail.com', 1, '2018-07-09 09:47:47'),
+(16, 'cmaza@gmail.com', 1, '2018-07-09 09:52:16'),
+(17, 'cmaza@gmail.com', 1, '2018-07-09 10:01:35'),
+(18, 'cmaza@gmail.com', 1, '2018-07-09 10:13:25'),
+(19, 'cmaza@gmail.com', 1, '2018-07-09 10:58:49'),
+(20, 'cmaza@gmail.com', 1, '2018-07-09 10:59:50'),
+(21, 'cmaza@gmail.com', 1, '2018-07-09 11:03:46'),
+(22, 'cmaza@gmail.com', 1, '2018-07-09 11:24:36'),
+(23, 'cmaza@gmail.com', 1, '2018-07-09 11:25:22'),
+(24, 'cmaza@gmail.com', 1, '2018-07-09 11:25:54'),
+(25, 'cmaza@gmail.com', 1, '2018-07-10 00:10:23'),
+(26, 'cmaza@gmail.com', 1, '2018-07-10 00:28:42');
 
 -- --------------------------------------------------------
 
@@ -692,7 +754,8 @@ INSERT INTO `proyecto` (`id`, `servicio_id`, `nombre`, `tipo`, `cliente_id`, `fe
 (6, 7, 'Edificacion', 'concluido', 19, '2017-12-12', '1bec1eb30e310cd21d7c3ee1e91991b6.png', 'Proyecto', 'edificacion'),
 (7, 7, 'Edificación Suma', 'concluido', 16, '2017-01-01', 'a7294ab8773dcaa142e6c665c909e33d.png', 'Un proyecto de gran alcance...', 'edificacion-suma'),
 (9, 6, 'Terracería Don Bife', 'proceso', 23, '2018-06-01', '03a607a98f56931f658eb1f005447996.jpg', 'Terracería para Don Bife', 'terraceria-don-bife'),
-(13, 3, 'Restaurante Espada', 'concluido', 24, '2017-01-01', '778d5ef423ecc128591f7bc030b1bf43.jpg', 'Se realizó la construcción del restaurante espada', 'restaurante-espada');
+(13, 3, 'Restaurante Espada', 'concluido', 24, '2017-01-01', '778d5ef423ecc128591f7bc030b1bf43.jpg', 'Se realizó la construcción del restaurante espada', 'restaurante-espada'),
+(14, 3, 'Puente Tambogrande', 'concluido', 19, '2018-07-09', 'aaf8fd84574bfdfc188546b5c0d658f7.jpg', 'Puente Tipo Viga-Losa, en Tambogrande - Piura', 'puente-tambogrande');
 
 -- --------------------------------------------------------
 
@@ -718,7 +781,8 @@ INSERT INTO `servicios` (`id`, `servicio`, `img`, `descripcion`) VALUES
 (6, 'Terracerías', '6fdea52579fd8e972627492788960181.png', 'Para cualquier desarrollo y construcción, el manejo de suelos representa una piedra angular para acceso, soporte y planeación de la obra, ofrecemos soluciones en Cortes, Rellenos, Nivelaciones y Mejoramiento de Suelos.\r\n\r\nmanejo de suelos representa una piedra angular para acceso, soporte y planeación de la obra, ofrecemos soluciones en Cortes, Rellenos, Nivelaciones y Mejoramiento de Suelos. Todos son realizados con el mayor factor de seguridad, apoyándolos con Pruebas de Laboratorio para verificar Pesos Volumétricos, Contenido de Humedad y Porcentajes de Compactación requeridos, según el Diseño y Cálculos previamente establecidos.'),
 (7, 'Edificaciones', 'a41e472e00ee098ddf95d84446572174.png', 'En Hammer Contratistas queremos convertir grandes ideas en grandes construcciones, por ello establecemos y ejecutamos modelos y planes de trabajo estructurado para lograr levantar cualquier edificación. Contamos con la asesoría técnica y profesional para la realización del Proyecto y Construcción de la Edificación que su empresa requiera.'),
 (8, 'Estructuras metálicas y cubiertas', 'aeea1a33c72b7e245e9f63d048497e68.png', 'En Hammer Contratistas estamos orgullosos de poder contribuir en con nuestros clientes desde el primer momento, te ofrecemos Diseño, Fabricación, Transporte y Montaje de estructuras metálicas a base de Marcos Rígidos de sección variable, los cuales poseen una gran versatilidad para ser empleados en Construcciones Industriales, Bodegas y Edificios Comerciales, cubriendo Grandes Claros con gran Rapidez, Economía y proporcionando una Apariencia Inmejorable.'),
-(9, 'Diseño de Planos', '36b95be9f71303138edb545853ffa3f6.jpg', 'Diseño de planos para empresas...');
+(9, 'Diseño de Planos', '36b95be9f71303138edb545853ffa3f6.jpg', 'Diseño de planos para empresas...'),
+(10, 'Elaboración de imágenes fotorealistas', 'd973f12705f61e7ab4897b5e8de687ab.png', 'Elaboración de renders');
 
 -- --------------------------------------------------------
 
@@ -764,7 +828,9 @@ INSERT INTO `tarea_servicio` (`id`, `servicio_id`, `tarea`) VALUES
 (2, 5, 'Diseñado Interiores'),
 (3, 5, 'Diseñado Medieval'),
 (4, 5, 'Diseño 7D'),
-(5, 9, 'Diseño de planos 3D');
+(5, 9, 'Diseño de planos 3D'),
+(6, 3, 'Edificaciones'),
+(7, 3, 'Obras viales');
 
 -- --------------------------------------------------------
 
@@ -910,7 +976,7 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `contacto`
 --
 ALTER TABLE `contacto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `empresa`
@@ -934,7 +1000,7 @@ ALTER TABLE `galeria`
 -- AUTO_INCREMENT de la tabla `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT de la tabla `logindiario`
@@ -946,19 +1012,19 @@ ALTER TABLE `logindiario`
 -- AUTO_INCREMENT de la tabla `logueo`
 --
 ALTER TABLE `logueo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `slides_portada`
@@ -970,7 +1036,7 @@ ALTER TABLE `slides_portada`
 -- AUTO_INCREMENT de la tabla `tarea_servicio`
 --
 ALTER TABLE `tarea_servicio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`

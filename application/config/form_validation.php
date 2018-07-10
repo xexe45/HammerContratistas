@@ -13,7 +13,7 @@ $config = array(
 
 		array('field' => 'nombre', 'label' => 'Nombre', 'rules' => 'required|is_string|trim|max_length[150]|min_length[2]'),
 		array('field' => 'ruc', 'label' => 'RUC', 'rules' => 'required|numeric|trim|exact_length[11]'),
-		array('field' => 'direccion', 'label' => 'Dirección', 'rules' => 'required|is_string|trim|max_length[200]|min_length[10]'),
+		array('field' => 'direccion', 'label' => 'Dirección', 'rules' => 'required|is_string|trim|max_length[200]|min_length[8]'),
 		array('field' => 'telefono', 'label' => 'Telefono de contacto', 'rules' => 'required|numeric|trim|max_length[15]|min_length[6]'),
 		array('field' => 'correo', 'label' => 'E-Mail', 'rules' => 'required|is_string|trim|valid_email'),
 		array('field' => 'presentacion', 'label' => 'Presentación', 'rules' => 'required|is_string|trim'),
@@ -161,7 +161,7 @@ $config = array(
 		array('field' => 'telefono', 'label' => 'Telefono', 'rules' => 'required|numeric|trim|max_length[12]'),
 		array('field' => 'direccion', 'label' => 'Direccion', 'rules' => 'required|is_string|trim|max_length[255]'),
 		array('field' => 'correo', 'label' => 'Correo Electrónico', 'rules' => 'required|is_string|trim|valid_email'),
-		array('field' => 'password', 'label' => 'Password', 'rules' => 'required|is_string|trim|max_length[200]'),
+		array('field' => 'password', 'label' => 'Password', 'rules' => 'required|is_string|trim|max_length[200]|min_length[8]'),
 		array('field' => 'rol', 'label' => 'Rol de usuario', 'rules' => 'required|is_string|in_list[user,admin]'),
 	//array('field' => 'rut','label' => 'RUT','rules' => 'required|is_string|xss_clean|trim|esRut'),
 	),

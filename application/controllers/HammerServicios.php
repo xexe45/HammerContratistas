@@ -8,6 +8,7 @@ class HammerServicios extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('Servicios');
+		$this->load->model('Tareas');
 	}
 
 
@@ -16,8 +17,9 @@ class HammerServicios extends CI_Controller {
 	{
 		$servicio = $this->Servicios->servicio($id);
 		if(isset($servicio)){
+			$tareas = $this->Tareas->listarServicio($id);
 			$this->load->view('templates/header');
-			$this->load->view('servicios', compact('servicio'));
+			$this->load->view('servicios', compact('servicio','tareas'));
 			$this->load->view('templates/footer');
 		}else{
 			redirect(base_url());

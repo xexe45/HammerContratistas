@@ -54,11 +54,11 @@
 					  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 					  	<br>
 					  	<button id="btn-clientes" class="btn btn-primary"><i class="fa fa-list"></i> Cargar Listado...</button>
-							<br>
+					  	<br>
 							<button id="button" class="btn btn-danger">Eliminar</button>
-							<table id="table" 
+					  	<table id="table" 
 		                data-sort-name="v1"
-										data-click-to-select="true"
+		                data-click-to-select="true"
 		                data-sort-order="desc"
 		                data-search="true"
 		                data-pagination="true"               
@@ -95,7 +95,7 @@
 <script src="<?=base_url()?>assets/js/portada.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-			ruta ='<?= base_url()?>';  
+    	ruta ='<?= base_url()?>';  
     	ejecutar();
   	});
 </script>

@@ -5,7 +5,7 @@
 			    	<div class="col-md-5">
 			    		<div class="card">
 						  <div class="card-body">
-						  	<button class="btn btn-info" id="btn1"><i class="fa fa-pie-chart" aria-hidden="true"></i> Reporte comparación Registros - Edición</button>
+						  	<button class="btn btn-info" id="btn1"><i class="fa fa-pie-chart" aria-hidden="true"></i> Reporte Registros - Edición</button>
 						    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
 						  </div>
 						</div>
@@ -46,6 +46,7 @@
 									</div>
 									<button class="btn btn-info" id="btn2"><i class="fa fa-line-chart" aria-hidden="true"></i> Reporte Iteracciones de usuario entre fechas</button>
 								<?=form_close()?>
+								<br>
 						    <div id="chartContainer3" style="height: 300px; width: 100%;"></div>
 						  </div>
 						</div>
@@ -68,10 +69,11 @@
 <script src="<?=base_url()?>assets/js/reportes.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		ruta ='<?= base_url()?>';  
+    	ruta ='<?= base_url()?>';  
     	ejecutar();
   	});
 </script>
+
 </body>	
 </html>
 

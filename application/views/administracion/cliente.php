@@ -13,7 +13,11 @@
 					  </li>
 					</ul>
 					<div class="tab-content" id="myTabContent">
-					  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+					  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					  	<div class="top">
+					  		<p>Módulo para el registro y listado de los Clientes de la empresa.</p>
+					  	</div>
+					  </div>
 					  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 					  	<div class="top">
 					  		<?=form_open_multipart('Clientes/store', array("id" => "form"));?>
@@ -28,7 +32,7 @@
 					  				<input type="file" class="form-control" name="logo" id="logo">
 					  			</div>
 					  			<div class="form-group">
-					  				<label for="web">Página web *</label>
+					  				<label for="web">Página web </label>
 					  				<input type="url" class="form-control" name="web" id="web" placeholder="www.webpage.com">
 					  			</div>
 					  			
@@ -79,10 +83,11 @@
 <script src="<?=base_url()?>assets/js/cliente.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-			ruta ='<?= base_url()?>';  
+    	 ruta ='<?= base_url()?>';  
     	ejecutar();
   	});
 </script>
+
 </body>	
 </html>
 

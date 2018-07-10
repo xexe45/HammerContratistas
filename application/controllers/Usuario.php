@@ -153,9 +153,13 @@ class Usuario extends CI_Controller {
 			$fecha2 = $this->security->xss_clean(strip_tags($this->input->post('date2')));
 			
 			$data = array($user_id,$fecha1,$fecha2);
+			$reporte = $this->Musuario->reporte($data);
+			foreach ($reporte as $key => $value) {
+				$value->y = intval($value->y);
+			}
 
 			$respuesta["valido"] = true;
-			$respuesta['reporte'] = $this->Musuario->reporte($data);
+			$respuesta['reporte'] = $reporte;
 				
 
 		}else{

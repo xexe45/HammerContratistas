@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="<?=base_url()?>assets/css/token-input-facebook.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/fontawesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/css/home.css">
+    <link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>assets/imgs/logo.ico">
     <title>HammerContratistas</title>
 </head>
 <body>
@@ -50,7 +51,7 @@
 			<ul class="list-group">
 
 			<a href="#" class="list-group-item list-group-item-action active">
-			   <i class="fa fa-dashboard"></i> Dashboard 
+			   <i class="fa fa-dashboard"></i> Menú 
 			 </a>
 			 <a href="<?=base_url()?>mensajes" class="list-group-item list-group-item-action"><i class="fa fa-envelope"></i> Mensajes</a>
 			 <a href="<?=base_url()?>portada" class="list-group-item list-group-item-action"><i class="fa fa-home"></i> Portada</a>
@@ -69,7 +70,7 @@
 		<div class="col-md-9">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
-				   <li class="breadcrumb-item"><a href="<?=base_url()?>Administracion/inicio">Home</a></li>
+				   <li class="breadcrumb-item"><a href="<?=base_url()?>Administracion/inicio">Inicio</a></li>
 				   <li class="breadcrumb-item active" aria-current="page"><?=$this->uri->segment(1)?></li>
 			
 				 </ol>

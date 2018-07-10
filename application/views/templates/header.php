@@ -28,7 +28,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link <?php if($this->uri->segment(1) == ''){ ?> active <?php }   ?>" href="<?=base_url()?>">Home</a>
+              <a class="nav-link <?php if($this->uri->segment(1) == ''){ ?> active <?php }   ?>" href="<?=base_url()?>">Inicio</a>
             </li>
             <li class="nav-item">
               <a class="nav-link <?php if($this->uri->segment(1) == 'Conocenos'){ ?> active <?php }   ?>" href="<?=base_url()?>Conocenos">Conócenos</a>
@@ -53,7 +53,7 @@
               <a class="nav-link <?php if($this->uri->segment(1) == 'nuestros-clientes'){ ?> active <?php }   ?>" href="<?=base_url()?>nuestros-clientes">Clientes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?=base_url()?>Login">Login</a>
+              <a class="nav-link" href="<?=base_url()?>Login">Iniciar Sesión </a>
             </li>
             
           </ul>

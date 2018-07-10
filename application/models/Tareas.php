@@ -18,6 +18,15 @@ class Tareas extends CI_Model {
 		return $tareas->result();
 	}
 
+	public function listarServicio($id){
+		
+		$query = "CALL sp_get_tarea_servicio(?)";
+		$this->load->database();
+		$tareas = $this->db->query($query,$id);
+		$this->db->close();
+		return $tareas->result();
+	}
+
 	public function registrar($data){
 
 		$query = "CALL sp_registrar_tarea(?,?,?,@s)";

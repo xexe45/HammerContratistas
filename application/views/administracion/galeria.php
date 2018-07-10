@@ -19,7 +19,7 @@
 					  			
 					  			
 					  			<div class="form-group">
-					  				<label for="img_principal">Seleccionar Imágenes *</label>
+					  				<label for="img_principal">Seleccionar Imágenes </label>
 					  				<input  type="file" class="form-control" name="file[]" multiple class="form-control">
 					  			</div>
 					  			 
@@ -67,7 +67,7 @@
 <script src="<?=base_url()?>assets/js/galeria.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		ruta ='<?= base_url()?>';  
+    	ruta ='<?= base_url()?>';  
     	ejecutar();
   	});
 </script>

@@ -13,7 +13,11 @@
 					  </li>
 					</ul>
 					<div class="tab-content" id="myTabContent">
-					  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+					  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					  	<div class="top">
+					  		<p>Módulo para el registro y listado de los proyectos de la empresa.</p>
+					  	</div>
+					  </div>
 					  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 					  	<div class="top">
 					  		<?=form_open_multipart('Proyectos/store' , array("id" => "form"))?>
@@ -119,7 +123,7 @@
 <script src="<?=base_url()?>assets/js/proyectos.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		ruta ='<?= base_url()?>';  
+    	ruta ='<?= base_url()?>';  
     	ejecutar();
   	});
 </script>

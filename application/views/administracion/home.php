@@ -6,7 +6,7 @@
 			<?php endif ?>
 			<div class="card top">
 			  <div class="card-body">
-			    This is some text within a card body.
+			    Módulo de Administración de la empresa Hammer Contratistas.
 			  </div>
 			</div>
 		</div>
